@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:signlingo/footer.dart';
 import 'package:signlingo/header.dart';
+import 'package:signlingo/home/home.dart';
 
 
 void main() {
@@ -9,11 +10,7 @@ void main() {
     home: SafeArea(
         child: Scaffold(
       appBar: Header(),
-      body: Center(child: Text(
-        "check",
-        textAlign: TextAlign.center,
-        textDirection: TextDirection.rtl,
-        )),
+      body: Home(),
       bottomNavigationBar: Footer(),
       // bottomSheet: Footer(),
     )),
