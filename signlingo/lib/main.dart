@@ -12,7 +12,6 @@ void main() {
       appBar: Header(),
       body: Home(),
       bottomNavigationBar: Footer(),
-      // bottomSheet: Footer(),
     )),
     debugShowCheckedModeBanner: false,
   ));
