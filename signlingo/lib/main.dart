@@ -18,6 +18,9 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int currentIndex = 0;
+  final pages = [
+    Home(),
+  ];
   @override
   Widget build(BuildContext context) {
     return (MaterialApp(
@@ -25,24 +28,7 @@ class _MyAppState extends State<MyApp> {
       home: SafeArea(
           child: Scaffold(
         appBar: const Header(),
-        body: <Widget>[
-          const Home(),
-          Container(
-            color: Colors.green,
-            alignment: Alignment.center,
-            child: const Text('Page 2'),
-          ),
-          Container(
-            color: Colors.blue,
-            alignment: Alignment.center,
-            child: const Text('Page 3'),
-          ),
-          Container(
-            color: Colors.red,
-            alignment: Alignment.center,
-            child: const Text('Page 4'),
-          )
-        ][currentIndex],
+        body: pages[currentIndex],
         bottomNavigationBar: NavigationBar(
           onDestinationSelected: (int index) {
             setState(() {
@@ -50,7 +36,7 @@ class _MyAppState extends State<MyApp> {
             });
           },
           indicatorColor: Colors.amber[800],
-          selectedIndex: currentIndex,  
+          selectedIndex: currentIndex,
           destinations: const <Widget>[
             NavigationDestination(
                 icon: Icon(Icons.home_outlined), label: "Home"),
