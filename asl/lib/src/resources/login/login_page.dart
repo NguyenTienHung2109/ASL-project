@@ -1,31 +1,23 @@
+import 'package:asl/src/bloc/login_bloc.dart';
+import 'package:asl/src/resources/home/main.dart';
+import 'package:asl/src/resources/login/register_page.dart';
 import 'package:flutter/material.dart';
-import 'package:asl/register.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home: SafeArea(
-      child: Scaffold(body: MyContent()),
-    ),
-    debugShowCheckedModeBanner: false,
-  ));
-}
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
-class MyContent extends StatefulWidget {
   @override
-  MyContentState createState() => MyContentState();
+  LoginPageState createState() => LoginPageState();
 }
 
-class MyContentState extends State<MyContent> {
+class LoginPageState extends State<LoginPage> {
+
+  LoginBloc bloc = new LoginBloc();
   bool showPass = false;
 
   TextEditingController EmailData =
       new TextEditingController(); //data cua email
   TextEditingController PassData = new TextEditingController(); //data cua pass
-
-  String EmailError = "Email khong hop le";
-  String PassError = "Pass khong le";
-  bool checkEmail = false;
-  bool checkPass = false;
 
   @override
   Widget build(BuildContext context) {
@@ -49,28 +41,33 @@ class MyContentState extends State<MyContent> {
         ),
         Padding(
             padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-            child: TextField(
-              controller: EmailData,
-              style: TextStyle(fontSize: 18, color: Colors.black),
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: Colors.blue,
-                      width: 2.0,
+            child: StreamBuilder(
+              stream: bloc.userStream,
+              builder: (context, snapshot) =>TextField(
+                controller: EmailData,
+                style: TextStyle(fontSize: 18, color: Colors.black),
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        color: Colors.blue,
+                        width: 2.0,
+                      ),
                     ),
-                  ),
-                  labelText: 'Email',
-                  errorText: checkEmail ? EmailError : null,
-                  labelStyle: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500)),
-            )),
+                    labelText: 'Email',
+                    errorText: snapshot.hasError ?  snapshot.error.toString() : null,
+                    labelStyle: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500)),
+            ))
+             ),
         Stack(
           alignment: AlignmentDirectional.centerEnd,
           children: [
-            Padding(
+            StreamBuilder(
+              stream: bloc.passStream, 
+              builder: (context, snapshot) => Padding(
                 padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
                 child: TextField(
                   controller: PassData,
@@ -85,12 +82,12 @@ class MyContentState extends State<MyContent> {
                         ),
                       ),
                       labelText: 'Password',
-                      errorText: checkPass ? PassError : null,
+                      errorText: snapshot.hasError ? snapshot.error.toString() : null,
                       labelStyle: TextStyle(
                           fontSize: 16,
                           color: Colors.black,
                           fontWeight: FontWeight.w500)),
-                )),
+                ))),
             IconButton(
                 onPressed: () {
                   print('click eye');
@@ -138,28 +135,25 @@ class MyContentState extends State<MyContent> {
 
   void onClickButton() {
     setState(() {
-      if (EmailData.text.length < 6 ||
-          !EmailData.text.contains("@") ||
-          !EmailData.text.contains(".com")) {
-        checkEmail = true;
-      } else {
-        checkEmail = false;
-      }
-
-      if (PassData.text.length < 6) {
-        checkPass = true;
-      } else {
-        checkPass = false;
+      if (bloc.isValidInfo(EmailData.text, PassData.text)) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MyHome()));
       }
     });
   }
 
   void onClickNewAcc() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => Register()));
+    setState(() {
+      Navigator.push(
+        context, MaterialPageRoute(builder: (context) => RegisterPage()));
+    });
   }
 
   Widget NewAccPage(BuildContext context) {
-    return Register();
+    return RegisterPage();
+  }
+
+  Widget GotoHome(BuildContext context) {
+    return MyHome();
   }
 }
