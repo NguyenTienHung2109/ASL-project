@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:signlingo/home/chapter.dart';
+import 'package:signlingo/src/resources/home/chapter.dart';
 
 class Unit extends StatefulWidget {
   final int unit;

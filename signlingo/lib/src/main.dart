@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:signlingo/header.dart';
-import 'package:signlingo/home/home.dart';
+import 'package:signlingo/src/header.dart';
+import 'package:signlingo/src/resources/home/home.dart';
 
 void main() {
   // runApp(const MyApp());

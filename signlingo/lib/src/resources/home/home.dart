@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:signlingo/home/unit.dart';
+import 'package:signlingo/src/resources/home/unit.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
