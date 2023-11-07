@@ -20,7 +20,8 @@ class _MyAppState extends State<MyApp> {
   int currentIndex = 0;
   final pages = [
     Home(),
-    Home(),
+    Home(), // Trainer
+    // Dictionary
   ];
   @override
   Widget build(BuildContext context) {
@@ -46,27 +47,30 @@ class _MyAppState extends State<MyApp> {
           currentIndex: currentIndex,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home_outlined,
+                // color: Colors.black,
+              ),
+              label: "Home",
+              // backgroundColor: Colors.white,
+            ),
+            BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.home_outlined,
+                  Icons.menu_book_outlined,
                   // color: Colors.black,
-                ), 
-                label: "Home",
-                // backgroundColor: Colors.white,
-      
                 ),
+                label: "Trainer"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.menu_book_outlined,
-                // color: Colors.black,
-                ), label: "Trainer"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.list_alt_outlined, 
-                // color: Colors.black,
-                ), 
+                icon: Icon(
+                  Icons.list_alt_outlined,
+                  // color: Colors.black,
+                ),
                 label: "Dictionary"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.settings_outlined, 
-                // color: Colors.black,
-                ), 
+                icon: Icon(
+                  Icons.settings_outlined,
+                  // color: Colors.black,
+                ),
                 label: "Settings"),
           ],
         ),
