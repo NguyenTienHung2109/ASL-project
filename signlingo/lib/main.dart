@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:signlingo/src/header.dart';
-import 'package:signlingo/src/resources/home/home.dart';
+import 'package:signlingo/src/resources/dictionary/dictionary_page.dart';
+import 'package:signlingo/src/resources/home/home_page.dart';
 
 void main() {
   // runApp(const MyApp());
@@ -19,8 +20,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int currentIndex = 0;
   final pages = [
-    Home(),
-    Home(), // Trainer
+    HomePage(),
+    HomePage(), 
+    DictionaryPage()// Trainer
     // Dictionary
   ];
   @override
