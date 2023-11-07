@@ -14,23 +14,29 @@ class MyContent extends StatefulWidget {
 
 class MyContentState extends State<MyContent> {
   bool showPass = false;
+  bool showPass2 = false;
 
   TextEditingController EmailData =
       new TextEditingController(); //data cua email
   TextEditingController PassData = new TextEditingController(); //data cua pass
+  TextEditingController Pass2Data =
+      new TextEditingController(); //kiem tra lai pass
   TextEditingController NameData = new TextEditingController(); //data cua name
 
   String EmailError = "Email error";
   String PassError = "Password error";
+  String Pass2Error = "Password error";
   String NameError = "Name error";
   bool checkEmail = false;
   bool checkPass = false;
+  bool checkPass2 = false;
   bool checkName = false;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints.expand(),
+      padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
       color: Colors.white,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Container(
@@ -43,7 +49,7 @@ class MyContentState extends State<MyContent> {
           ),
         ),
         Padding(
-            padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+            padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
             child: TextField(
               controller: EmailData,
               style: TextStyle(fontSize: 18, color: Colors.black),
@@ -116,6 +122,40 @@ class MyContentState extends State<MyContent> {
                     : Icon(Icons.remove_red_eye_outlined))
           ],
         ),
+        Stack(
+          alignment: AlignmentDirectional.centerEnd,
+          children: [
+            Padding(
+                padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+                child: TextField(
+                  controller: Pass2Data,
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                  obscureText: !showPass2,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(
+                          color: Colors.blue,
+                          width: 2.0,
+                        ),
+                      ),
+                      labelText: 'Check your password again',
+                      errorText: checkPass2 ? Pass2Error : null,
+                      labelStyle: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500)),
+                )),
+            IconButton(
+                onPressed: () {
+                  print('click eye2');
+                  ShowPass2();
+                },
+                icon: showPass
+                    ? Icon(Icons.remove_red_eye)
+                    : Icon(Icons.remove_red_eye_outlined))
+          ],
+        ),
         Container(
             alignment: AlignmentDirectional.center,
             child: Column(
@@ -151,6 +191,12 @@ class MyContentState extends State<MyContent> {
     });
   }
 
+  void ShowPass2() {
+    setState(() {
+      showPass2 = !showPass2;
+    });
+  }
+
   void onClickButton() {
     setState(() {
       if (EmailData.text.length < 6 ||
@@ -171,6 +217,12 @@ class MyContentState extends State<MyContent> {
         checkPass = true;
       } else {
         checkPass = false;
+      }
+
+      if (PassData.text == Pass2Data.text) {
+        checkPass2 = false;
+      } else {
+        checkPass2 = true;
       }
     });
   }
