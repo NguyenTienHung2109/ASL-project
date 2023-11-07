@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:signlingo/src/resources/home/chapter.dart';
+import 'package:signlingo/src/resources/home/chapter/chapter.dart';
 
 class Unit extends StatefulWidget {
   final int unit;
@@ -13,27 +13,73 @@ class Unit extends StatefulWidget {
 }
 
 class _UnitState extends State<Unit> {
+  List<Widget> items = [
+    Chapter(
+      chapter: 1,
+      name: "Hello and welcome",
+      description: "Greet people and ask them how they are doing.",
+      progress: 10,
+      isLooking: false,
+      items: ['Discover', 'Discover', 'Discover'],
+    ),
+    Chapter(
+      chapter: 2,
+      name: "Hello and welcome",
+      description: "Greet people and ask them how they are doing.",
+      progress: 10,
+      isLooking: false,
+      items: ['Discover', 'Discover', 'Discover'],
+    ),
+    Chapter(
+      chapter: 3,
+      name: "Hello and welcome",
+      description: "Greet people and ask them how they are doing.",
+      progress: 40,
+      isLooking: true,
+      items: ['Discover', 'Discover', 'Discover', 'Dialog', 'Review'],
+    ),
+    Chapter(
+      chapter: 4,
+      name: "Hello and welcome",
+      description: "Greet people and ask them how they are doing.",
+      progress: 30,
+      isLooking: true,
+      items: [
+        'Discover',
+        'Discover',
+        'Discover',
+        'Discover',
+        'Discover',
+        'Discover',
+        'Dialog',
+        'Review'
+      ],
+    )
+  ];
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(
-      height: 100.0,
-      decoration: ShapeDecoration(
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(7.0),
-              side: const BorderSide(width: 1, color: Colors.white))),
-      width: double.infinity,
-      margin: const EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
-      child: Container(
-        margin: const EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 0),
-        child: Chapter(
-          chapter: 1,
-          name: "Hello and welcome",
-          description: "Greet people and ask them how they are doing.",
-          progress: 10,
-          isLooking: false),
-      ) ,
+    return ListView.separated(
+      padding: const EdgeInsets.all(10.0),
+      itemCount: items.length,
+      itemBuilder: (BuildContext context, index) {
+        return items[index];
+      },
+      separatorBuilder: (BuildContext context, int index) => Container(
+        height: 20.0,
+        color: Colors.grey.shade300,
+      ),
     );
+    //   )
+    // Container(
+    //   // height: 500.0,
+    //   width: double.infinity,
+    //   padding: EdgeInsets.zero,
+    //   margin: const EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
+    //   child: ListView(
+    //       padding: EdgeInsets.zero,
+    //       // margin: const EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 0),
+    //       children: items),
+    // );
   }
 }
