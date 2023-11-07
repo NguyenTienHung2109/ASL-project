@@ -20,6 +20,7 @@ class _MyAppState extends State<MyApp> {
   int currentIndex = 0;
   final pages = [
     Home(),
+    Home(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -29,23 +30,44 @@ class _MyAppState extends State<MyApp> {
           child: Scaffold(
         appBar: const Header(),
         body: pages[currentIndex],
-        bottomNavigationBar: NavigationBar(
-          onDestinationSelected: (int index) {
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: (int index) {
             setState(() {
               currentIndex = index;
             });
           },
-          indicatorColor: Colors.amber[800],
-          selectedIndex: currentIndex,
-          destinations: const <Widget>[
-            NavigationDestination(
-                icon: Icon(Icons.home_outlined), label: "Home"),
-            NavigationDestination(
-                icon: Icon(Icons.menu_book_outlined), label: "Trainer"),
-            NavigationDestination(
-                icon: Icon(Icons.list_alt_outlined), label: "Dictionary"),
-            NavigationDestination(
-                icon: Icon(Icons.settings_outlined), label: "Settings"),
+          selectedItemColor: Colors.amber[800],
+          backgroundColor: Colors.white,
+          unselectedItemColor: Colors.grey.shade500,
+          selectedFontSize: 14.0,
+          unselectedFontSize: 14.0,
+          iconSize: 30.0,
+          type: BottomNavigationBarType.fixed,
+          currentIndex: currentIndex,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home_outlined,
+                  // color: Colors.black,
+                ), 
+                label: "Home",
+                // backgroundColor: Colors.white,
+      
+                ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.menu_book_outlined,
+                // color: Colors.black,
+                ), label: "Trainer"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.list_alt_outlined, 
+                // color: Colors.black,
+                ), 
+                label: "Dictionary"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.settings_outlined, 
+                // color: Colors.black,
+                ), 
+                label: "Settings"),
           ],
         ),
       )),
