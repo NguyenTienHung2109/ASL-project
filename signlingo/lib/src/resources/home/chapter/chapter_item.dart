@@ -14,13 +14,13 @@ class ChapterBodyItem extends StatefulWidget {
 class _ChapterBodyItemState extends State<ChapterBodyItem> {
   static final List<Icon> _iconList = [
     const Icon(Icons.remove_red_eye_outlined,
-        size: 60.0, color: Colors.orange, semanticLabel: 'Discover'),
+        size: 45.0, color: Colors.orange, semanticLabel: 'Discover'),
     const Icon(Icons.mode_comment_outlined,
-        size: 60.0, color: Colors.orange, semanticLabel: 'Dialog'),
+        size: 45.0, color: Colors.orange, semanticLabel: 'Dialog'),
     const Icon(Icons.rate_review_outlined,
-        size: 60.0, color: Colors.orange, semanticLabel: 'Review'),
+        size: 45.0, color: Colors.orange, semanticLabel: 'Review'),
     const Icon(Icons.picture_in_picture_alt_outlined,
-        size: 60.0, color: Colors.orange, semanticLabel: 'Iconic')
+        size: 45.0, color: Colors.orange, semanticLabel: 'Iconic')
   ];
   @override
   Widget build(BuildContext context) {

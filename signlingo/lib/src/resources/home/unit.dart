@@ -47,11 +47,7 @@ class _UnitState extends State<Unit> {
       isLooking: true,
       items: const [
         'Discover',
-        'Discover',
-        'Discover',
-        'Discover',
-        'Discover',
-        'Discover',
+        'Iconic',
         'Dialog',
         'Review'
       ],
@@ -92,7 +88,7 @@ class _UnitState extends State<Unit> {
               padding: const EdgeInsets.all(25.0),
               // margin: const EdgeInsets.all(20.0),
               decoration: BoxDecoration(
-                color: Colors.white,
+                // color: Colors.white,
                 border: Border.all(
                   color: Colors.white.withOpacity(0), // Màu viền
                   width: 0.1, // Độ dày của viền
@@ -114,7 +110,7 @@ class _UnitState extends State<Unit> {
                     ),
                     Container(
                       height: 10.0,
-                      color: Colors.white,
+                      // color: Colors.white,
                     ),
                     Center(
                       child: Text(
@@ -127,10 +123,6 @@ class _UnitState extends State<Unit> {
                 ),
               ),
             ),
-          ),
-          Container(
-            height: 25.0,
-            color: Colors.grey.shade200,
           ),
           Container(
             height: 25.0,
