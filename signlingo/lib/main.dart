@@ -3,8 +3,6 @@ import 'package:signlingo/src/resources/app.dart';
 
 
 void main() {
-  // runApp(const MyApp());
-
   runApp(const MyApp());
 }
 

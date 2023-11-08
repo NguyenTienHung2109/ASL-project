@@ -21,11 +21,12 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("Login")),
       body: Container(
         constraints: const BoxConstraints.expand(),
         color: Colors.white,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Icon(Icons.arrow_back, size: 30, color: Colors.black),
+          //const Icon(Icons.arrow_back, size: 30, color: Colors.black),
           Container(
             width: double.infinity,
             alignment: AlignmentDirectional.center,
