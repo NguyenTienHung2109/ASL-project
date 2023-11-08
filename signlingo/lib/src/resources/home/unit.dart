@@ -57,60 +57,94 @@ class _UnitState extends State<Unit> {
       ],
     )
   ];
+
+  List<Widget> getItem() {
+    List<Widget> result = [];
+    for (int i = 0; i < items.length; i++) {
+      result.add(items[i]);
+      result.add(Container(
+        height: 20.0,
+        color: Colors.grey.shade300,
+      ));
+    }
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return ListView(
-      children: [
-        Container(
-          margin: const EdgeInsets.all(20.0),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(
-              color: Colors.white.withOpacity(0), // Màu viền
-              width: 0.1, // Độ dày của viền
+    return SizedBox(
+      height: 800,
+      child: ListView(
+        scrollDirection: Axis.vertical,
+        children: [
+          Center(
+            child: Container(
+              alignment: Alignment.center,
+              height: 200,
+              padding: const EdgeInsets.all(30.0),
+              margin: const EdgeInsets.all(20.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(
+                  color: Colors.white.withOpacity(0), // Màu viền
+                  width: 0.1, // Độ dày của viền
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+              ),
+              child: Column(
+                children: [
+                  Center(
+                    child: Text(
+                      "Unit ${widget.unit}",
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 30.0,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 10.0,
+                    color: Colors.white,
+                  ),
+                  Center(
+                    child: Text(
+                      widget.description,
+                      style: const TextStyle(
+                          color: Colors.black54, fontSize: 20.0),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
-          child: Column(
-            children: [
-              Center(
-                child: Text(
-                  "Unit ${widget.unit}",
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 30.0,
-                  ),
-                ),
-              ),
-              Container(
-                height: 10.0,
-                color: Colors.white,
-              ),
-              Center(
-                child: Text(
-                  widget.description,
-                  style: const TextStyle(color: Colors.black54, fontSize: 20.0),
-                ),
-              )
-            ],
+          Container(
+            height: 25.0,
+            color: Colors.black.withOpacity(0),
           ),
-        ),
-        Container(
-          height: 25.0,
-          color: Colors.black.withOpacity(0),
-        ),
-        ListView.separated(
-          padding: const EdgeInsets.all(10.0),
-          itemCount: items.length,
-          itemBuilder: (BuildContext context, index) {
-            return items[index];
-          },
-          separatorBuilder: (BuildContext context, int index) => Container(
-            height: 20.0,
-            color: Colors.grey.shade300,
-          ),
-        )
-      ],
+          // SizedBox(
+          //   height: 500,
+          //   child: ListView.separated(
+          //     scrollDirection: Axis.vertical,
+          //     padding: const EdgeInsets.all(10.0),
+          //     itemCount: items.length,
+          //     itemBuilder: (BuildContext context, index) {
+          //       return items[index];
+          //     },
+          //     separatorBuilder: (BuildContext context, int index) => Container(
+          //       height: 20.0,
+          //       color: Colors.grey.shade300,
+          //     ),
+          //   ),
+          // )
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: getItem(),
+            ),
+          )
+        ],
+      ),
     );
     //   )
     // Container(
