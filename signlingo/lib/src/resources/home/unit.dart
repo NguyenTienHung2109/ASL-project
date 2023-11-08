@@ -64,7 +64,7 @@ class _UnitState extends State<Unit> {
       result.add(items[i]);
       result.add(Container(
         height: 20.0,
-        color: Colors.grey.shade300,
+        color: Colors.grey.shade200,
       ));
     }
     return result;
@@ -73,72 +73,73 @@ class _UnitState extends State<Unit> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return SizedBox(
-      height: 800,
+    return Container(
+      height: double.infinity,
+      color: Colors.grey.shade200,
       child: ListView(
         scrollDirection: Axis.vertical,
         children: [
-          Center(
+          Container(  
+            height: 25.0,
+            color: Colors.grey.shade200,
+          ),
+          Container(
+            color: Colors.grey.shade200,
+            padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
             child: Container(
-              alignment: Alignment.center,
-              height: 200,
-              padding: const EdgeInsets.all(30.0),
-              margin: const EdgeInsets.all(20.0),
+              // height: 125,
+              // width: 220,
+              padding: const EdgeInsets.all(25.0),
+              // margin: const EdgeInsets.all(20.0),
               decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border.all(
                   color: Colors.white.withOpacity(0), // Màu viền
                   width: 0.1, // Độ dày của viền
                 ),
-                borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               ),
-              child: Column(
-                children: [
-                  Center(
-                    child: Text(
-                      "Unit ${widget.unit}",
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 30.0,
+              child: Center(
+                child: Column(
+                  children: [
+                    Center(
+                      child: Text(
+                        "Unit ${widget.unit}",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    height: 10.0,
-                    color: Colors.white,
-                  ),
-                  Center(
-                    child: Text(
-                      widget.description,
-                      style: const TextStyle(
-                          color: Colors.black54, fontSize: 20.0),
+                    Container(
+                      height: 10.0,
+                      color: Colors.white,
                     ),
-                  )
-                ],
+                    Center(
+                      child: Text(
+                        widget.description,
+                        style: const TextStyle(
+                            color: Colors.black54, fontSize: 20.0),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
           Container(
             height: 25.0,
-            color: Colors.black.withOpacity(0),
+            color: Colors.grey.shade200,
           ),
-          // SizedBox(
-          //   height: 500,
-          //   child: ListView.separated(
-          //     scrollDirection: Axis.vertical,
-          //     padding: const EdgeInsets.all(10.0),
-          //     itemCount: items.length,
-          //     itemBuilder: (BuildContext context, index) {
-          //       return items[index];
-          //     },
-          //     separatorBuilder: (BuildContext context, int index) => Container(
-          //       height: 20.0,
-          //       color: Colors.grey.shade300,
-          //     ),
-          //   ),
-          // )
-          Padding(
-            padding: const EdgeInsets.all(10.0),
+          Container(
+            height: 25.0,
+            color: Colors.grey.shade200,
+          ),
+          Container(
+            padding: const EdgeInsets.all(5.0),
+            width: 400,
+            color: Colors.grey.shade200,
             child: Column(
               children: getItem(),
             ),
@@ -146,16 +147,5 @@ class _UnitState extends State<Unit> {
         ],
       ),
     );
-    //   )
-    // Container(
-    //   // height: 500.0,
-    //   width: double.infinity,
-    //   padding: EdgeInsets.zero,
-    //   margin: const EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
-    //   child: ListView(
-    //       padding: EdgeInsets.zero,
-    //       // margin: const EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 0),
-    //       children: items),
-    // );
   }
 }

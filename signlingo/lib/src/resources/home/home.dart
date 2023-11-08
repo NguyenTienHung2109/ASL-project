@@ -25,8 +25,17 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const Header(),
-      body: pages[currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
+      body: Container(
+        // color: Colors.red,
+        child: pages[currentIndex],
+      )
+      ,
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          // color: Colors.red,
+          border: Border(top: BorderSide(width: 0.5, color: Colors.black26))
+        ),
+        child: BottomNavigationBar(
         onTap: (int index) {
           setState(() {
             currentIndex = index;
@@ -68,7 +77,7 @@ class _HomeState extends State<Home> {
               ),
               label: "Settings"),
         ],
-      ),
+      )),
     );
     // ));
     // ));

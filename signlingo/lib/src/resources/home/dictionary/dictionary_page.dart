@@ -17,15 +17,15 @@ class _SearchScreenState extends State<DictionaryPage> {
     return Column(
       children: <Widget>[
         Container(
-          margin: const EdgeInsets.only(bottom: 10.0),
-          padding: const EdgeInsets.only(bottom: 10.0),
-          decoration: const BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.only(
+          // margin: const EdgeInsets.only(bottom: 10.0),
+          // padding: const EdgeInsets.only(bottom: 10.0),
+          decoration: BoxDecoration(
+            color: Colors.yellow.shade50,
+            borderRadius: const BorderRadius.only(
               bottomLeft:
-                  Radius.circular(15), // Độ bo tròn của góc dưới bên trái
+                  Radius.circular(0), // Độ bo tròn của góc dưới bên trái
               bottomRight:
-                  Radius.circular(15), // Độ bo tròn của góc dưới bên phải
+                  Radius.circular(0), // Độ bo tròn của góc dưới bên phải
             ),
           ),
           child: Column(children: <Widget>[
@@ -33,10 +33,10 @@ class _SearchScreenState extends State<DictionaryPage> {
               margin: const EdgeInsets.only(
                   top: 25.0, right: 10.0, left: 10.0, bottom: 10.0),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25.0), // Bo tròn viền
+                borderRadius: BorderRadius.circular(15.0), // Bo tròn viền
                 border: Border.all(
-                  color: Colors.blueAccent, // Màu của đường viền
-                  width: 1.0, // Độ rộng của đường viền
+                  color: Colors.black, // Màu của đường viền
+                  width: 0.7, // Độ rộng của đường viền
                 ),
                 color: Colors.white, // Màu nền
               ),
@@ -66,7 +66,8 @@ class _SearchScreenState extends State<DictionaryPage> {
             Container(
                 height: 50,
                 margin: EdgeInsets.all(10.0),
-                padding: EdgeInsets.only(bottom: 10.0),
+                padding: EdgeInsets.fromLTRB(0.0, 5.0, 0, 5.0),
+                color: Colors.yellow.shade50,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: List.generate(26, (index) {
@@ -84,21 +85,25 @@ class _SearchScreenState extends State<DictionaryPage> {
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                                side: const BorderSide(
-                                    color: Colors.lightBlue, width: 1.0),
+                                borderRadius: BorderRadius.circular(7.0),
+                                side: BorderSide(
+                                    color: Colors.grey, width: 0.8),
                               ),
                             ),
                             backgroundColor: MaterialStateProperty.all<Color>(
                               Colors.white, // Màu nền của nút
                             ),
+                            elevation: MaterialStateProperty.all<double>(
+                                2), // Độ nổi lên
+                            shadowColor: MaterialStateProperty.all<Color>(
+                                Colors.grey), // Màu đổ bóng
                           ),
                           child: Container(
                             child: Text(
                               char,
                               style: const TextStyle(
                                 fontSize: 18, // Tùy chỉnh kích thước văn bản
-                                color: Colors.lightBlue, // Màu văn bản
+                                color: Colors.black54, // Màu văn bản
                               ),
                             ),
                           ),
@@ -107,19 +112,37 @@ class _SearchScreenState extends State<DictionaryPage> {
                     );
                   }),
                 )),
+            Container(
+              height: 5.0,
+              color: Colors.yellow.shade50,
+            )
           ]),
         ),
-        Expanded(
+        Container(
+          height: 5.0,
+          color: Colors.yellow.shade50,
+        ),
+        (Expanded(
           child: ListView(
             children: List.generate(26, (index) {
-              return Padding(
+              return Container(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
+                color: Colors.yellow.shade50,
                 child: Container(
                   margin: EdgeInsets.only(left: 10.0, right: 10.0),
                   decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Colors.blueAccent,
-                        width: 2.0), // Đường viền xung quanh ExpansionTile
+                    color: Colors.yellow.shade50,
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.grey, // Màu đổ bóng
+                        spreadRadius: 0.5, // Độ mở rộng của đổ bóng
+                        blurRadius: 3, // Độ mờ của đổ bóng
+                        offset: Offset(0, 2), // Vị trí đổ bóng
+                      )
+                    ],
+                    // border: Border.all(
+                    //     color: Colors.black45,
+                    //     width: 0.5), // Đường viền xung quanh ExpansionTile
                     borderRadius: BorderRadius.circular(25.0),
                   ),
                   child: ExpansionTile(
@@ -127,7 +150,7 @@ class _SearchScreenState extends State<DictionaryPage> {
                       String.fromCharCode('A'.codeUnitAt(0) + index),
                       style: TextStyle(
                         fontSize: 22, // Đặt kích thước văn bản cho tiêu đề
-                        color: Colors.blue, // Đổi màu chữ
+                        color: Colors.black54, // Đổi màu chữ
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -144,12 +167,16 @@ class _SearchScreenState extends State<DictionaryPage> {
                                   RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15.0),
-                                  side: const BorderSide(
-                                      color: Colors.lightBlue, width: 1.0),
+                                  // side: const BorderSide(
+                                  //     color: Colors.lightBlue, width: 1.0),
                                 ),
                               ),
+                              elevation: MaterialStateProperty.all<double>(
+                                  4.0), // Độ nổi lên
+                              shadowColor: MaterialStateProperty.all<Color>(
+                                  Colors.grey), // Màu đổ bóng
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                Colors.white, // Màu nền của nút
+                                Colors.yellow.shade50, // Màu nền của nút
                               ),
                             ),
                             child: Container(
@@ -172,7 +199,7 @@ class _SearchScreenState extends State<DictionaryPage> {
               );
             }),
           ),
-        ),
+        )),
       ],
     );
   }

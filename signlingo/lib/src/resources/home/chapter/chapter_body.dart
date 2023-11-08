@@ -49,7 +49,7 @@ class _ChapterBodyState extends State<ChapterBody> {
           Container(
             height: 4,
             width: double.infinity,
-            color: Colors.grey.shade300,
+            color: Colors.grey.shade200,
           ),
           Container(
             alignment: Alignment.centerLeft,

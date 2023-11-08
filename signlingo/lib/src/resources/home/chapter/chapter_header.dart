@@ -45,7 +45,7 @@ class _ChapterHeaderState extends State<ChapterHeader> {
                   Text(
                     "Chapter ${widget.chapter} - ${widget.name}",
                     style: const TextStyle(
-                      color: Colors.black54,
+                      color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 16.0,
                     ),
@@ -68,7 +68,7 @@ class _ChapterHeaderState extends State<ChapterHeader> {
                   alignment: Alignment.center,
                   child: CircularProgressIndicator(
                     strokeWidth: 5.0,
-                    backgroundColor: Colors.black26,
+                    backgroundColor: Colors.grey.shade300,
                     valueColor: AlwaysStoppedAnimation(Colors.amber.shade600),
                     value: !widget.isLooking ? widget.progress / 100 : 0,
                   ),
