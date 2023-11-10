@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:signlingo/src/resources/element/glowing_button.dart';
 import 'package:signlingo/src/resources/login/login_page.dart';
 import 'package:signlingo/src/resources/login/register_page.dart';
 
@@ -41,33 +42,47 @@ class StartPageState extends State<StartPage> {
           ),
           Column(
             children: [
-              ElevatedButton(
-                onPressed: () {
+          ElevatedButton(
+            onPressed: () {
                   print("start button");
                   onClickStartButton();
-                },
-                style: ElevatedButton.styleFrom(
-                    minimumSize: Size(300, 40),
+                  },
+            style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    minimumSize: Size(160, 48),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30))),
-                child: Text(
-                  'GET STARTED',
-                  style: TextStyle(),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
+                        borderRadius: BorderRadius.circular(40))),
+            child: GlowingButton(
+              color1: Colors.redAccent,
+              color2: Colors.yellowAccent,
+              width_button: 300,
+              text_button: "GET STARTED",
+              event_button: onClickStartButton
+            ),
+          ),
+          SizedBox(
+            height: 10
+          ),
+          ElevatedButton(
+            onPressed: () {
                   print("new acc button");
                   onClickNewAcc();
-                },
-                style: ElevatedButton.styleFrom(
-                    minimumSize: Size(300, 40),
+                  },
+            style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    minimumSize: Size(160, 48),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30))),
-                child: Text("I ALREADY HAVE AN ACCOUNT"),
-              ),
+                        borderRadius: BorderRadius.circular(40))),
+            child: GlowingButton(
+              color1: Colors.redAccent,
+              color2: Colors.yellowAccent,
+              width_button: 300,
+              text_button: "I ALREADY HAVE AN ACCOUNT",
+              event_button: onClickNewAcc
+            ),
+          ),
             ],
-          )
+          ),
         ],
       ),
     ));
