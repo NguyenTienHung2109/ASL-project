@@ -2,13 +2,9 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:signlingo/src/bloc/Learning_bloc.dart';
-import 'package:signlingo/src/resources/learning/learning.dart';
 import 'package:signlingo/src/resources/learning/learning_body/learning_footer/incorrect_footer.dart';
-import 'package:video_player/video_player.dart';
 
 class PracticePage extends StatefulWidget {
   late String name;
