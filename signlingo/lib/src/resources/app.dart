@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:signlingo/src/resources/home/home.dart';
+import 'package:signlingo/src/resources/learning/learning.dart';
 import 'package:signlingo/src/resources/login/login_page.dart';
 
 class MyApp extends StatefulWidget {
@@ -15,7 +16,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: LoginPage(),
