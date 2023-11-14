@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "331111665029",
+    "project_id": "asl-project-80a75",
+    "storage_bucket": "asl-project-80a75.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:331111665029:android:ffeb7562ac59f6fa2b88ec",
+        "android_client_info": {
+          "package_name": "com.example.signlingo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBh0blwCjSHrH8kW23ZWQlNUe9JGCAlk_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
