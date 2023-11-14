@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:signlingo/src/header.dart';
 import 'package:signlingo/src/resources/home/dictionary/dictionary_page.dart';
 import 'package:signlingo/src/resources/home/home_page.dart';
+import 'package:signlingo/src/resources/home/setting/setting.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -18,7 +19,8 @@ class _HomeState extends State<Home> {
   final pages = [
     HomePage(),
     HomePage(),
-    DictionaryPage() // Trainer
+    DictionaryPage(), // Trainer
+    SettingPage()
     // Dictionary
   ];
   @override
@@ -52,7 +54,7 @@ class _HomeState extends State<Home> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home_outlined,
+              Icons.home,
               // color: Colors.black,
             ),
             label: "Home",
@@ -72,7 +74,7 @@ class _HomeState extends State<Home> {
               label: "Dictionary"),
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.settings_outlined,
+                Icons.settings,
                 // color: Colors.black,
               ),
               label: "Settings"),
