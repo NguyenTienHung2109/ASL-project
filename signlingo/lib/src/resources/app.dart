@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:signlingo/src/resources/home/home.dart';
 import 'package:signlingo/src/resources/login/login_page.dart';
+import 'package:signlingo/src/resources/quiz/quiz_page.dart';
 import 'package:signlingo/src/resources/start/start_page.dart';
 
 class MyApp extends StatefulWidget {
@@ -19,7 +20,15 @@ class _MyAppState extends State<MyApp> {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(
-        child: StartPage(),
+        child:QuizPage()
+         /*QuizPage(Url: 'https://www.youtube.com/watch?v=n1Y4HROvFME',
+        answer: {
+    'A. 1999': true,
+    'B. 1998': false,
+    'C. 1997': false,
+  },
+        question: "abc",
+        ),*/
       ),
     );
   }
