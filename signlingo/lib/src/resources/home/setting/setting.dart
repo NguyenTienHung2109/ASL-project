@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:signlingo/src/resources/home/setting/edit_profile.dart';
 
 class SettingPage extends StatefulWidget {
    const SettingPage({super.key});
@@ -27,7 +28,11 @@ class _SettingScreenState extends State<SettingPage> {
           child: InkWell(
             onTap: () {
               // Xử lý sự kiện khi nút được nhấn
-              print('Button Pressed!');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EditProfilePage())
+              );
+              print("press");
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,6 +97,10 @@ class _SettingScreenState extends State<SettingPage> {
                 child: InkWell(
                   onTap: () {
                     // xu ly su kien
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => EditProfilePage())
+                    );
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
