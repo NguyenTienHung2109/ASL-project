@@ -18,7 +18,7 @@ class _HomeState extends State<Home> {
   int currentIndex = 0;
   final pages = [
     HomePage(),
-    HomePage(),
+    // HomePage(),
     DictionaryPage(), // Trainer
     SettingPage()
     // Dictionary
@@ -60,12 +60,12 @@ class _HomeState extends State<Home> {
             label: "Home",
             // backgroundColor: Colors.white,
           ),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.menu_book_outlined,
-                // color: Colors.black,
-              ),
-              label: "Trainer"),
+          // BottomNavigationBarItem(
+          //     icon: Icon(
+          //       Icons.menu_book_outlined,
+          //       // color: Colors.black,
+          //     ),
+          //     label: "Trainer"),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.list_alt_outlined,
