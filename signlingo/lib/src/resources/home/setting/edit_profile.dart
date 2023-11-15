@@ -129,7 +129,7 @@ class _EditProfilePage extends State<EditProfilePage>{
                           child: Text(
                           'Edit Profile',
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontSize: 16.0
                           ),
                         ),

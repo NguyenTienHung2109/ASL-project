@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:signlingo/src/resources/home/setting/about_page.dart';
 import 'package:signlingo/src/resources/home/setting/edit_profile.dart';
+import 'package:signlingo/src/resources/home/setting/logout_alert.dart';
 
 class SettingPage extends StatefulWidget {
    const SettingPage({super.key});
@@ -157,6 +159,10 @@ class _SettingScreenState extends State<SettingPage> {
                 child: InkWell(
                   onTap: () {
                     // xu ly su kien
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => EditProfilePage())
+                    );
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -213,6 +219,12 @@ class _SettingScreenState extends State<SettingPage> {
                 child: InkWell(
                   onTap: () {
                     // xu ly su kien
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AboutPage(); // Sử dụng CustomDialog ở đây
+                      },
+                    );
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -269,6 +281,12 @@ class _SettingScreenState extends State<SettingPage> {
                 child: InkWell(
                   onTap: () {
                     // xu ly su kien
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return LogoutAlert(); // Sử dụng CustomDialog ở đây
+                      },
+                    );
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -322,5 +340,4 @@ class _SettingScreenState extends State<SettingPage> {
       ],
     );
   }
-  
 }
