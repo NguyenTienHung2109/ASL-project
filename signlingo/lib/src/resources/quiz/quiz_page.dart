@@ -8,59 +8,96 @@ class QuizPage extends StatefulWidget {
 }
 
 class QuizPageState extends State<QuizPage> {
-  final Map<String, bool> answerMap = {
-    'A. 1999': true,
-    'B. 1998': false,
-    'C. 1997': false,
-  };
+  List<Map<String, bool>> answers = [
+    {"1997": true},
+    {"1887": false},
+    {"1998": false},
+  ];
+  bool check = false;
+  String? selectedAnswer;
+  bool isCorrect = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: 
-        Column(
+        body: Column(children: [
+      Container(
+        height: 200.0,
+        child: YoutubePlayerExample(
+          videoUrl: "https://www.youtube.com/watch?v=-oGnIDH1aeA",
+        ),
+      ),
+      Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Text(
+          'Năm sinh của bạn A là?',
+          style: TextStyle(fontSize: 18.0),
+        ),
+      ),
+      Container(
+        width: 200,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              height: 200.0,
-              child: YoutubePlayerExample(
-                videoUrl: "https://www.youtube.com/watch?v=-oGnIDH1aeA",
-              ),
+            for (var answer in answers) buildAnswerButton(answer.keys.first),
+            SizedBox(
+              height: 20,
+              width: 200,
             ),
-            Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Text(
-            'Năm sinh của bạn A là?',
-            style: TextStyle(fontSize: 18.0),
-          ),
-        ),
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: answerMap.length,
-          itemBuilder: (context, index) {
-            var entry = answerMap.entries.elementAt(index);
-            return AnswerWidget(
-              answerText: entry.key,
-              isCorrect: entry.value,
-            );
-          },
-        ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(minimumSize: const Size(20, 40)),
+              onPressed: () {
+                setState(() {
+                  check = true;
+                  // Kiểm tra xem đáp án đã chọn có đúng hay không
+                  isCorrect = selectedAnswer != null &&
+                      answers
+                          .firstWhere(
+                              (answer) => answer.keys.first == selectedAnswer)
+                          .values
+                          .first;
+                });
+              },
+              child: Text('Check Answer'),
+            ),
+            SizedBox(height: 20),
+            // Hiển thị true nếu đáp án đúng và false nếu đáp án sai
+            check
+                ? Text(
+                    'Đáp án đúng: ${isCorrect?.toString() ?? ""}',
+                    style: TextStyle(
+                      color: isCorrect == true
+                          ? Colors.green
+                          : isCorrect == false
+                              ? Colors.red
+                              : null,
+                      fontSize: 18,
+                    ),
+                  )
+                : Text(""),
           ],
-        )
-        
-    );
+        ),
+      ),
+    ]));
   }
-}
 
-class AnswerWidget extends StatelessWidget {
-  final String answerText;
-  final bool isCorrect;
-
-  AnswerWidget({required this.answerText, required this.isCorrect});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(answerText),
-      tileColor: isCorrect ? Colors.green : Colors.red,
+  Widget buildAnswerButton(String answer) {
+    return OutlinedButton(
+      onPressed: () {
+        setState(() {
+          selectedAnswer = answer;
+        });
+      },
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(
+            width: 2,
+            color: selectedAnswer == answer ? Colors.orange : Colors.blue),
+        //primary: selectedAnswer == answer ? Colors.yellow : null,
+        minimumSize: const Size(200, 40),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+      ),
+      child: Text(answer),
     );
   }
 }

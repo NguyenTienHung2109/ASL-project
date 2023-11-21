@@ -16,16 +16,17 @@ class YoutubePlayerExampleState extends State<YoutubePlayerExample> {
     return Scaffold(
       body: Container(
           child: YoutubePlayer(
-            controller: YoutubePlayerController(
-              initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl)!,
-              flags: YoutubePlayerFlags(
-                autoPlay: true,
-                mute: false,
-              ),
-            ),
-            showVideoProgressIndicator: true,
-          )
-      ),
+        controller: YoutubePlayerController(
+          initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl)!,
+          flags: const YoutubePlayerFlags(
+              autoPlay: true,
+              mute: false,
+              controlsVisibleAtStart: false,
+              loop: true,
+              hideThumbnail: true),
+        ),
+        showVideoProgressIndicator: false,
+      )),
     );
   }
 }
