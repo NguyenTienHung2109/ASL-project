@@ -1,22 +1,44 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
-class CheckFooter extends StatefulWidget {
-  late Future<void> Function() checkLesson;
-
-  CheckFooter({super.key, required this.checkLesson});
-
+class LoadingFooter extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _CheckFooterState();
+    return _LoadingFooterState();
   }
 }
 
-class _CheckFooterState extends State<CheckFooter> {
+class _LoadingFooterState extends State<LoadingFooter> {
+  String loadingText = "Loading";
+  void startLoadingAnimation() {
+    const duration = const Duration(milliseconds: 500);
+
+    Timer.periodic(duration, (Timer timer) {
+      if (mounted) {
+        setState(() {
+          loadingText += '.';
+          if (loadingText.length > 10) {
+            loadingText = 'Loading';
+          }
+        });
+      } else {
+        timer.cancel();
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    startLoadingAnimation();
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-
     return Container(
           decoration: BoxDecoration(color: Colors.white),
           height: 100,
@@ -40,15 +62,13 @@ class _CheckFooterState extends State<CheckFooter> {
                 child: Center(
                     child: TextButton(
                   child: const Text(
-                    "CHECK",
+                    "Loading",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
                     ),
                   ),
-                  onPressed: () {
-                    widget.checkLesson();
-                  },
+                  onPressed: () {},
                 ))),
           ),
         );

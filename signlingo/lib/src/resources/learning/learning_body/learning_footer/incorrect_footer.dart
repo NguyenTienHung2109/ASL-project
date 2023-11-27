@@ -26,11 +26,11 @@ class IncorrectFooter extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.red[100],
                 border: Border(
-                bottom: BorderSide(
-                  color: Colors.black,
-                  width: 2.0,
+                  bottom: BorderSide(
+                    color: Colors.black,
+                    width: 2.0,
+                  ),
                 ),
-              ),
               ),
               child: ClipPath(
                 clipper: WaveClipper(),
@@ -54,12 +54,15 @@ class IncorrectFooter extends StatelessWidget {
                         color: Colors.white,
                         size: 20,
                       ),
+                      Container(
+                        width: 10.0,
+                      ),
                       Text(
-                        "Incorrect",
+                        "Incorrect!",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
-                            fontStyle: FontStyle.italic),
+                            fontWeight: FontWeight.bold,),
                       )
                     ],
                   ),
@@ -70,7 +73,7 @@ class IncorrectFooter extends StatelessWidget {
                       height: 60,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [Colors.orange[500]!, Colors.orange[900]!],
+                          colors: [Colors.deepOrange!, Colors.deepOrange[700]!],
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
                         ),
@@ -107,7 +110,7 @@ class IncorrectFooter extends StatelessWidget {
 }
 
 class WaveClipper extends CustomClipper<Path> {
-    @override
+  @override
   Path getClip(Size size) {
     var path = Path();
 
@@ -115,17 +118,17 @@ class WaveClipper extends CustomClipper<Path> {
     path.moveTo(0, 5);
 
     // Tạo một sóng bằng quadraticBezierTo
-   // Tạo sóng thứ nhất
-path.quadraticBezierTo(
+    // Tạo sóng thứ nhất
+    path.quadraticBezierTo(
       size.width / 4,
-      size.height / 20 - 1,  // Điều chỉnh đây để giảm độ cong của sóng
+      size.height / 20 - 1, // Điều chỉnh đây để giảm độ cong của sóng
       size.width / 2,
       1,
     );
     path.quadraticBezierTo(
       size.width * 3 / 4,
-      size.height / 20 - 1,  // Điều chỉnh đây để giảm độ cong của sóng
-      size.width ,
+      size.height / 20 - 1, // Điều chỉnh đây để giảm độ cong của sóng
+      size.width,
       3,
     );
     // Kết thúc tại điểm góc trên bên phải
@@ -140,5 +143,5 @@ path.quadraticBezierTo(
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
     return false;
-  } 
+  }
 }
