@@ -16,70 +16,77 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentIndex = 0;
-  final pages = [
-    HomePage(),
-    // HomePage(),
-    DictionaryPage(), // Trainer
-    SettingPage()
-    // Dictionary
-  ];
+  Widget _currentWidget = HomePage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const Header(),
       body: Container(
         // color: Colors.red,
-        child: pages[currentIndex],
-      )
-      ,
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          // color: Colors.red,
-          border: Border(top: BorderSide(width: 0.5, color: Colors.black26))
+        child: AnimatedSwitcher(
+          duration: Duration(milliseconds: 500),
+          child: _currentWidget,
         ),
-        child: BottomNavigationBar(
-        onTap: (int index) {
-          setState(() {
-            currentIndex = index;
-          });
-        },
-        selectedItemColor: Colors.amber[800],
-        backgroundColor: Colors.white,
-        unselectedItemColor: Colors.grey.shade500,
-        selectedFontSize: 14.0,
-        unselectedFontSize: 14.0,
-        iconSize: 30.0,
-        type: BottomNavigationBarType.fixed,
-        currentIndex: currentIndex,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              // color: Colors.black,
-            ),
-            label: "Home",
-            // backgroundColor: Colors.white,
-          ),
-          // BottomNavigationBarItem(
-          //     icon: Icon(
-          //       Icons.menu_book_outlined,
-          //       // color: Colors.black,
-          //     ),
-          //     label: "Trainer"),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.list_alt_outlined,
-                // color: Colors.black,
+      ),
+      bottomNavigationBar: Container(
+          decoration: const BoxDecoration(
+              // color: Colors.red,
+              border:
+                  Border(top: BorderSide(width: 0.5, color: Colors.black26))),
+          child: BottomNavigationBar(
+            onTap: (int index) {
+              setState(() {
+                currentIndex = index;
+                switch (index) {
+                  case 0:
+                    _currentWidget = HomePage();
+                    break;
+                  case 1:
+                    _currentWidget = DictionaryPage();
+                    break;
+                  case 2:
+                    _currentWidget = SettingPage();
+                    break;
+                }
+              });
+            },
+            selectedItemColor: Colors.amber[800],
+            backgroundColor: Colors.white,
+            unselectedItemColor: Colors.grey.shade500,
+            selectedFontSize: 14.0,
+            unselectedFontSize: 14.0,
+            iconSize: 30.0,
+            type: BottomNavigationBarType.fixed,
+            currentIndex: currentIndex,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home,
+                  // color: Colors.black,
+                ),
+                label: "Home",
+                // backgroundColor: Colors.white,
               ),
-              label: "Dictionary"),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.settings,
-                // color: Colors.black,
-              ),
-              label: "Settings"),
-        ],
-      )),
+              // BottomNavigationBarItem(
+              //     icon: Icon(
+              //       Icons.menu_book_outlined,
+              //       // color: Colors.black,
+              //     ),
+              //     label: "Trainer"),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.list_alt_outlined,
+                    // color: Colors.black,
+                  ),
+                  label: "Dictionary"),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.settings,
+                    // color: Colors.black,
+                  ),
+                  label: "Settings"),
+            ],
+          )),
     );
     // ));
     // ));
