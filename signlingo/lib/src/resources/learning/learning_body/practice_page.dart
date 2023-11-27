@@ -1,10 +1,13 @@
-import 'dart:async';
+import 'dart:async' show Future, Timer;
 import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:signlingo/src/bloc/Learning_bloc.dart';
+import 'package:signlingo/src/resources/learning/learning_body/learning_footer/check_footer.dart';
+import 'package:signlingo/src/resources/learning/learning_body/learning_footer/correct_footer.dart';
 import 'package:signlingo/src/resources/learning/learning_body/learning_footer/incorrect_footer.dart';
+import 'package:signlingo/src/resources/learning/learning_body/learning_footer/loading_footer.dart';
 
 class PracticePage extends StatefulWidget {
   late String name;
@@ -25,15 +28,36 @@ class _PracticePageState extends State<PracticePage> {
   late CameraController _cameraController;
   bool _isRecording = false;
   bool _recorded = false;
+  bool _doneRecorded = false;
   bool _haveFrontCamera = false;
   int _countdown = 3;
   int _recordDuration = 5;
   LearningBloc _bloc = new LearningBloc();
+  bool _isChecking = false;
+  bool _checked = false;
+  bool _result = false;
+  var file;
+
+  Widget _footer = SizedBox.shrink();
 
   @override
   void dispose() {
     _cameraController.dispose();
     super.dispose();
+  }
+
+  void callCheck() {}
+  Future<void> checkLesson() async {
+    if (_doneRecorded && !_checked) {
+      setState(() {
+        _checked = true;
+        _isChecking = true;
+      });
+      _result = await _bloc.isCorrectVideo(file, widget.name);
+      setState(() {
+        _isChecking = false;
+      });
+    }
   }
 
   Future<void> _startCountdown() async {
@@ -57,12 +81,14 @@ class _PracticePageState extends State<PracticePage> {
       await _cameraController.startVideoRecording();
       Timer(Duration(seconds: _recordDuration), () async {
         if (_isRecording) {
-          final file = await _cameraController.stopVideoRecording();
+          file = await _cameraController.stopVideoRecording();
           print('Dừng ghi video.');
           print(file.path);
           setState(() {
             _isRecording = false;
+            _doneRecorded = true;
           });
+          // dispose();
         }
       });
     }
@@ -103,6 +129,35 @@ class _PracticePageState extends State<PracticePage> {
 
   @override
   Widget build(BuildContext context) {
+    if (_doneRecorded) {
+      setState(() {
+        if (!_checked) {
+          _footer = CheckFooter(checkLesson: () async {
+            await checkLesson();
+          });
+        } else {
+          if (_isChecking) {
+            _footer = LoadingFooter();
+          } else {
+            if (_result) {
+              _footer = CorrectFooter(nextLesson: () {
+                widget.nextLesson();
+              });
+            } else {
+              _footer = IncorrectFooter(
+                  nextLesson: () {
+                    widget.nextLesson();
+                  },
+                  resetLesson: () {
+                    widget.resetLesson();
+                  },
+                  type: false);
+            }
+          }
+        }
+      });
+    }
+
     return Scaffold(
         body: _isLoading
             ? Container(
@@ -227,12 +282,11 @@ class _PracticePageState extends State<PracticePage> {
                         ),
                       )
                     ])),
-    bottomNavigationBar: _isLoading ? null : IncorrectFooter(nextLesson: () {
-
-    }, resetLesson: () {
-
-    }, type: false),
-            );
+        bottomNavigationBar: AnimatedSwitcher(
+          duration: Duration(milliseconds: 600),
+          child: _footer,
+        )
+        );
     // TODO: implement build
   }
 }
