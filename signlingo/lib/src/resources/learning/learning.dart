@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:signlingo/src/resources/learning/learning_body/learning_footer/next_footer.dart';
 import 'package:signlingo/src/resources/learning/learning_body/practice_page.dart';
 import 'package:signlingo/src/resources/learning/learning_body/study_page.dart';
+import 'package:signlingo/src/resources/learning/learning_menu.dart';
 
 // ignore: must_be_immutable
 class Learning extends StatefulWidget {
@@ -19,7 +19,7 @@ class Learning extends StatefulWidget {
 }
 
 class _LearningState extends State<Learning> {
-  late Widget _currentWidget;
+  Widget _currentWidget = SizedBox.shrink();
 
   @override
   void initState() {
@@ -45,24 +45,26 @@ class _LearningState extends State<Learning> {
   }
 
   void updateWidget() {
-    if (widget.complete == 1) {
-      _currentWidget = StudyPage(
-        name: "HEARING",
-        nextLesson: () {
-          increment();
-          updateWidget();
-        },
-      );
-    }
-    if (widget.complete == 2) {
-      _currentWidget = PracticePage(
-        name: "DEAF",
-        nextLesson: () {
-          increment();
-          updateWidget();
-        },
-      );
-    }
+    setState(() {
+      if (widget.complete == 1) {
+        _currentWidget = StudyPage(
+          name: "HEARING",
+          nextLesson: () {
+            increment();
+            updateWidget();
+          },
+        );
+      }
+      if (widget.complete == 2) {
+        _currentWidget = PracticePage(
+          name: "DEAF",
+          nextLesson: () {
+            increment();
+            updateWidget();
+          },
+        );
+      }
+    });
   }
 
   // List<String> sceriano = [
@@ -97,10 +99,12 @@ class _LearningState extends State<Learning> {
                 color: Colors.black,
               ),
               onPressed: () {
-                widget.isHiding = !widget.isHiding;
-                setState(() {
-                  Navigator.pop(context);
-                });
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return LearningMenu(); // Sử dụng CustomDialog ở đây
+                  },
+                );
               },
             ),
             actions: [
@@ -142,7 +146,10 @@ class _LearningState extends State<Learning> {
           // bottomNavigationBar: NextFooter(nextLesson: () {
           //   increment();
           // }),
-          body: _currentWidget,
+          body: AnimatedSwitcher(
+            duration: Duration(milliseconds: 400),
+            child: _currentWidget,
+          ),
         ));
   }
 }
