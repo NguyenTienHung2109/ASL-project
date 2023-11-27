@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:signlingo/src/resources/home/setting/about_page.dart';
+import 'package:signlingo/src/resources/home/setting/edit_profile.dart';
+import 'package:signlingo/src/resources/home/setting/logout_alert.dart';
 
 class SettingPage extends StatefulWidget {
-   const SettingPage({super.key});
-   @override
+  const SettingPage({super.key});
+  @override
   State<StatefulWidget> createState() {
-     return _SettingScreenState();
-   }
+    return _SettingScreenState();
+  }
 }
 
 class _SettingScreenState extends State<SettingPage> {
@@ -16,9 +19,10 @@ class _SettingScreenState extends State<SettingPage> {
       children: <Widget>[
         Container(
           margin: EdgeInsets.only(bottom: 20.0),
-          padding: EdgeInsets.only(top: 35.0, bottom: 25.0, right: 15.0, left: 15.0),
+          padding:
+              EdgeInsets.only(top: 35.0, bottom: 25.0, right: 15.0, left: 15.0),
           decoration: BoxDecoration(
-              color: Color.fromRGBO(77, 210, 255, 0.3),
+            color: Color.fromRGBO(77, 210, 255, 0.3),
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(20.0),
               bottomRight: Radius.circular(20.0),
@@ -27,7 +31,9 @@ class _SettingScreenState extends State<SettingPage> {
           child: InkWell(
             onTap: () {
               // Xử lý sự kiện khi nút được nhấn
-              print('Button Pressed!');
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => EditProfilePage()));
+              print("press");
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,21 +41,21 @@ class _SettingScreenState extends State<SettingPage> {
                 Row(
                   children: [
                     Container(
-                    width: 90.0,
-                    height: 90.0,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.blue, // Màu nền của khung ảnh
-                    ),
+                      width: 90.0,
+                      height: 90.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.blue, // Màu nền của khung ảnh
+                      ),
                       child: Center(
-                       child: ClipOval(
-                        child: Image.network(
-                          'https://i.pinimg.com/736x/11/e4/4d/11e44d85743b28fa62121b5ae71a914b.jpg',
-                          width: 88.0,
-                          height: 88.0,
-                          fit: BoxFit.cover,
+                        child: ClipOval(
+                          child: Image.network(
+                            'https://i.pinimg.com/736x/11/e4/4d/11e44d85743b28fa62121b5ae71a914b.jpg',
+                            width: 88.0,
+                            height: 88.0,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                       ),
                       ),
                     ),
                     SizedBox(width: 16.0),
@@ -78,7 +84,7 @@ class _SettingScreenState extends State<SettingPage> {
               ],
             ),
           ),
-        ),                // Profile
+        ), // Profile
         Container(
           padding: EdgeInsets.all(5.0),
           child: Column(
@@ -92,6 +98,10 @@ class _SettingScreenState extends State<SettingPage> {
                 child: InkWell(
                   onTap: () {
                     // xu ly su kien
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditProfilePage()));
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -102,8 +112,10 @@ class _SettingScreenState extends State<SettingPage> {
                             width: 35.0,
                             height: 35.0,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30.0), // Bo tròn viền
-                              color: Color.fromRGBO(77, 210, 255, 0.3), // Màu nền
+                              borderRadius:
+                                  BorderRadius.circular(30.0), // Bo tròn viền
+                              color:
+                                  Color.fromRGBO(77, 210, 255, 0.3), // Màu nền
                             ),
                             child: Icon(
                               Icons.person,
@@ -114,7 +126,7 @@ class _SettingScreenState extends State<SettingPage> {
                           SizedBox(width: 20.0),
                           Container(
                             child: Text(
-                                'Edit Personal Data',
+                              'Edit Personal Data',
                               style: TextStyle(
                                 fontSize: 20.0,
                               ),
@@ -126,20 +138,19 @@ class _SettingScreenState extends State<SettingPage> {
                         width: 25.0,
                         height: 25.0,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.0), // Bo tròn viền
+                          borderRadius:
+                              BorderRadius.circular(5.0), // Bo tròn viền
                           // color: Color.fromRGBO(211, 211, 211, 0.5), // Màu nền
                         ),
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          size: 12.0,
-                            color: Color.fromRGBO(77, 210, 255, 1)
-                        ),
+                        child: Icon(Icons.arrow_forward_ios,
+                            size: 12.0, color: Color.fromRGBO(77, 210, 255, 1)),
                       )
                     ],
                   ),
                 ),
-              ),             // edit data
-              Container(                          // change pass
+              ), // edit data
+              Container(
+                // change pass
                 margin: EdgeInsets.all(10.0),
                 height: 60.0,
                 decoration: BoxDecoration(
@@ -148,6 +159,10 @@ class _SettingScreenState extends State<SettingPage> {
                 child: InkWell(
                   onTap: () {
                     // xu ly su kien
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditProfilePage()));
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -158,8 +173,10 @@ class _SettingScreenState extends State<SettingPage> {
                             width: 35.0,
                             height: 35.0,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30.0), // Bo tròn viền
-                              color: Color.fromRGBO(184, 111, 220, 0.3), // Màu nền
+                              borderRadius:
+                                  BorderRadius.circular(30.0), // Bo tròn viền
+                              color:
+                                  Color.fromRGBO(184, 111, 220, 0.3), // Màu nền
                             ),
                             child: Icon(
                               Icons.vpn_key,
@@ -170,7 +187,7 @@ class _SettingScreenState extends State<SettingPage> {
                           SizedBox(width: 20.0),
                           Container(
                             child: Text(
-                                'Change Password',
+                              'Change Password',
                               style: TextStyle(
                                 fontSize: 20.0,
                               ),
@@ -182,14 +199,13 @@ class _SettingScreenState extends State<SettingPage> {
                         width: 25.0,
                         height: 25.0,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.0), // Bo tròn viền
+                          borderRadius:
+                              BorderRadius.circular(5.0), // Bo tròn viền
                           // color: Color.fromRGBO(211, 211, 211, 0.5), // Màu nền
                         ),
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          size: 12.0,
-                            color: Color.fromRGBO(184, 111, 220, 1)
-                        ),
+                        child: Icon(Icons.arrow_forward_ios,
+                            size: 12.0,
+                            color: Color.fromRGBO(184, 111, 220, 1)),
                       )
                     ],
                   ),
@@ -204,6 +220,12 @@ class _SettingScreenState extends State<SettingPage> {
                 child: InkWell(
                   onTap: () {
                     // xu ly su kien
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AboutPage(); // Sử dụng CustomDialog ở đây
+                      },
+                    );
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -214,8 +236,10 @@ class _SettingScreenState extends State<SettingPage> {
                             width: 35.0,
                             height: 35.0,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30.0), // Bo tròn viền
-                              color: Color.fromRGBO(0, 230, 142, 0.3), // Màu nền
+                              borderRadius:
+                                  BorderRadius.circular(30.0), // Bo tròn viền
+                              color:
+                                  Color.fromRGBO(0, 230, 142, 0.3), // Màu nền
                             ),
                             child: Icon(
                               Icons.add_circle_outline,
@@ -238,7 +262,8 @@ class _SettingScreenState extends State<SettingPage> {
                         width: 25.0,
                         height: 25.0,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.0), // Bo tròn viền
+                          borderRadius:
+                              BorderRadius.circular(5.0), // Bo tròn viền
                           // color: Color.fromRGBO(0, 230, 142, 0.3), // Màu nền
                         ),
                         child: Icon(
@@ -260,6 +285,12 @@ class _SettingScreenState extends State<SettingPage> {
                 child: InkWell(
                   onTap: () {
                     // xu ly su kien
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return LogoutAlert(); // Sử dụng CustomDialog ở đây
+                      },
+                    );
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -270,8 +301,10 @@ class _SettingScreenState extends State<SettingPage> {
                             width: 35.0,
                             height: 35.0,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30.0), // Bo tròn viền
-                              color: Color.fromRGBO(233, 22, 64, 0.3), // Màu nền
+                              borderRadius:
+                                  BorderRadius.circular(30.0), // Bo tròn viền
+                              color:
+                                  Color.fromRGBO(233, 22, 64, 0.3), // Màu nền
                             ),
                             child: Icon(
                               Icons.logout,
@@ -294,14 +327,12 @@ class _SettingScreenState extends State<SettingPage> {
                         width: 25.0,
                         height: 25.0,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.0), // Bo tròn viền
+                          borderRadius:
+                              BorderRadius.circular(5.0), // Bo tròn viền
                           // color: Color.fromRGBO(211, 211, 211, 0.5), // Màu nền
                         ),
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          size: 12.0,
-                            color: Color.fromRGBO(233, 22, 64, 1)
-                        ),
+                        child: Icon(Icons.arrow_forward_ios,
+                            size: 12.0, color: Color.fromRGBO(233, 22, 64, 1)),
                       )
                     ],
                   ),
@@ -313,5 +344,4 @@ class _SettingScreenState extends State<SettingPage> {
       ],
     );
   }
-  
 }
