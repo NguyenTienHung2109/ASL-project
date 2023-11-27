@@ -88,9 +88,12 @@ class _StudyPageState extends State<StudyPage> {
                   )),
                 )),
               ])),
-      bottomNavigationBar: NextFooter(nextLesson: () {
-        widget.nextLesson();
-      }),
+      bottomNavigationBar: AnimatedSwitcher(
+        duration: Duration(milliseconds: 600),
+        child: NextFooter(nextLesson: () {
+          widget.nextLesson();
+        }),
+      ),
     );
   }
 }
