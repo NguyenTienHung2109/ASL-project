@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:signlingo/src/resources/element/video_youtube.dart';
+import 'package:signlingo/src/bloc/quiz_bloc.dart';
 
 class QuizPage extends StatefulWidget {
   const QuizPage({Key? key}) : super(key: key);
@@ -8,6 +9,8 @@ class QuizPage extends StatefulWidget {
 }
 
 class QuizPageState extends State<QuizPage> {
+  QuizBloc bloc = new QuizBloc();
+
   List<Map<String, bool>> answers = [
     {"1997": true},
     {"1887": false},
@@ -43,22 +46,28 @@ class QuizPageState extends State<QuizPage> {
               height: 20,
               width: 200,
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(minimumSize: const Size(20, 40)),
-              onPressed: () {
-                setState(() {
-                  check = true;
-                  // Kiểm tra xem đáp án đã chọn có đúng hay không
-                  isCorrect = selectedAnswer != null &&
-                      answers
-                          .firstWhere(
-                              (answer) => answer.keys.first == selectedAnswer)
-                          .values
-                          .first;
-                });
-              },
-              child: Text('Check Answer'),
-            ),
+            StreamBuilder(
+                stream: bloc.checkStream,
+                builder: (context, snapshot) => ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(20, 40)),
+                      onPressed: () {
+                        setState(() {
+                          check = true;
+                          // Kiểm tra xem đáp án đã chọn có đúng hay không
+                          if (answers
+                                  .firstWhere((answer) =>
+                                      answer.keys.first == selectedAnswer)
+                                  .values
+                                  .first &&
+                              selectedAnswer != null)
+                            isCorrect = true;
+                          else
+                            isCorrect = false;
+                        });
+                      },
+                      child: Text('Check Answer'),
+                    )),
             SizedBox(height: 20),
             // Hiển thị true nếu đáp án đúng và false nếu đáp án sai
             check

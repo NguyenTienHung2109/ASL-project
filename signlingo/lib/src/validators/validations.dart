@@ -13,4 +13,8 @@ class Validations {
     // Code here
     return pass == pass2;
   }
+
+  static bool isValidQuiz(bool key) {
+    return key;
+  }
 }
