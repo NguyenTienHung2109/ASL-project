@@ -139,7 +139,7 @@ class LoginPageState extends State<LoginPage> {
     setState(() {
       if (bloc.isValidInfo(EmailData.text, PassData.text)) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Home()));
+            context, MaterialPageRoute(builder: (context) => Home(username: "testing@gmail.com")));
       }
     });
   }
@@ -156,6 +156,6 @@ class LoginPageState extends State<LoginPage> {
   }
 
   Widget GotoHome(BuildContext context) {
-    return Home();
+    return Home(username: "testing@gmail.com");
   }
 }

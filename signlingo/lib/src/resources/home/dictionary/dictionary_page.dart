@@ -5,7 +5,8 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'dart:convert';
 
 class DictionaryPage extends StatefulWidget {
-  const DictionaryPage({super.key});
+  late String username;
+  DictionaryPage({super.key, required this.username});
 
   @override
   State<StatefulWidget> createState() {
@@ -103,8 +104,8 @@ class _SearchScreenState extends State<DictionaryPage> {
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(7.0),
-                                side:
-                                    const BorderSide(color: Colors.grey, width: 0.8),
+                                side: const BorderSide(
+                                    color: Colors.grey, width: 0.8),
                               ),
                             ),
                             backgroundColor: MaterialStateProperty.all<Color>(
@@ -204,11 +205,9 @@ class _SearchScreenState extends State<DictionaryPage> {
                                                   borderRadius:
                                                       BorderRadius.only(
                                                     topLeft:
-                                                        Radius.circular(
-                                                            15.0),
+                                                        Radius.circular(15.0),
                                                     topRight:
-                                                        Radius.circular(
-                                                            15.0),
+                                                        Radius.circular(15.0),
                                                   ),
                                                 ),
                                                 child: Column(
@@ -218,8 +217,8 @@ class _SearchScreenState extends State<DictionaryPage> {
                                                           MainAxisAlignment.end,
                                                       children: [
                                                         IconButton(
-                                                          icon:
-                                                              const Icon(Icons.close),
+                                                          icon: const Icon(
+                                                              Icons.close),
                                                           onPressed: () =>
                                                               Navigator.pop(
                                                                   context),
@@ -227,20 +226,30 @@ class _SearchScreenState extends State<DictionaryPage> {
                                                       ],
                                                     ),
                                                     Container(
-                                                      margin: const EdgeInsets.only(top: 10.0),
+                                                      margin:
+                                                          const EdgeInsets.only(
+                                                              top: 10.0),
                                                       decoration: BoxDecoration(
                                                         color: Colors.white,
-                                                        borderRadius: BorderRadius.circular(15.0), // Add rounded corners
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                15.0), // Add rounded corners
                                                       ),
                                                       child: Column(
                                                         children: [
                                                           Padding(
-                                                            padding: const EdgeInsets.all(8.0),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8.0),
                                                             child: Text(
-                                                              items[index].title ?? 'Default Title',
-                                                              style: const TextStyle(
+                                                              items[index]
+                                                                      .title ??
+                                                                  'Default Title',
+                                                              style:
+                                                                  const TextStyle(
                                                                 fontSize: 30.0,
-                                                                color: Colors.black,
+                                                                color: Colors
+                                                                    .black,
                                                                 height: 2.5,
                                                               ),
                                                             ),
@@ -308,7 +317,8 @@ class _SearchScreenState extends State<DictionaryPage> {
                                           ),
                                         ),
                                         child: Container(
-                                          margin: const EdgeInsets.only(bottom: 15),
+                                          margin:
+                                              const EdgeInsets.only(bottom: 15),
                                           child: Text(
                                             items[index].title ??
                                                 'Default Title',
@@ -325,7 +335,8 @@ class _SearchScreenState extends State<DictionaryPage> {
                                 },
                               );
                             } else {
-                              return const Center(child: CircularProgressIndicator());
+                              return const Center(
+                                  child: CircularProgressIndicator());
                             }
                           },
                         ),

@@ -5,7 +5,8 @@ import 'package:signlingo/src/resources/home/setting/edit_profile.dart';
 import 'package:signlingo/src/resources/home/setting/logout_alert.dart';
 
 class SettingPage extends StatefulWidget {
-  const SettingPage({super.key});
+  late String username;
+  SettingPage({super.key, required this.username});
   @override
   State<StatefulWidget> createState() {
     return _SettingScreenState();

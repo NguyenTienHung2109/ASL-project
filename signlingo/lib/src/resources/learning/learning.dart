@@ -147,8 +147,11 @@ class _LearningState extends State<Learning> {
           //   increment();
           // }),
           body: AnimatedSwitcher(
-            duration: Duration(milliseconds: 400),
-            child: _currentWidget,
+            duration: const Duration(milliseconds: 600),
+            child: Container(
+              key: ValueKey<int> (widget.complete),
+              child: _currentWidget
+              ),
           ),
         ));
   }
