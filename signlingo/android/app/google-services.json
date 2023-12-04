@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "292341323563",
+    "firebase_url": "https://signlingo-7eab0-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "signlingo-7eab0",
+    "storage_bucket": "signlingo-7eab0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292341323563:android:57bd38d7e185e2bc86576e",
+        "android_client_info": {
+          "package_name": "com.example.signlingo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZaP-ydJsSCDOGeAy2yORshKVXtpUbfyw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
