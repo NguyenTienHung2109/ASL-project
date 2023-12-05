@@ -25,7 +25,7 @@ class IncorrectFooter extends StatelessWidget {
               height: 140,
               decoration: BoxDecoration(
                 color: Colors.red[100],
-                border: Border(
+                border: const Border(
                 bottom: BorderSide(
                   color: Colors.black,
                   width: 2.0,
@@ -45,8 +45,8 @@ class IncorrectFooter extends StatelessWidget {
                 Container(
                   width: 100,
                   height: 20,
-                  margin: EdgeInsets.symmetric(vertical: 12),
-                  child: Row(
+                  margin: const EdgeInsets.symmetric(vertical: 12),
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(

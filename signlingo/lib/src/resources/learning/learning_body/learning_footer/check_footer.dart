@@ -8,7 +8,7 @@ class CheckFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      decoration: BoxDecoration(color: Colors.white),
+      decoration: const BoxDecoration(color: Colors.white),
       height: 100,
       child: Center(
         child: Container(
@@ -26,7 +26,7 @@ class CheckFooter extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(40),
             ),
-            margin: EdgeInsets.only(bottom: 20),
+            margin: const EdgeInsets.only(bottom: 20),
             child: Center(
                 child: TextButton(
               child: const Text(

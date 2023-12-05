@@ -3,6 +3,8 @@ import 'package:signlingo/src/bloc/login_bloc.dart';
 import 'package:signlingo/src/resources/home/home.dart';
 
 class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
   //const RegisterPage({super.key});
 
   @override
@@ -10,25 +12,25 @@ class RegisterPage extends StatefulWidget {
 }
 
 class RegisterState extends State<RegisterPage> {
-  LoginBloc bloc = new LoginBloc();
+  LoginBloc bloc = LoginBloc();
 
   bool showPass = false;
   bool showPass2 = false;
 
   TextEditingController EmailData =
-      new TextEditingController(); //data cua email
-  TextEditingController PassData = new TextEditingController(); //data cua pass
+      TextEditingController(); //data cua email
+  TextEditingController PassData = TextEditingController(); //data cua pass
   TextEditingController Pass2Data =
-      new TextEditingController(); //kiem tra lai pass
-  TextEditingController NameData = new TextEditingController(); //data cua name
+      TextEditingController(); //kiem tra lai pass
+  TextEditingController NameData = TextEditingController(); //data cua name
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Register")),
+        appBar: AppBar(title: const Text("Register")),
         body: Container(
-          constraints: BoxConstraints.expand(),
-          padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+          constraints: const BoxConstraints.expand(),
+          padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
           color: Colors.white,
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -44,16 +46,16 @@ class RegisterState extends State<RegisterPage> {
               ),
             ),
             Padding(
-                padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                 child: StreamBuilder(
                     stream: bloc.userStream,
                     builder: (context, snapshot) => TextField(
                           controller: EmailData,
-                          style: TextStyle(fontSize: 18, color: Colors.black),
+                          style: const TextStyle(fontSize: 18, color: Colors.black),
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.blue,
                                   width: 2.0,
                                 ),
@@ -62,26 +64,26 @@ class RegisterState extends State<RegisterPage> {
                               errorText: snapshot.hasError
                                   ? snapshot.error.toString()
                                   : null,
-                              labelStyle: TextStyle(
+                              labelStyle: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500)),
                         ))),
             Padding(
-                padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                 child: TextField(
                   controller: NameData,
-                  style: TextStyle(fontSize: 18, color: Colors.black),
+                  style: const TextStyle(fontSize: 18, color: Colors.black),
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.blue,
                           width: 2.0,
                         ),
                       ),
                       labelText: 'First Name',
-                      labelStyle: TextStyle(
+                      labelStyle: const TextStyle(
                           fontSize: 16,
                           color: Colors.black,
                           fontWeight: FontWeight.w500)),
@@ -92,15 +94,15 @@ class RegisterState extends State<RegisterPage> {
                 StreamBuilder(
                     stream: bloc.passStream,
                     builder: (context, snapshot) => Padding(
-                        padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                         child: TextField(
                           controller: PassData,
-                          style: TextStyle(fontSize: 18, color: Colors.black),
+                          style: const TextStyle(fontSize: 18, color: Colors.black),
                           obscureText: !showPass,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.blue,
                                   width: 2.0,
                                 ),
@@ -109,7 +111,7 @@ class RegisterState extends State<RegisterPage> {
                               errorText: snapshot.hasError
                                   ? snapshot.error.toString()
                                   : null,
-                              labelStyle: TextStyle(
+                              labelStyle: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500)),
@@ -120,8 +122,8 @@ class RegisterState extends State<RegisterPage> {
                       ShowPass();
                     },
                     icon: showPass
-                        ? Icon(Icons.remove_red_eye)
-                        : Icon(Icons.remove_red_eye_outlined))
+                        ? const Icon(Icons.remove_red_eye)
+                        : const Icon(Icons.remove_red_eye_outlined))
               ],
             ),
             Stack(
@@ -130,15 +132,15 @@ class RegisterState extends State<RegisterPage> {
                 StreamBuilder(
                     stream: bloc.passStream2,
                     builder: (context, snapshot) => Padding(
-                        padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                         child: TextField(
                           controller: Pass2Data,
-                          style: TextStyle(fontSize: 18, color: Colors.black),
+                          style: const TextStyle(fontSize: 18, color: Colors.black),
                           obscureText: !showPass2,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.blue,
                                   width: 2.0,
                                 ),
@@ -147,7 +149,7 @@ class RegisterState extends State<RegisterPage> {
                               errorText: snapshot.hasError
                                   ? snapshot.error.toString()
                                   : null,
-                              labelStyle: TextStyle(
+                              labelStyle: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500)),
@@ -158,8 +160,8 @@ class RegisterState extends State<RegisterPage> {
                       ShowPass2();
                     },
                     icon: showPass
-                        ? Icon(Icons.remove_red_eye)
-                        : Icon(Icons.remove_red_eye_outlined))
+                        ? const Icon(Icons.remove_red_eye)
+                        : const Icon(Icons.remove_red_eye_outlined))
               ],
             ),
             Container(
@@ -181,7 +183,7 @@ class RegisterState extends State<RegisterPage> {
                           print('button acc');
                           onClickNewAcc();
                         },
-                        child: Text(
+                        child: const Text(
                           "I already have an account",
                           style:
                               TextStyle(decoration: TextDecoration.underline),

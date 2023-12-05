@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -25,10 +24,10 @@ class _PracticePageState extends State<PracticePage> {
   late CameraController _cameraController;
   bool _isRecording = false;
   bool _recorded = false;
-  bool _haveFrontCamera = false;
+  final bool _haveFrontCamera = false;
   int _countdown = 3;
-  int _recordDuration = 5;
-  LearningBloc _bloc = new LearningBloc();
+  final int _recordDuration = 5;
+  final LearningBloc _bloc = LearningBloc();
 
   @override
   void dispose() {
@@ -38,7 +37,7 @@ class _PracticePageState extends State<PracticePage> {
 
   Future<void> _startCountdown() async {
     for (int i = _countdown; i > 0; i--) {
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(const Duration(seconds: 1));
       setState(() {
         _countdown = i;
       });

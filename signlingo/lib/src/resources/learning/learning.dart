@@ -84,7 +84,7 @@ class _LearningState extends State<Learning> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
         ),
         child: Scaffold(
@@ -92,7 +92,7 @@ class _LearningState extends State<Learning> {
             backgroundColor: Colors.white,
             elevation: 0,
             leading: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.menu,
                 color: Colors.black,
               ),

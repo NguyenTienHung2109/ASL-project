@@ -1,5 +1,4 @@
 import 'package:camera/camera.dart';
-
 class Validations {
   static bool isValidUser(String user) {
     return true;

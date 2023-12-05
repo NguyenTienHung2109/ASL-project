@@ -11,12 +11,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
-  LoginBloc bloc = new LoginBloc();
+  LoginBloc bloc = LoginBloc();
   bool showPass = false;
 
   TextEditingController EmailData =
-      new TextEditingController(); //data cua email
-  TextEditingController PassData = new TextEditingController(); //data cua pass
+      TextEditingController(); //data cua email
+  TextEditingController PassData = TextEditingController(); //data cua pass
 
   @override
   Widget build(BuildContext context) {
@@ -38,16 +38,16 @@ class LoginPageState extends State<LoginPage> {
             ),
           ),
           Padding(
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
               child: StreamBuilder(
                   stream: bloc.userStream,
                   builder: (context, snapshot) => TextField(
                         controller: EmailData,
-                        style: TextStyle(fontSize: 18, color: Colors.black),
+                        style: const TextStyle(fontSize: 18, color: Colors.black),
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.blue,
                                 width: 2.0,
                               ),
@@ -56,7 +56,7 @@ class LoginPageState extends State<LoginPage> {
                             errorText: snapshot.hasError
                                 ? snapshot.error.toString()
                                 : null,
-                            labelStyle: TextStyle(
+                            labelStyle: const TextStyle(
                                 fontSize: 16,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500)),
@@ -67,15 +67,15 @@ class LoginPageState extends State<LoginPage> {
               StreamBuilder(
                   stream: bloc.passStream,
                   builder: (context, snapshot) => Padding(
-                      padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                       child: TextField(
                         controller: PassData,
-                        style: TextStyle(fontSize: 18, color: Colors.black),
+                        style: const TextStyle(fontSize: 18, color: Colors.black),
                         obscureText: !showPass,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.blue,
                                 width: 2.0,
                               ),
@@ -84,7 +84,7 @@ class LoginPageState extends State<LoginPage> {
                             errorText: snapshot.hasError
                                 ? snapshot.error.toString()
                                 : null,
-                            labelStyle: TextStyle(
+                            labelStyle: const TextStyle(
                                 fontSize: 16,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500)),
@@ -95,8 +95,8 @@ class LoginPageState extends State<LoginPage> {
                     ShowPass();
                   },
                   icon: showPass
-                      ? Icon(Icons.remove_red_eye)
-                      : Icon(Icons.remove_red_eye_outlined))
+                      ? const Icon(Icons.remove_red_eye)
+                      : const Icon(Icons.remove_red_eye_outlined))
             ],
           ),
           Container(
@@ -118,7 +118,7 @@ class LoginPageState extends State<LoginPage> {
                         print('button acc');
                         onClickNewAcc();
                       },
-                      child: Text(
+                      child: const Text(
                         "Create Account",
                         style: TextStyle(decoration: TextDecoration.underline),
                       ))

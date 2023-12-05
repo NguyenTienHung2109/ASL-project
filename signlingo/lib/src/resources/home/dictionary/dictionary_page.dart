@@ -17,7 +17,7 @@ class DictionaryPage extends StatefulWidget {
 class _SearchScreenState extends State<DictionaryPage> {
   Future<List<VideoDataModel>> readJsonData(String currentCharacter) async {
     final jsonData = await rootBundle
-        .loadString('JSON_file/dict_JSON/letter_' + currentCharacter + '.json');
+        .loadString('JSON_file/dict_JSON/letter_$currentCharacter.json');
     final list = json.decode(jsonData) as List<dynamic>;
 
     return list.map((e) => VideoDataModel.fromJson(e)).toList();

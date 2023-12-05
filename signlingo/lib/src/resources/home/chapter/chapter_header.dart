@@ -8,7 +8,7 @@ class ChapterHeader extends StatefulWidget {
   bool isLooking = true;
 
   ChapterHeader(
-      {required this.chapter,
+      {super.key, required this.chapter,
       required this.name,
       required this.description,
       required this.progress,

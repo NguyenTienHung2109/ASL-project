@@ -35,7 +35,7 @@ class _StudyPageState extends State<StudyPage> {
                 Container(
                   height: 30,
                   color: Colors.white,
-                  child: Text(
+                  child: const Text(
                     "Learn a new sign!",
                     style: TextStyle(
                       fontSize: 20,

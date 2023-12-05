@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SettingPage extends StatefulWidget {
@@ -15,9 +14,9 @@ class _SettingScreenState extends State<SettingPage> {
     return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.only(bottom: 20.0),
-          padding: EdgeInsets.only(top: 35.0, bottom: 25.0, right: 15.0, left: 15.0),
-          decoration: BoxDecoration(
+          margin: const EdgeInsets.only(bottom: 20.0),
+          padding: const EdgeInsets.only(top: 35.0, bottom: 25.0, right: 15.0, left: 15.0),
+          decoration: const BoxDecoration(
               color: Color.fromRGBO(77, 210, 255, 0.3),
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(20.0),
@@ -37,7 +36,7 @@ class _SettingScreenState extends State<SettingPage> {
                     Container(
                     width: 90.0,
                     height: 90.0,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.blue, // Màu nền của khung ảnh
                     ),
@@ -52,8 +51,8 @@ class _SettingScreenState extends State<SettingPage> {
                        ),
                       ),
                     ),
-                    SizedBox(width: 16.0),
-                    Column(
+                    const SizedBox(width: 16.0),
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -80,11 +79,11 @@ class _SettingScreenState extends State<SettingPage> {
           ),
         ),                // Profile
         Container(
-          padding: EdgeInsets.all(5.0),
+          padding: const EdgeInsets.all(5.0),
           child: Column(
             children: <Widget>[
               Container(
-                margin: EdgeInsets.all(10.0),
+                margin: const EdgeInsets.all(10.0),
                 height: 60.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0), // Bo tròn viền
@@ -103,17 +102,17 @@ class _SettingScreenState extends State<SettingPage> {
                             height: 35.0,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30.0), // Bo tròn viền
-                              color: Color.fromRGBO(77, 210, 255, 0.3), // Màu nền
+                              color: const Color.fromRGBO(77, 210, 255, 0.3), // Màu nền
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.person,
                               size: 20.0,
                               color: Color.fromRGBO(77, 210, 255, 1),
                             ),
                           ),
-                          SizedBox(width: 20.0),
+                          const SizedBox(width: 20.0),
                           Container(
-                            child: Text(
+                            child: const Text(
                                 'Edit Personal Data',
                               style: TextStyle(
                                 fontSize: 20.0,
@@ -129,7 +128,7 @@ class _SettingScreenState extends State<SettingPage> {
                           borderRadius: BorderRadius.circular(5.0), // Bo tròn viền
                           // color: Color.fromRGBO(211, 211, 211, 0.5), // Màu nền
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.arrow_forward_ios,
                           size: 12.0,
                             color: Color.fromRGBO(77, 210, 255, 1)
@@ -140,7 +139,7 @@ class _SettingScreenState extends State<SettingPage> {
                 ),
               ),             // edit data
               Container(                          // change pass
-                margin: EdgeInsets.all(10.0),
+                margin: const EdgeInsets.all(10.0),
                 height: 60.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0), // Bo tròn viền
@@ -159,17 +158,17 @@ class _SettingScreenState extends State<SettingPage> {
                             height: 35.0,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30.0), // Bo tròn viền
-                              color: Color.fromRGBO(184, 111, 220, 0.3), // Màu nền
+                              color: const Color.fromRGBO(184, 111, 220, 0.3), // Màu nền
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.vpn_key,
                               size: 20.0,
                               color: Color.fromRGBO(184, 111, 220, 1),
                             ),
                           ),
-                          SizedBox(width: 20.0),
+                          const SizedBox(width: 20.0),
                           Container(
-                            child: Text(
+                            child: const Text(
                                 'Change Password',
                               style: TextStyle(
                                 fontSize: 20.0,
@@ -185,7 +184,7 @@ class _SettingScreenState extends State<SettingPage> {
                           borderRadius: BorderRadius.circular(5.0), // Bo tròn viền
                           // color: Color.fromRGBO(211, 211, 211, 0.5), // Màu nền
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.arrow_forward_ios,
                           size: 12.0,
                             color: Color.fromRGBO(184, 111, 220, 1)
@@ -196,7 +195,7 @@ class _SettingScreenState extends State<SettingPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.all(10.0),
+                margin: const EdgeInsets.all(10.0),
                 height: 60.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0), // Bo tròn viền
@@ -215,17 +214,17 @@ class _SettingScreenState extends State<SettingPage> {
                             height: 35.0,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30.0), // Bo tròn viền
-                              color: Color.fromRGBO(0, 230, 142, 0.3), // Màu nền
+                              color: const Color.fromRGBO(0, 230, 142, 0.3), // Màu nền
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.add_circle_outline,
                               size: 20.0,
                               color: Color.fromRGBO(0, 230, 142, 1),
                             ),
                           ),
-                          SizedBox(width: 20.0),
+                          const SizedBox(width: 20.0),
                           Container(
-                            child: Text(
+                            child: const Text(
                               'About',
                               style: TextStyle(
                                 fontSize: 20.0,
@@ -241,7 +240,7 @@ class _SettingScreenState extends State<SettingPage> {
                           borderRadius: BorderRadius.circular(5.0), // Bo tròn viền
                           // color: Color.fromRGBO(0, 230, 142, 0.3), // Màu nền
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.arrow_forward_ios,
                           size: 12.0,
                           color: Color.fromRGBO(0, 230, 142, 1),
@@ -252,7 +251,7 @@ class _SettingScreenState extends State<SettingPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.all(10.0),
+                margin: const EdgeInsets.all(10.0),
                 height: 60.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0), // Bo tròn viền
@@ -271,17 +270,17 @@ class _SettingScreenState extends State<SettingPage> {
                             height: 35.0,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30.0), // Bo tròn viền
-                              color: Color.fromRGBO(233, 22, 64, 0.3), // Màu nền
+                              color: const Color.fromRGBO(233, 22, 64, 0.3), // Màu nền
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.logout,
                               size: 20.0,
                               color: Color.fromRGBO(233, 22, 64, 1),
                             ),
                           ),
-                          SizedBox(width: 20.0),
+                          const SizedBox(width: 20.0),
                           Container(
-                            child: Text(
+                            child: const Text(
                               'Log Out',
                               style: TextStyle(
                                 fontSize: 20.0,
@@ -297,7 +296,7 @@ class _SettingScreenState extends State<SettingPage> {
                           borderRadius: BorderRadius.circular(5.0), // Bo tròn viền
                           // color: Color.fromRGBO(211, 211, 211, 0.5), // Màu nền
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.arrow_forward_ios,
                           size: 12.0,
                             color: Color.fromRGBO(233, 22, 64, 1)
