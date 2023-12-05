@@ -208,16 +208,16 @@ class RegisterState extends State<RegisterPage> {
     setState(() {
       if (bloc.isValidNewInfo(EmailData.text, PassData.text, Pass2Data.text)) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Home()));
+            context, MaterialPageRoute(builder: (context) => Home(username: "testing@gmail.com",)));
       }
     });
   }
 
   void onClickNewAcc() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Home(username: "testing@gmail.com")));
   }
 
   Widget NewAccPage(BuildContext context) {
-    return Home();
+    return Home(username: "testing@gmail.com");
   }
 }

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:signlingo/src/resources/home/unit.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  late String username;
+  HomePage({super.key, required this.username});
 
   @override
   State<StatefulWidget> createState() {

@@ -21,12 +21,11 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Login")),
       body: Container(
         constraints: const BoxConstraints.expand(),
         color: Colors.white,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          //const Icon(Icons.arrow_back, size: 30, color: Colors.black),
+          const Icon(Icons.arrow_back, size: 30, color: Colors.black),
           Container(
             width: double.infinity,
             alignment: AlignmentDirectional.center,
@@ -140,7 +139,7 @@ class LoginPageState extends State<LoginPage> {
     setState(() {
       if (bloc.isValidInfo(EmailData.text, PassData.text)) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Home()));
+            context, MaterialPageRoute(builder: (context) => Home(username: "testing@gmail.com")));
       }
     });
   }
@@ -157,6 +156,6 @@ class LoginPageState extends State<LoginPage> {
   }
 
   Widget GotoHome(BuildContext context) {
-    return Home();
+    return Home(username: "testing@gmail.com");
   }
 }

@@ -45,7 +45,7 @@ class _ChapterHeaderState extends State<ChapterHeader> {
                   Text(
                     "Chapter ${widget.chapter} - ${widget.name}",
                     style: const TextStyle(
-                      color: Colors.black54,
+                      color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 16.0,
                     ),
@@ -61,28 +61,35 @@ class _ChapterHeaderState extends State<ChapterHeader> {
               ),
             ),
           ),
-          Center(
-            child: Stack(
+          // Center(
+            // child: 
+            Stack(
               children: [
                 Container(
                   alignment: Alignment.center,
+                  width: 50,
                   child: CircularProgressIndicator(
                     strokeWidth: 5.0,
-                    backgroundColor: Colors.black26,
+                    backgroundColor: Colors.grey.shade300,
                     valueColor: AlwaysStoppedAnimation(Colors.amber.shade600),
                     value: !widget.isLooking ? widget.progress / 100 : 0,
                   ),
                 ),
                 Container(
                   alignment: Alignment.center,
-                  margin: !widget.isLooking ? const EdgeInsets.only(left: 5.0) : const EdgeInsets.only(left: 8.0),
+                  width: 50,
+                  // margin: !widget.isLooking
+                  //     ? const EdgeInsets.only(left: 5.0)
+                  //     : const EdgeInsets.only(left: 8.0),
                   child: !widget.isLooking
                       ? Text(
                           "${widget.progress.toStringAsFixed(0)}%",
+                          // "100%",
                           style: const TextStyle(
                             color: Colors.black54,
-                            fontSize: 14.0,
+                            fontSize: 13.0,
                           ),
+                          // textAlign: TextAlign.center,
                         )
                       : const Icon(
                           Icons.lock_outline_rounded,
@@ -92,7 +99,7 @@ class _ChapterHeaderState extends State<ChapterHeader> {
                 )
               ],
             ),
-          )
+          // )
         ],
       ),
     );
