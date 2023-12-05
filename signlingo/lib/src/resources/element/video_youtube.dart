@@ -20,7 +20,7 @@ class YoutubePlayerExampleState extends State<YoutubePlayerExample> {
           initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl)!,
           flags: const YoutubePlayerFlags(
               autoPlay: true,
-              mute: false,
+              mute: true,
               controlsVisibleAtStart: false,
               loop: true,
               hideThumbnail: true),

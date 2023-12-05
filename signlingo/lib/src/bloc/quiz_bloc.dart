@@ -7,8 +7,8 @@ class QuizBloc {
 
   Stream get checkStream => _quizController.stream;
 
-  bool isCheck(bool key) {
-    if (!Validations.isValidQuiz(key)) {
+  bool isCheck(bool key, String? answer) {
+    if (!Validations.isValidQuiz(key, answer)) {
       _quizController.sink.addError("Đáp án sai");
       return false;
     }

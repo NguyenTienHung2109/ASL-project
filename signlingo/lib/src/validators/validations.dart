@@ -4,7 +4,7 @@ class Validations {
     return user != null && user.length > 6 && user.contains('@');
   }
 
-  static bool isValidPassword(String pass) {
+  static bool isValidPassword(String? pass) {
     // Code here
     return pass != null && pass.length > 6;
   }
@@ -14,7 +14,7 @@ class Validations {
     return pass == pass2;
   }
 
-  static bool isValidQuiz(bool key) {
-    return key;
+  static bool isValidQuiz(bool key, String? answer) {
+    return key && answer != null;
   }
 }
