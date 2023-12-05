@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:signlingo/src/resources/learning/learning.dart';
 
 class ChapterBodyItem extends StatefulWidget {
   final String name;
@@ -32,10 +33,22 @@ class _ChapterBodyItemState extends State<ChapterBodyItem> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
-          _iconList[_iconList.indexWhere((element) {
-            Icon icon = element;
-            return icon.semanticLabel == widget.name;
-          })],
+          TextButton(
+            onPressed: () {
+              setState(() {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Learning(
+                              total: 10,
+                            )));
+              });
+            },
+            child: _iconList[_iconList.indexWhere((element) {
+              Icon icon = element;
+              return icon.semanticLabel == widget.name;
+            })],
+          ),
           Text(
             widget.name,
             textAlign: TextAlign.justify,
