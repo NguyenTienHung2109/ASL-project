@@ -19,6 +19,10 @@ class Validations {
     return pass == pass2;
   }
 
+  static bool isValidQuiz(bool key, String? answer) {
+    return key && answer != null;
+  }
+
   static Future<bool> isCorrectVideo(XFile path, String name) async {
     return true;
     // var apiUrl = Uri.parse('https://your-server.com/upload-video');
