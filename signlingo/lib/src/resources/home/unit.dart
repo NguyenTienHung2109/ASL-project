@@ -37,12 +37,16 @@ class _UnitState extends State<Unit> {
         Map<String, dynamic> chapterData = _data[key];
 
         result.add(Chapter(
-            chapter: i + 1,
-            name: chapterData["name"],
-            description: chapterData["description"],
-            progress: 0,
-            isLooking: false,
-            items: HomeBloc.dynamicToStringList(chapterData["items"])));
+          chapter: i + 1,
+          name: chapterData["name"],
+          description: chapterData["description"],
+          progress: 0,
+          isLooking: false,
+          items: HomeBloc.dynamicToStringList(
+            chapterData["items"],
+          ),
+          unit: widget.unit,
+        ));
       } else {
         print("Error: Can not find chapter ${i + 1}");
       }

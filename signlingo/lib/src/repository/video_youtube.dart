@@ -20,9 +20,26 @@ class VideoYoutube extends StatefulWidget {
 }
 
 class _VideoYoutubeState extends State<VideoYoutube> {
+  late YoutubePlayerController _controller;
   @override
   void initState() {
     super.initState();
+    _controller = YoutubePlayerController(
+      initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl)!,
+      flags: const YoutubePlayerFlags(
+        autoPlay: true,
+        mute: true,
+        controlsVisibleAtStart: false,
+        loop: true,
+        // hideThumbnail: true,
+        hideControls: true,
+        // disableDragSeek: true,
+      ),
+    );
+
+    // Disable user interactions
+    _controller.pause();
+    _controller.seekTo(const Duration(seconds: 0));
   }
 
   @override
@@ -32,15 +49,19 @@ class _VideoYoutubeState extends State<VideoYoutube> {
         width: double.infinity,
         height: double.infinity,
         child: YoutubePlayer(
-          controller: YoutubePlayerController(
-              initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl)!,
-              flags: const YoutubePlayerFlags(
-                  autoPlay: true,
-                  mute: true,
-                  controlsVisibleAtStart: false,
-                  loop: true,
-                  hideThumbnail: true)),
+          controller: _controller,
           showVideoProgressIndicator: false,
+          bottomActions: [
+            CurrentPosition(),
+            ProgressBar(isExpanded: true),
+            // TotalDuration(),
+          ],
+          // topActions: [Text(
+          //   "hahah",
+          //   style: TextStyle(
+          //     color: Colors.white
+          //   ),
+          // )],
         ));
   }
 }

@@ -79,7 +79,7 @@ class QuestionPageState extends State<QuestionPage> {
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'Đây là từ gì?',
+                'Choose the correct word!',
                 style: TextStyle(fontSize: 18.0),
               ),
             ),

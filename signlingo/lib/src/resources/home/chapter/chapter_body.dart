@@ -3,8 +3,9 @@ import 'package:signlingo/src/resources/home/chapter/chapter_item.dart';
 
 class ChapterBody extends StatefulWidget {
   final List<String> items;
-
-  const ChapterBody({super.key, required this.items});
+  final int unit;
+  final int chapter;
+  const ChapterBody({super.key, required this.items, required this.chapter, required this.unit});
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -35,7 +36,7 @@ class _ChapterBodyState extends State<ChapterBody> {
         );
       }
       childrenWithSpace
-          .add(ChapterBodyItem(name: itemList[i], hasComplete: false));
+          .add(ChapterBodyItem(name: itemList[i], hasComplete: false, chapter: widget.unit, unit: widget.chapter,));
     }
     return childrenWithSpace;
   }

@@ -3,8 +3,15 @@ import 'package:signlingo/src/resources/learning/learning.dart';
 
 class ChapterBodyItem extends StatefulWidget {
   final String name;
+  final int unit;
+  final int chapter;
   bool hasComplete;
-  ChapterBodyItem({super.key, required this.name, required this.hasComplete});
+  ChapterBodyItem(
+      {super.key,
+      required this.name,
+      required this.hasComplete,
+      required this.chapter,
+      required this.unit});
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -40,7 +47,9 @@ class _ChapterBodyItemState extends State<ChapterBodyItem> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => Learning(
-                              total: 10,
+                              unit: widget.unit,
+                              chapter: widget.chapter,
+                              name: widget.name,
                             )));
               });
             },

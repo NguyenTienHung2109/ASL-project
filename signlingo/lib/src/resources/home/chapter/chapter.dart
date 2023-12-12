@@ -10,13 +10,15 @@ class Chapter extends StatefulWidget {
       required this.description,
       required this.progress,
       required this.isLooking,
-      required this.items});
+      required this.items,
+      required this.unit});
 
   final int chapter;
   final String name;
   final String description;
   final double progress;
   final List<String> items;
+  final int unit;
   bool isLooking = true;
   bool hiding = false;
 
@@ -66,7 +68,7 @@ class _ChapterState extends State<Chapter> {
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
           child: !widget.hiding
-              ? ChapterBody(items: widget.items)
+              ? ChapterBody(items: widget.items, chapter: widget.chapter, unit: widget.unit,)
               : const SizedBox.shrink(),
         ),
       ]),
