@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:signlingo/src/resources/quiz/question.dart';
+import 'package:signlingo/src/resources/learning/learning_body/quiz/question.dart';
 import 'package:signlingo/src/resources/element/video_youtube.dart';
 
 class QuizVideo extends StatefulWidget {
-  const QuizVideo({super.key});
+  late Function nextLesson;
+  QuizVideo({Key? key, required this.nextLesson}) : super(key: key);
 
   @override
   QuizVideoState createState() => QuizVideoState();
 }
 
 class QuizVideoState extends State<QuizVideo> {
+  //dữ liệu đầu vào
+  List<Map<String, bool>> answers = [
+    {"way": true},
+    {"what": false},
+    {"want": false},
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +27,10 @@ class QuizVideoState extends State<QuizVideo> {
             videoUrl: "https://www.youtube.com/watch?v=GhX6yIBXIWQ",
           ),
         ),
-        Expanded(child: QuestionPage()),
+        Expanded(
+            child: QuestionPage(answers: answers,
+          nextLesson: widget.nextLesson,
+        )),
       ]),
     );
   }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:signlingo/src/resources/learning/learning_body/practice_page.dart';
 import 'package:signlingo/src/resources/learning/learning_body/study_page.dart';
 import 'package:signlingo/src/resources/learning/learning_menu.dart';
+import 'package:signlingo/src/resources/learning/learning_body/quiz/quiz_video.dart';
+import 'package:signlingo/src/resources/learning/learning_body/quiz/quiz_img.dart';
 
 // ignore: must_be_immutable
 class Learning extends StatefulWidget {
@@ -58,6 +60,24 @@ class _LearningState extends State<Learning> {
       if (widget.complete == 2) {
         _currentWidget = PracticePage(
           name: "DEAF",
+          nextLesson: () {
+            increment();
+            updateWidget();
+          },
+        );
+      }
+      if (widget.complete == 3) {
+        _currentWidget = QuizVideo(
+          // name: "DEAF",
+          nextLesson: () {
+            increment();
+            updateWidget();
+          },
+        );
+      }
+      if (widget.complete == 4) {
+        _currentWidget = QuizImg(
+          // name: "DEAF",
           nextLesson: () {
             increment();
             updateWidget();
