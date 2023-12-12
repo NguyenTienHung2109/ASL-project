@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:signlingo/src/bloc/login_bloc.dart';
 import 'package:signlingo/src/resources/home/home.dart';
+import 'package:signlingo/src/resources/login/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   //const RegisterPage({super.key});
@@ -208,13 +209,20 @@ class RegisterState extends State<RegisterPage> {
     setState(() {
       if (bloc.isValidNewInfo(EmailData.text, PassData.text, Pass2Data.text)) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Home(username: "testing@gmail.com",)));
+            context,
+            MaterialPageRoute(
+                builder: (context) => Home(
+                      username: "testing@gmail.com",
+                    )));
       }
     });
   }
 
   void onClickNewAcc() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Home(username: "testing@gmail.com")));
+    setState(() {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => LoginPage()));
+    });
   }
 
   Widget NewAccPage(BuildContext context) {

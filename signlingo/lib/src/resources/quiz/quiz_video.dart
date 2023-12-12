@@ -17,7 +17,7 @@ class QuizVideoState extends State<QuizVideo> {
         Container(
           height: 200.0,
           child: YoutubePlayerExample(
-            videoUrl: "https://www.youtube.com/watch?v=-oGnIDH1aeA",
+            videoUrl: "https://www.youtube.com/watch?v=GhX6yIBXIWQ",
           ),
         ),
         Expanded(child: QuestionPage()),

@@ -10,15 +10,15 @@ class QuestionPage extends StatefulWidget {
 
 class QuestionPageState extends State<QuestionPage> {
   QuizBloc bloc = new QuizBloc();
-
+  //dữ liệu đầu vào
   List<Map<String, bool>> answers = [
-    {"1997": true},
-    {"1887": false},
-    {"1998": false},
+    {"way": true},
+    {"what": false},
+    {"want": false},
   ];
   bool check = false;
   String? selectedAnswer;
-  bool isCorrect = false;
+  bool isCorrect = false; //check đáp án
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,16 +35,17 @@ class QuestionPageState extends State<QuestionPage> {
         Padding(
           padding: EdgeInsets.all(16.0),
           child: Text(
-            'Năm sinh của bạn A là?',
+            'Đây là từ gì?',
             style: TextStyle(fontSize: 18.0),
           ),
         ),
         Container(
-          width: 200,
+          width: 400,
           child: StreamBuilder(
               stream: bloc.checkStream,
               builder: (context, snapshot) => Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       for (var answer in answers)
                         buildAnswerButton(answer.keys.first),
@@ -82,23 +83,31 @@ class QuestionPageState extends State<QuestionPage> {
   }
 
   Widget buildAnswerButton(String answer) {
-    return OutlinedButton(
-      onPressed: () {
-        setState(() {
-          selectedAnswer = answer;
-        });
-      },
-      style: OutlinedButton.styleFrom(
-        side: BorderSide(
-            width: 2,
-            color: selectedAnswer == answer ? Colors.orange : Colors.blue),
-        //primary: selectedAnswer == answer ? Colors.yellow : null,
-        minimumSize: const Size(200, 40),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+    return Container(
+      margin: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+      child: OutlinedButton(
+        onPressed: () {
+          setState(() {
+            selectedAnswer = answer;
+          });
+        },
+        style: OutlinedButton.styleFrom(
+          side: BorderSide(
+              width: 2,
+              color: selectedAnswer == answer
+                  ? Colors.amber.shade200
+                  : Colors.blue),
+          //primary: selectedAnswer == answer ? Colors.yellow : null,
+          minimumSize: const Size(800, 60),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+        ),
+        child: Text(
+          answer,
+          style: TextStyle(fontSize: 25, color: Colors.black87),
         ),
       ),
-      child: Text(answer),
     );
   }
 
