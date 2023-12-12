@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeData {
-  static FirebaseFirestore database = FirebaseFirestore.instance;
 
   // static Map<String, dynamic> getUserData(String username) {
   //   final docRef = database.collection("user_info").doc(username);
@@ -13,6 +12,7 @@ class HomeData {
   // }
 
   static Future<Map<String, dynamic>> getAllChapter(String unit) async {
+    FirebaseFirestore database = FirebaseFirestore.instance;
     final docRef = database.collection("scenario").doc("Unit $unit");
     print(docRef);
 
@@ -29,5 +29,18 @@ class HomeData {
       print("Error: $e");
       return {};
     }
+  }
+
+  static Future<int> getNumberDocument(String collecion) async {
+    FirebaseFirestore database = FirebaseFirestore.instance;
+    final docRef = database.collection(collecion);
+    try {
+      QuerySnapshot querySnapshot = await docRef.get();
+      int document = querySnapshot.size;
+      return document;
+    } catch (e) {
+      print('Error: $e');
+    }
+    return 0;
   }
 }
