@@ -15,20 +15,21 @@ class QuizVideoState extends State<QuizVideo> {
   List<Map<String, bool>> answers = [
     {"way": true},
     {"what": false},
-    {"want": false},
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(children: [
         Container(
+          padding: EdgeInsets.all(10),
           height: 200.0,
           child: YoutubePlayerExample(
             videoUrl: "https://www.youtube.com/watch?v=GhX6yIBXIWQ",
           ),
         ),
         Expanded(
-            child: QuestionPage(answers: answers,
+            child: QuestionPage(
+          answers: answers,
           nextLesson: widget.nextLesson,
         )),
       ]),

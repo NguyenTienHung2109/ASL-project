@@ -32,50 +32,11 @@ class QuestionPageState extends State<QuestionPage> {
         _footer = CorrectFooter(nextLesson: () {
           widget.nextLesson();
         });
-        // if (isCorrect) {
-        //   _footer = CorrectFooter(nextLesson: () {
-        //     widget.nextLesson();
-        //   });
-        // } else {
-        //   _footer = IncorrectFooter(
-        //     nextLesson: () {
-        //       widget.nextLesson();
-        //     },
-        //     resetLesson: widget.nextLesson(),
-        //     type: false,
-        //   );
-        // }
-        // if (isCorrect) {
-        //   _footer = LoadingFooter();
-        // } else {
-        //   if (_result) {
-        //     _footer = CorrectFooter(nextLesson: () {
-        //       widget.nextLesson();
-        //     });
-        //   } else {
-        //     _footer = IncorrectFooter(
-        //         nextLesson: () {
-        //           widget.nextLesson();
-        //         },
-        //         resetLesson: () {
-        //           widget.resetLesson();
-        //         },
-        //         type: false);
-        //   }
-        // }
       }
     });
     return Scaffold(
         body: Center(
           child: Column(children: [
-            // Container(
-            //   height: 200.0,
-            //   child: YoutubePlayerExample(
-            //     videoUrl: "https://www.youtube.com/watch?v=-oGnIDH1aeA",
-            //   ),
-            // ),
-            // Container(child: ChooseQuizPage(),
-            // height: 200,),
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
@@ -97,31 +58,6 @@ class QuestionPageState extends State<QuestionPage> {
                             height: 20,
                             width: 200,
                           ),
-                          // CheckFooter(checkLesson: () async {
-                          //   await checkQuiz();
-                          // })
-                          // ElevatedButton(
-                          //   style: ElevatedButton.styleFrom(
-                          //       minimumSize: const Size(20, 40)),
-                          //   onPressed: () {
-                          //     onClickButton();
-                          //   },
-                          //   child: Text('Check Answer'),
-                          // ),
-                          // SizedBox(height: 20),
-                          // check
-                          //     ? Text(
-                          //         'Đáp án đúng: ${isCorrect?.toString() ?? ""}',
-                          //         style: TextStyle(
-                          //           color: isCorrect == true
-                          //               ? Colors.green
-                          //               : isCorrect == false
-                          //                   ? Colors.red
-                          //                   : null,
-                          //           fontSize: 18,
-                          //         ),
-                          //       )
-                          //     : Text(""),
                         ],
                       )),
             ),
@@ -191,17 +127,6 @@ class QuestionPageState extends State<QuestionPage> {
         isCorrect = true;
       else
         isCorrect = false;
-      // widget.nextLesson;
     });
-    // if (_doneRecorded && !_checked) {
-    //   setState(() {
-    //     _checked = true;
-    //     _isChecking = true;
-    //   });
-    //   _result = await _bloc.isCorrectVideo(file, widget.name);
-    //   setState(() {
-    //     _isChecking = false;
-    //   });
-    // }
   }
 }

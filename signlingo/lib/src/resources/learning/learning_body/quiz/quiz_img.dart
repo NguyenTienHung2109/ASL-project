@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:signlingo/src/resources/learning/learning_body/quiz/question.dart';
+import 'package:signlingo/src/resources/learning/learning_body/quiz/img_question.dart';
 import 'package:signlingo/src/resources/element/video_youtube.dart';
 
 class QuizImg extends StatefulWidget {
@@ -32,7 +32,8 @@ class QuizImgState extends State<QuizImg> {
                           'https://lh3.googleusercontent.com/l1PbMRIFRS4BcOXSyUjbSsi3OKJOdp6ysy0G5w2O-jNCHcRMnWRDXSWNee0MHifq9IMVqLxo23K3A0iMh8UutYMjOUpwyrsxnS-VpO7S=rp-w1080-nu'),
                       fit: BoxFit.cover,
                     ),
-                    ElevatedButton(onPressed: () => (), child: Text("A"))
+                    ElevatedButton(onPressed: () => (),style: ElevatedButton.styleFrom(), child: Text("A"),
+                    )
                   ],
                 ),
                 SizedBox(width: 16),
