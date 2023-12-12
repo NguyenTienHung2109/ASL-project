@@ -17,19 +17,39 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    Widget currentWidget = HomePage(
-      username: widget.username,
-    );
+    Widget currentWidget = SizedBox.shrink();
+    switch (currentIndex) {
+      case 0:
+        {
+          currentWidget = HomePage(
+            username: widget.username,
+          );
+          break;
+        }
+
+      case 1:
+        {
+          currentWidget = DictionaryPage(username: widget.username);
+          break;
+        }
+
+      case 2:
+        {
+          currentWidget = SettingPage(username: widget.username);
+          break;
+        }
+    }
     return Scaffold(
       appBar: const Header(),
       body: Container(
         // color: Colors.red,
         child: AnimatedSwitcher(
           duration: Duration(milliseconds: 500),
-          child: Container(
-              key: ValueKey<int>(currentIndex), child: currentWidget),
+          child:
+              Container(key: ValueKey<int>(currentIndex), child: currentWidget),
         ),
       ),
       bottomNavigationBar: Container(
@@ -41,19 +61,7 @@ class _HomeState extends State<Home> {
             onTap: (int index) {
               setState(() {
                 currentIndex = index;
-                switch (index) {
-                  case 0:
-                    currentWidget = HomePage(
-                      username: widget.username,
-                    );
-                    break;
-                  case 1:
-                    currentWidget = DictionaryPage(username: widget.username);
-                    break;
-                  case 2:
-                    currentWidget = SettingPage(username: widget.username);
-                    break;
-                }
+                // print(index);
               });
             },
             selectedItemColor: Colors.amber[800],
