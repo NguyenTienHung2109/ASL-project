@@ -49,14 +49,16 @@ class _PracticePageState extends State<PracticePage> {
   }
 
   Future<void> checkCameraPermission() async {
-    PermissionStatus status = await Permission.camera.status;
-    if (status == PermissionStatus.denied) {
-      // Yêu cầu quyền truy cập camera
-      await Permission.camera.request();
-    }
-    if (status == PermissionStatus.granted) {
-      _initCamera();
-    }
+    // PermissionStatus status = await Permission.camera.status;
+    // print(status);
+    // if (status == PermissionStatus.denied) {
+    //   // Yêu cầu quyền truy cập camera
+    //   await Permission.camera.request();
+    // }
+    // if (status == PermissionStatus.granted) {
+    //   _initCamera();
+    // }
+    _initCamera();
   }
 
   Future<void> checkLesson() async {
@@ -286,7 +288,7 @@ class _PracticePageState extends State<PracticePage> {
                                   ),
                                   alignment: Alignment.center,
                                   child: Text(
-                                    widget.name,
+                                    LearningBloc.toUpper(widget.name),
                                     style: const TextStyle(
                                         color: Colors.black, fontSize: 20),
                                   ),

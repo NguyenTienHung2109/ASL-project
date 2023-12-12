@@ -7,7 +7,7 @@ class LearningBloc {
   StreamController _checkController = new StreamController();
   Stream get checkStream => _checkController.stream;
 
-  Future<bool> isCorrectVideo(XFile file, String name) async{
+  Future<bool> isCorrectVideo(XFile file, String name) async {
     bool status = await Validations.isCorrectVideo(file, name);
     if (!status) {
       _checkController.sink.addError("Incorrect!");
@@ -19,5 +19,13 @@ class LearningBloc {
 
   void dispose() {
     _checkController.close();
+  }
+
+  static String toUpper(String temp) {
+    return temp.toUpperCase();
+  }
+
+  static String toLower(String temp) {
+    return temp.toLowerCase();
   }
 }

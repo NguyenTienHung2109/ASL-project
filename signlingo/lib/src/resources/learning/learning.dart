@@ -26,7 +26,7 @@ class _LearningState extends State<Learning> {
     super.initState();
 
     _currentWidget = StudyPage(
-      name: "DEAF",
+      name: "drInK",
       nextLesson: () {
         increment();
         updateWidget();
@@ -48,7 +48,7 @@ class _LearningState extends State<Learning> {
     setState(() {
       if (widget.complete == 1) {
         _currentWidget = StudyPage(
-          name: "HEARING",
+          name: "HOTEL",
           nextLesson: () {
             increment();
             updateWidget();
@@ -57,7 +57,7 @@ class _LearningState extends State<Learning> {
       }
       if (widget.complete == 2) {
         _currentWidget = PracticePage(
-          name: "DEAF",
+          name: "Dance",
           nextLesson: () {
             increment();
             updateWidget();

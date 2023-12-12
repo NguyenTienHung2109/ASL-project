@@ -285,7 +285,8 @@ class _SearchScreenState extends State<DictionaryPage> {
                                                                     false,
                                                                 loop: true,
                                                                 hideThumbnail:
-                                                                    true)),
+                                                                    true)
+                                                                    ),
                                                         showVideoProgressIndicator:
                                                             false,
                                                       ),

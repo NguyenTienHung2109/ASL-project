@@ -10,7 +10,6 @@ class HomeData {
   //   }, onError: (e) => print("Error: $e"));
   //   return result;
   // }
-
   static Future<Map<String, dynamic>> getAllChapter(String unit) async {
     FirebaseFirestore database = FirebaseFirestore.instance;
     final docRef = database.collection("scenario").doc("Unit $unit");
