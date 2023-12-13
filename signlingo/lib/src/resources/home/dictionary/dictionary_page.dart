@@ -65,15 +65,15 @@ class _SearchScreenState extends State<DictionaryPage> {
             // Thêm danh sách các nút ở đây
             Container(
                 height: 50,
-                margin: EdgeInsets.all(10.0),
-                padding: EdgeInsets.fromLTRB(0.0, 5.0, 0, 5.0),
+                margin: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0, 5.0),
                 color: Colors.yellow.shade50,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: List.generate(26, (index) {
                     final char = String.fromCharCode('A'.codeUnitAt(0) + index);
                     return Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           horizontal: 3.0), // Thêm khoảng cách giữa các button
                       child: SizedBox(
                         height: 30,
@@ -86,7 +86,7 @@ class _SearchScreenState extends State<DictionaryPage> {
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(7.0),
-                                side: BorderSide(
+                                side: const BorderSide(
                                     color: Colors.grey, width: 0.8),
                               ),
                             ),
@@ -129,7 +129,7 @@ class _SearchScreenState extends State<DictionaryPage> {
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 color: Colors.yellow.shade50,
                 child: Container(
-                  margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                  margin: const EdgeInsets.only(left: 10.0, right: 10.0),
                   decoration: BoxDecoration(
                     color: Colors.yellow.shade50,
                     boxShadow: const [
@@ -148,7 +148,7 @@ class _SearchScreenState extends State<DictionaryPage> {
                   child: ExpansionTile(
                     title: Text(
                       String.fromCharCode('A'.codeUnitAt(0) + index),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 22, // Đặt kích thước văn bản cho tiêu đề
                         color: Colors.black54, // Đổi màu chữ
                         fontWeight: FontWeight.bold,
@@ -180,7 +180,7 @@ class _SearchScreenState extends State<DictionaryPage> {
                               ),
                             ),
                             child: Container(
-                              margin: EdgeInsets.only(bottom: 15),
+                              margin: const EdgeInsets.only(bottom: 15),
                               child: Text(
                                 'Button ${subIndex + 1}',
                                 style: const TextStyle(

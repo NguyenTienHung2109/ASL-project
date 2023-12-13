@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:signlingo/src/resources/home/home.dart';
+import 'package:signlingo/src/main_page.dart';
 import 'package:signlingo/src/resources/login/login_page.dart';
 
 class MyApp extends StatefulWidget {
@@ -18,7 +18,7 @@ class _MyAppState extends State<MyApp> {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(
-        child: LoginPage(),
+        child: MainPage(),
       ),
     );
   }

@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
     return Container(
       // height: double.infinity,
       color: Colors.grey.shade300,
-      child: Unit(unit: 1, description: "Introduction"),
+      child: const Unit(unit: 1, description: "Introduction"),
     );
   }
 }

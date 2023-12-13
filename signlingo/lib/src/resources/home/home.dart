@@ -17,10 +17,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int currentIndex = 0;
   final pages = [
-    HomePage(),
-    HomePage(),
-    DictionaryPage(), // Trainer
-    SettingPage()
+    const HomePage(),
+    const HomePage(),
+    const DictionaryPage(), // Trainer
+    const SettingPage()
     // Dictionary
   ];
   @override

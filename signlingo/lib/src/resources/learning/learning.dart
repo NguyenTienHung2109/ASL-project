@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Learning extends StatefulWidget {
+  const Learning({super.key});
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
