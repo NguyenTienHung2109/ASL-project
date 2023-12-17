@@ -23,7 +23,7 @@ class QuizChooseVideo extends StatefulWidget {
 
 class QuizChooseVideoState extends State<QuizChooseVideo> {
   bool isLoading = true;
-  String chooseWord = "";
+  String? chooseWord;
   //dữ liệu đầu vào
   List<Widget> videoWidgets = [];
 
@@ -36,25 +36,32 @@ class QuizChooseVideoState extends State<QuizChooseVideo> {
     return Container();
   }
 
+  Future<Widget> buildAnswerVideo(String answer) async {
+    return TextButton(
+      onPressed: () {
+        setState(() {
+          chooseWord = answer;
+          print(chooseWord);
+        });
+      },
+      style: TextButton.styleFrom(
+        backgroundColor: chooseWord == answer ? Colors.blue : null,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(0),
+        ),
+      ),
+      child: Container(
+        height: 250,
+        width: double.infinity,
+        padding: EdgeInsets.all(5.0),
+        child: await getVideo(answer),
+      ),
+    );
+  }
+
   Future<void> init() async {
     for (int i = 0; i < widget.answers.length; i++) {
-      videoWidgets.add(TextButton(
-          onPressed: () {
-            setState(() {
-              chooseWord = widget.answers[i];
-            });
-          },
-          child: Container(
-            height: 250,
-            width: double.infinity,
-            padding: EdgeInsets.all(5.0),
-            decoration: BoxDecoration(
-              border: Border.all(
-                  color: Colors.orange,
-                  width: chooseWord == widget.answers[i] ? 5.0 : 0.0),
-            ),
-            child: await getVideo(widget.answers[i]),
-          )));
+      videoWidgets.add(await buildAnswerVideo(widget.answers[i]));
     }
     widget.name = LearningBloc.toUpper(widget.name);
     setState(() {
