@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:signlingo/src/resources/element/glowing_button.dart';
+import 'package:signlingo/src/resources/login/auth_page.dart';
 import 'package:signlingo/src/resources/login/login_page.dart';
 import 'package:signlingo/src/resources/login/register_page.dart';
 
@@ -91,22 +92,22 @@ class StartPageState extends State<StartPage> {
   void onClickStartButton() {
     setState(() {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => LoginPage()));
+          context, MaterialPageRoute(builder: (context) => AuthPage()));
     });
   }
 
   void onClickNewAcc() {
     setState(() {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => RegisterPage()));
+          context, MaterialPageRoute(builder: (context) => AuthPage()));
     });
   }
 
   Widget NewAccPage(BuildContext context) {
-    return RegisterPage();
+    return AuthPage();
   }
 
   Widget GotoLoginPage(BuildContext context) {
-    return LoginPage();
+    return AuthPage();
   }
 }

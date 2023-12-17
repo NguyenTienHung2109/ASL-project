@@ -3,9 +3,7 @@ import 'package:signlingo/src/database/dict_database.dart';
 import 'package:signlingo/src/repository/video_youtube.dart';
 
 class DictionaryPage extends StatefulWidget {
-  late String username;
-
-  DictionaryPage({super.key, required this.username});
+  const DictionaryPage({super.key});
 
   @override
   State<StatefulWidget> createState() {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:signlingo/src/main_page.dart';
 import 'package:signlingo/src/resources/home/home.dart';
 import 'package:signlingo/src/resources/learning/learning.dart';
 import 'package:signlingo/src/resources/login/login_page.dart';
@@ -21,7 +22,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(
-        child: StartPage(),
+        child: MainPage(),
       ),
     );
   }
