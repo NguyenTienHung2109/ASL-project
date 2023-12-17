@@ -1,16 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:signlingo/src/bloc/learning_bloc.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoYoutube extends StatefulWidget {
-  late int id;
-  late String title;
-  late String videoUrl;
+  late String word;
 
-  VideoYoutube(
-      {super.key,
-      required this.id,
-      required this.title,
-      required this.videoUrl});
+  VideoYoutube(String _word) {
+    word = _word;
+  }
 
   @override
   State<StatefulWidget> createState() {
@@ -21,11 +19,47 @@ class VideoYoutube extends StatefulWidget {
 
 class _VideoYoutubeState extends State<VideoYoutube> {
   late YoutubePlayerController _controller;
-  @override
-  void initState() {
-    super.initState();
+  late int id;
+  late String title;
+  late String videoUrl;
+  bool _isLoading = true;
+
+  Future<Map<String, dynamic>> getVideo(String word) async {
+    FirebaseFirestore database = FirebaseFirestore.instance;
+    if (word.isEmpty) return {};
+    String upper = LearningBloc.toUpper(word);
+    final docRef = database.collection("Dictionary").doc(upper[0]);
+    // print(docRef);
+
+    try {
+      DocumentSnapshot doc = await docRef.get();
+      if (doc.exists) {
+        Map<String, dynamic> result = doc.data() as Map<String, dynamic>;
+        // print(result);
+        // print(result[LearningBloc.toLower(word)]);
+        // print(LearningBloc.toLower(word));
+        if (result.containsKey(LearningBloc.toLower(word))) {
+          return result[LearningBloc.toLower(word)];
+        }
+      } else {
+        print("Document does not exist");
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
+    return {};
+  }
+
+  Future<void> initID() async {
+    Map<String, dynamic> temp = await getVideo(widget.word);
+    id = temp["id"];
+    title = temp["title"];
+    videoUrl = temp["link"];
+  }
+
+  Future<void> initController() async {
     _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl)!,
+      initialVideoId: YoutubePlayer.convertUrlToId(videoUrl)!,
       flags: const YoutubePlayerFlags(
         autoPlay: true,
         mute: true,
@@ -36,32 +70,53 @@ class _VideoYoutubeState extends State<VideoYoutube> {
         // disableDragSeek: true,
       ),
     );
-
     // Disable user interactions
     _controller.pause();
     _controller.seekTo(const Duration(seconds: 0));
+  }
+
+  Future<void> init() async {
+    await initID();
+    await initController();
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    init();
   }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: YoutubePlayer(
-          controller: _controller,
-          showVideoProgressIndicator: false,
-          bottomActions: [
-            CurrentPosition(),
-            ProgressBar(isExpanded: true),
-            // TotalDuration(),
-          ],
-          // topActions: [Text(
-          //   "hahah",
-          //   style: TextStyle(
-          //     color: Colors.white
-          //   ),
-          // )],
-        ));
+        width: 350,
+        height: 250,
+        margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 0.0),
+        child: _isLoading
+            ? Container(
+                color: Colors.white,
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              )
+            : YoutubePlayer(
+                controller: _controller,
+                showVideoProgressIndicator: false,
+                bottomActions: [
+                  CurrentPosition(),
+                  ProgressBar(isExpanded: true),
+                  // TotalDuration(),
+                ],
+                // topActions: [Text(
+                //   "hahah",
+                //   style: TextStyle(
+                //     color: Colors.white
+                //   ),
+                // )],
+              ));
   }
 }

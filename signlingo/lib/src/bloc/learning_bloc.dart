@@ -27,6 +27,10 @@ class LearningBloc {
     _checkController.close();
   }
 
+  Future<bool> checkString(String answer, String correct) async {
+    return toUpper(answer.trim()) == toUpper(correct.trim());
+  }
+
   static String toUpper(String temp) {
     return temp.toUpperCase();
   }

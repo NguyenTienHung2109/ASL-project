@@ -28,18 +28,13 @@ class QuizVideoState extends State<QuizVideo> {
     // {"what": false},
   ];
   Future<void> init() async {
-    Map<String, dynamic> temp = await LearningData.getVideo(widget.name);
-    if (temp.isNotEmpty) {
-      videoWidget = VideoYoutube(
-          id: temp["id"], title: temp["title"], videoUrl: temp["link"]);
-      for (var e in widget.answers) {
-        answers.add({e: e == widget.name});
-      }
+    videoWidget = VideoYoutube(widget.name);
+    for (var e in widget.answers) {
+      answers.add({e: e == widget.name});
     }
     setState(() {
-      isLoading = false;  
+      isLoading = false;
     });
-    
   }
 
   @override
