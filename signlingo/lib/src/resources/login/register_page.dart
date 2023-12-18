@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
@@ -29,21 +30,58 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
+  String getError(String error) {
+    switch (error) {
+      case "channel-error": return "Please complete your information";
+      case "invalid-credential": return "You've entered an incorrect email or password";
+      case "invalid-email": return "Please enter a valid email address";
+    }
+    return error;
+  }
+
   Future signUp() async {
-    if (passwordConfirm()) {
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
-      FirebaseFirestore.instance
-        .collection('user_info')
-        .doc(userCredential.user!.email)
-        .set({
+    try {
+      if (passwordConfirm()) {
+        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+        FirebaseFirestore.instance
+            .collection('user_info')
+            .doc(userCredential.user!.email)
+            .set({
           'email' :_emailController.text.trim(),
           'password' : _passwordController.text.trim(),
           'fullname' : _fullnameController.text.trim()
         });
-      //addUserDetails(_fullnameController.text.trim(), _emailController.text.trim(), _passwordController.text.trim());
+        //addUserDetails(_fullnameController.text.trim(), _emailController.text.trim(), _passwordController.text.trim());
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                "Confirm password must be the same as the password",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              backgroundColor: Colors.redAccent,
+            )
+        );
+      }
+    } on FirebaseAuthException catch (e){
+      String error = getError(e.code);
+      print(e.code);
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              error,
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            backgroundColor: Colors.redAccent,
+          )
+      );
     }
   }
 
@@ -209,6 +247,12 @@ class _RegisterPageState extends State<RegisterPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Text(
+                      "I am a member! ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
                     GestureDetector(
                       onTap: widget.showLoginPage,
                       child: Text(
