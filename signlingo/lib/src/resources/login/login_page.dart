@@ -1,163 +1,218 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:signlingo/src/bloc/login_bloc.dart';
-import 'package:signlingo/src/resources/home/home.dart';
-import 'package:signlingo/src/resources/login/register_page.dart';
+
+import 'forgot_page.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final VoidCallback showRegisterPage;
+  const LoginPage({Key? key, required this.showRegisterPage}) : super(key: key);
 
   @override
-  LoginPageState createState() => LoginPageState();
+  State<StatefulWidget> createState() => _LoginPageState();
 }
 
-class LoginPageState extends State<LoginPage> {
-  LoginBloc bloc = new LoginBloc();
+class _LoginPageState extends State<LoginPage> {
+  LoginBloc bloc = LoginBloc();
   bool showPass = false;
 
-  TextEditingController EmailData =
-      new TextEditingController(); //data cua email
-  TextEditingController PassData = new TextEditingController(); //data cua pass
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim()
+    );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Login")),
-      body: Container(
-        constraints: const BoxConstraints.expand(),
-        color: Colors.white,
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Container(
-            width: double.infinity,
-            alignment: AlignmentDirectional.center,
-            child: const Text(
-              'Welcome back!',
-              style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600),
+      backgroundColor: Colors.grey[300],
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.android,
+                  size: 100,
+                ),
+                const SizedBox(height: 25),
+                Text(
+                    'Hello Again',
+                    style: GoogleFonts.bebasNeue(
+                      fontSize: 52,
+                    )
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  'Welcome back, you\'ve been missed!',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(height: 50),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: TextField(
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.deepPurple),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      fillColor: Colors.grey[200],
+                      hintText: 'Email',
+                      filled: true,
+                    ),
+                  ),
+                ),
+
+
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: TextField(
+                    controller: _passwordController,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.deepPurple),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      fillColor: Colors.grey[200],
+                      hintText: 'Password',
+                      filled: true,
+                    ),
+                    obscureText: true,
+                  ),
+                ),
+
+                Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                              MaterialPageRoute(
+                                  builder: (context) {
+                                    return ForgotPasswordPage();
+                                  }
+                              )
+                            );
+                          },
+                          child: Text(
+                            "Forgot Password?",
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+
+                ),
+
+
+                Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: GestureDetector(
+                      onTap: signIn,
+                      child: Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Colors.deepPurple,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Sign In',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+
+                ),
+                const SizedBox(height: 25),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: widget.showRegisterPage,
+                      child: Text(
+                        "Register Now!",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ],
             ),
           ),
-          Padding(
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-              child: StreamBuilder(
-                  stream: bloc.userStream,
-                  builder: (context, snapshot) => TextField(
-                        controller: EmailData,
-                        style: TextStyle(fontSize: 18, color: Colors.black),
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(
-                                color: Colors.blue,
-                                width: 2.0,
-                              ),
-                            ),
-                            labelText: 'Email',
-                            errorText: snapshot.hasError
-                                ? snapshot.error.toString()
-                                : null,
-                            labelStyle: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500)),
-                      ))),
-          Stack(
-            alignment: AlignmentDirectional.centerEnd,
-            children: [
-              StreamBuilder(
-                  stream: bloc.passStream,
-                  builder: (context, snapshot) => Padding(
-                      padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-                      child: TextField(
-                        controller: PassData,
-                        style: TextStyle(fontSize: 18, color: Colors.black),
-                        obscureText: !showPass,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(
-                                color: Colors.blue,
-                                width: 2.0,
-                              ),
-                            ),
-                            labelText: 'Password',
-                            errorText: snapshot.hasError
-                                ? snapshot.error.toString()
-                                : null,
-                            labelStyle: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500)),
-                      ))),
-              IconButton(
-                  onPressed: () {
-                    print('click eye');
-                    ShowPass();
-                  },
-                  icon: showPass
-                      ? Icon(Icons.remove_red_eye)
-                      : Icon(Icons.remove_red_eye_outlined))
-            ],
-          ),
-          Container(
-              alignment: AlignmentDirectional.center,
-              child: Column(
-                children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        print('click button');
-                        onClickButton();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white,
-                      ),
-                      child: const Text('LOGIN')),
-                  TextButton(
-                      onPressed: () {
-                        print('button acc');
-                        onClickNewAcc();
-                      },
-                      child: Text(
-                        "Create Account",
-                        style: TextStyle(decoration: TextDecoration.underline),
-                      ))
-                ],
-              )),
-        ]),
+        ),
       ),
     );
   }
 
-  void ShowPass() {
-    setState(() {
-      showPass = !showPass;
-    });
-  }
-
-  void onClickButton() {
-    setState(() {
-      if (bloc.isValidInfo(EmailData.text, PassData.text)) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Home(username: "testing@gmail.com")));
-      }
-    });
-  }
-
-  void onClickNewAcc() {
-    setState(() {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => RegisterPage()));
-    });
-  }
-
-  Widget NewAccPage(BuildContext context) {
-    return RegisterPage();
-  }
-
-  Widget GotoHome(BuildContext context) {
-    return Home(username: "testing@gmail.com");
-  }
+  // void ShowPass() {
+  //   setState(() {
+  //     showPass = !showPass;
+  //   });
+  // }
+  //
+  // void onClickButton() {
+  //   setState(() {
+  //     if (bloc.isValidInfo(EmailData.text, PassData.text)) {
+  //       Navigator.push(
+  //           context, MaterialPageRoute(builder: (context) => Home()));
+  //     }
+  //   });
+  // }
+  //
+  // void onClickNewAcc() {
+  //   setState(() {
+  //     Navigator.push(
+  //         context, MaterialPageRoute(builder: (context) => RegisterPage()));
+  //   });
+  // }
+  //
+  // Widget NewAccPage(BuildContext context) {
+  //   return RegisterPage();
+  // }
+  //
+  // Widget GotoHome(BuildContext context) {
+  //   return Home();
+  // }
 }

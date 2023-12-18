@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   youtube_player_flutter: ^8.1.2
   camera: ^0.10.5+5
+  google_fonts:
   path_provider: ^2.1.1
   video_player: ^2.8.1
   http: ^1.1.0

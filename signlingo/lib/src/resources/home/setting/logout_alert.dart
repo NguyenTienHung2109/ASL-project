@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class LogoutAlert extends StatelessWidget {
+  const LogoutAlert({super.key});
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: EdgeInsets.all(3.0), // Để loại bỏ khoảng trắng xung quanh nội dung
+      contentPadding: const EdgeInsets.all(3.0), // Để loại bỏ khoảng trắng xung quanh nội dung
 
       // Thay đổi shape để bo tròn viền của AlertDialog
       shape: RoundedRectangleBorder(
@@ -12,15 +16,15 @@ class LogoutAlert extends StatelessWidget {
       ),
 
       content: Container(
-        padding: EdgeInsets.all(30.0),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.all(30.0),
+        decoration: const BoxDecoration(
           color: Color.fromRGBO(240, 248, 255, 1)
          ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             // Widget title ở giữa
-            Center(
+            const Center(
               child: Text(
                 'Are you sure?',
                 style: TextStyle(
@@ -29,7 +33,7 @@ class LogoutAlert extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 40), // Khoảng trắng giữa title và content
+            const SizedBox(height: 40), // Khoảng trắng giữa title và content
 
             // Widget content ở giữa
             // Center(
@@ -54,7 +58,7 @@ class LogoutAlert extends StatelessWidget {
                       ),
                     ),
                     backgroundColor: MaterialStateProperty.all<Color>(
-                      Color.fromRGBO(255, 250, 240, 1), // Màu nền của nút
+                      const Color.fromRGBO(255, 250, 240, 1), // Màu nền của nút
                     ),
                     elevation: MaterialStateProperty.all<double>(
                         1), // Độ nổi lên
@@ -62,21 +66,22 @@ class LogoutAlert extends StatelessWidget {
                         Colors.grey), // Màu đổ bóng
                   ),
                   child: Container(
-                    padding: EdgeInsets.only(left: 10.0, top: 15.0, right: 10.0, bottom: 15.0),
-                    child: Text(
+                    padding: const EdgeInsets.only(left: 10.0, top: 15.0, right: 10.0, bottom: 15.0),
+                    child: const Text(
                       'Cancel',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 18, // Tùy chỉnh kích thước văn bản
                         color: Colors.black54, // Màu văn bản
                       ),
                     ),
                   ),
                 ),
-                SizedBox(width: 30.0),
+                const SizedBox(width: 30.0),
                 ElevatedButton(
                   onPressed: () {
                     // Xử lý khi nút được nhấn
-
+                    FirebaseAuth.instance.signOut();
+                    Navigator.of(context).pop();
                   },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<
@@ -87,7 +92,7 @@ class LogoutAlert extends StatelessWidget {
                       ),
                     ),
                     backgroundColor: MaterialStateProperty.all<Color>(
-                      Color.fromRGBO(58, 223, 206, 1), // Màu nền của nút
+                      const Color.fromRGBO(58, 223, 206, 1), // Màu nền của nút
                     ),
                     elevation: MaterialStateProperty.all<double>(
                         1), // Độ nổi lên
@@ -95,10 +100,10 @@ class LogoutAlert extends StatelessWidget {
                         Colors.grey), // Màu đổ bóng
                   ),
                   child: Container(
-                    padding: EdgeInsets.only(left: 10.0, top: 15.0, right: 10.0, bottom: 15.0),
-                    child: Text(
+                    padding: const EdgeInsets.only(left: 10.0, top: 15.0, right: 10.0, bottom: 15.0),
+                    child: const Text(
                       'Log out',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 18, // Tùy chỉnh kích thước văn bản
                         color: Colors.white, // Màu văn bản
                       ),
