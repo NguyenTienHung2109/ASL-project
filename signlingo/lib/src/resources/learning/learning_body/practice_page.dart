@@ -42,9 +42,12 @@ class _PracticePageState extends State<PracticePage> {
 
   @override
   void dispose() {
-    if (!_isLoading) {
-      _cameraController.dispose();
-    }
+    // if (!_isLoading) {
+    //   // Dừng sử dụng camera
+    //   // _cameraController.stopImageStream();
+    //   // _cameraController.dispose();
+    // }
+    _cameraController?.dispose();
     super.dispose();
   }
 
@@ -103,6 +106,7 @@ class _PracticePageState extends State<PracticePage> {
             _doneRecorded = true;
           });
           // dispose();
+          // _cameraController.dispose();
         }
       });
     }
@@ -128,6 +132,7 @@ class _PracticePageState extends State<PracticePage> {
       _cameraController = CameraController(front, ResolutionPreset.max);
       print(_cameraController);
       await _cameraController.initialize();
+      print(_cameraController);
       setState(() => _isLoading = false);
     } on CameraException catch (e) {
       print(e.code);
@@ -156,11 +161,13 @@ class _PracticePageState extends State<PracticePage> {
           } else {
             if (_result) {
               _footer = CorrectFooter(nextLesson: () {
+                _cameraController.dispose();
                 widget.nextLesson();
               });
             } else {
               _footer = IncorrectFooter(
                   nextLesson: () {
+                    _cameraController.dispose();
                     widget.nextLesson();
                   },
                   resetLesson: () {

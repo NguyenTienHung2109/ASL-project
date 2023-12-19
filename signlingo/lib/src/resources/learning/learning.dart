@@ -51,6 +51,16 @@ class _LearningState extends State<Learning> {
       _currentWidget = Container();
       return;
     }
+
+    if (widget.name == "Review") {
+      _currentWidget = PracticePage(
+          name: scenario[widget.complete],
+          nextLesson: () {
+            // increment();
+            updateWidget();
+      });
+      return ;
+    }
     Map<String, dynamic> temp = scenario[widget.complete];
     String type = temp["type"];
     if (type == "study") {
@@ -92,6 +102,8 @@ class _LearningState extends State<Learning> {
             updateWidget();
           });
     }
+    
+
   }
 
   @override
