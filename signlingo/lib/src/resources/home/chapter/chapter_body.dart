@@ -36,7 +36,7 @@ class _ChapterBodyState extends State<ChapterBody> {
         );
       }
       childrenWithSpace
-          .add(ChapterBodyItem(name: itemList[i], hasComplete: false, chapter: widget.unit, unit: widget.chapter,));
+          .add(ChapterBodyItem(name: itemList[i], hasComplete: false, chapter: widget.chapter, unit: widget.unit,));
     }
     return childrenWithSpace;
   }

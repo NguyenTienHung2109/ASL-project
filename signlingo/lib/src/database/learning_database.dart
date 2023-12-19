@@ -7,11 +7,12 @@ class LearningData {
       int unit, int chapter, String part) async {
     FirebaseFirestore database = FirebaseFirestore.instance;
     final docRef = database.collection("scenario_detail").doc("Unit $unit");
+    // print(docRef);
     try {
       DocumentSnapshot doc = await docRef.get();
       if (doc.exists) {
         Map<String, dynamic> result = doc.data() as Map<String, dynamic>;
-
+        print(result);
         if (result.containsKey("Chapter $chapter")) {
           result = result["Chapter $chapter"];
           if (result.containsKey(part)) {
