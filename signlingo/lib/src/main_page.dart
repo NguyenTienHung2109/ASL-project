@@ -12,16 +12,16 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String username = " ";
     // TODO: implement build
     return Scaffold(
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            print("dang nhap duoc");
             return Home();
           } else {
-            return StartPage();
+            return AuthPage();
           }
         },
       ),
