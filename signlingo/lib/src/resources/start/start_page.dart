@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:signlingo/src/resources/element/glowing_button.dart';
+import 'package:signlingo/src/resources/login/auth_page.dart';
 import 'package:signlingo/src/resources/login/login_page.dart';
 import 'package:signlingo/src/resources/login/register_page.dart';
 
@@ -13,100 +14,124 @@ class StartPage extends StatefulWidget {
 class StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
-      constraints: const BoxConstraints.expand(),
-      color: Colors.white,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              const Text(
-                "Start learning a",
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
+    return Material(
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Stack(
+          children: [
+            Stack(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height / 1.6,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              const Text(
-                "Sign Language",
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
-                ),
-              )
-            ],
-          ),
-          Column(
-            children: [
-          ElevatedButton(
-            onPressed: () {
-                  print("start button");
-                  onClickStartButton();
-                  },
-            style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    minimumSize: Size(160, 48),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40))),
-            child: GlowingButton(
-              color1: Colors.redAccent,
-              color2: Colors.yellowAccent,
-              width_button: 300,
-              text_button: "GET STARTED",
-              event_button: onClickStartButton
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height / 1.6,
+                  decoration: BoxDecoration(
+                    color: Color(0xFF674AEF),
+                    borderRadius:
+                      BorderRadius.only(bottomRight: Radius.circular(70)),
+                  ),
+                  child: Center(child: Image.asset("images/books.png", scale: 0.8))
+                )
+              ],
             ),
-          ),
-          SizedBox(
-            height: 10
-          ),
-          ElevatedButton(
-            onPressed: () {
-                  print("new acc button");
-                  onClickNewAcc();
-                  },
-            style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    minimumSize: Size(160, 48),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40))),
-            child: GlowingButton(
-              color1: Colors.redAccent,
-              color2: Colors.yellowAccent,
-              width_button: 300,
-              text_button: "I ALREADY HAVE AN ACCOUNT",
-              event_button: onClickNewAcc
+            Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height - MediaQuery.of(context).size.height / 1.6,
+                  padding: EdgeInsets.only(top: 50),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF674AEF),
+                  ),
+                )
             ),
-          ),
-            ],
-          ),
-        ],
+            Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height - MediaQuery.of(context).size.height / 1.6,
+                  padding: EdgeInsets.only(top: 50),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(70),
+                    )
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Learning Sign Language",
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1,
+                          wordSpacing: 2,
+                        ),
+                      ),
+                      SizedBox(height: 60),
+                      Material(
+                        color: Color(0xFF674AEF),
+                        borderRadius: BorderRadius.circular(10),
+                        child: InkWell(
+                          onTap: onClickStartButton,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 80
+                            ),
+                            child: Text(
+                              "Get Start",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 22,
+                                letterSpacing: 1,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                )
+            )
+          ],
+        ),
       ),
-    ));
+    );
+
+
+
+
+
+
   }
 
   void onClickStartButton() {
     setState(() {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => LoginPage()));
+          context, MaterialPageRoute(builder: (context) => AuthPage()));
     });
   }
 
   void onClickNewAcc() {
     setState(() {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => RegisterPage()));
+          context, MaterialPageRoute(builder: (context) => AuthPage()));
     });
   }
 
   Widget NewAccPage(BuildContext context) {
-    return RegisterPage();
+    return AuthPage();
   }
 
   Widget GotoLoginPage(BuildContext context) {
-    return LoginPage();
+    return AuthPage();
   }
 }

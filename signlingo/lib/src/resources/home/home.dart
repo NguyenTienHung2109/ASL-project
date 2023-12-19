@@ -5,8 +5,7 @@ import 'package:signlingo/src/resources/home/home_page.dart';
 import 'package:signlingo/src/resources/home/setting/setting.dart';
 
 class Home extends StatefulWidget {
-  late String username;
-  Home({required this.username});
+  const Home({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -24,21 +23,19 @@ class _HomeState extends State<Home> {
     switch (currentIndex) {
       case 0:
         {
-          currentWidget = HomePage(
-            username: widget.username,
-          );
+          currentWidget = HomePage();
           break;
         }
 
       case 1:
         {
-          currentWidget = DictionaryPage(username: widget.username);
+          currentWidget = DictionaryPage();
           break;
         }
 
       case 2:
         {
-          currentWidget = SettingPage(username: widget.username);
+          currentWidget = SettingPage();
           break;
         }
     }

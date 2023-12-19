@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:signlingo/src/database/dict_database.dart';
-import 'package:signlingo/src/resources/home/dictionary/videodatamodel.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'dart:convert';
+import 'package:signlingo/src/repository/video_youtube.dart';
 
 class DictionaryPage extends StatefulWidget {
-  late String username;
-  DictionaryPage({super.key, required this.username});
+  const DictionaryPage({super.key});
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _DictionaryPageState();
   }
 }
 
 class _DictionaryPageState extends State<DictionaryPage> {
   String activeButton = '';
+  String selectedLetter = '';
 
   final TextEditingController _textController = TextEditingController();
 
   bool isTextNotEmpty = false;
 
   Map<String, dynamic> _letterData = {};
+  List<String> allKeys = [];
   List<String> filteredKeys = [];
-  Set<String> filteredKeysSet = {};
 
   @override
   void initState() {
@@ -41,37 +37,41 @@ class _DictionaryPageState extends State<DictionaryPage> {
 
   Future<void> fetchData() async {
     Map<String, dynamic> allData = {};
+    List<String> keys = [];
+
     for (int i = 0; i < 26; i++) {
       String letter = String.fromCharCode('A'.codeUnitAt(0) + i);
       Map<String, dynamic> data = await DictData.getLetter(letter);
       allData[letter] = data;
+      keys.addAll(data.keys);
     }
+
     setState(() {
       _letterData = allData;
-      filterKeys();
+      allKeys = keys;
+      filteredKeys = allKeys;
     });
   }
 
   void filterKeys() {
-    filteredKeysSet.clear();
     if (isTextNotEmpty) {
-      for (String letter in _letterData.keys) {
-        List<String> keys = _letterData[letter].keys.toList();
-        for (String key in keys) {
-          if (key.toLowerCase().contains(_textController.text.toLowerCase())) {
-            filteredKeysSet.add(key);
-          }
-        }
-      }
+      filteredKeys = allKeys
+          .where((key) =>
+              key.toLowerCase().contains(_textController.text.toLowerCase()))
+          .toList();
+      selectedLetter = '';
+    } else if (selectedLetter.isNotEmpty) {
+      filteredKeys = allKeys
+          .where((key) =>
+              key.toLowerCase().startsWith(selectedLetter.toLowerCase()))
+          .toList();
+    } else {
+      filteredKeys = allKeys;
     }
-    setState(() {
-      filteredKeys = List<String>.from(filteredKeysSet);
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       color: Colors.white,
       child: Column(
@@ -81,27 +81,24 @@ class _DictionaryPageState extends State<DictionaryPage> {
             margin: const EdgeInsets.only(
                 top: 25.0, right: 10.0, left: 10.0, bottom: 10.0),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30.0), // Bo tròn viền
+              borderRadius: BorderRadius.circular(30.0),
               border: Border.all(
-                color: Colors.orange, // Màu của đường viền
-                width: 2.5, // Độ rộng của đường viền
+                color: Colors.orange,
+                width: 2.5,
               ),
-              color: Colors.white, // Màu nền
+              color: Colors.white,
             ),
             child: TextField(
               controller: _textController,
               cursorColor: Colors.orange,
               decoration: InputDecoration(
-                border: InputBorder.none, // Ẩn viền của TextField
+                border: InputBorder.none,
                 hintText: 'Search for a word',
                 prefixIcon: Icon(Icons.search),
                 prefixIconColor: Colors.orange,
                 suffixIcon: isTextNotEmpty
                     ? IconButton(
-                        icon: Icon(
-                          Icons.clear,
-                          color: Colors.orange,
-                        ),
+                        icon: Icon(Icons.clear, color: Colors.orange),
                         onPressed: () {
                           setState(() {
                             _textController.clear();
@@ -111,145 +108,112 @@ class _DictionaryPageState extends State<DictionaryPage> {
                     : null,
               ),
               style: const TextStyle(
-                fontSize:
-                    18.0, // Đặt kích thước văn bản cho text trong TextField
+                fontSize: 18.0,
               ),
             ),
           ),
           Container(
-              height: 50,
-              margin: const EdgeInsets.all(10.0),
-              // padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0, 5.0),
-              color: Colors.white,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: List.generate(26, (index) {
-                  final char = String.fromCharCode('A'.codeUnitAt(0) + index);
-                  return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 6.0), // Thêm khoảng cách giữa các button
-                      child: SizedBox(
-                        height: 30,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              activeButton = char;
-                            });
-                          },
-                          style: ButtonStyle(
-                              backgroundColor: activeButton == char
-                                  ? MaterialStatePropertyAll(
-                                      Colors.orange.shade300)
-                                  : MaterialStatePropertyAll(
-                                      Colors.yellow.shade50),
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(7.0),
-                                  side: const BorderSide(
-                                      color: Colors.grey, width: 0.5),
-                                ),
-                              ),
-                              elevation: MaterialStatePropertyAll(4.0)
-                              // Màu đổ bóng
-                              ),
-                          child: Container(
-                            child: Text(
-                              char,
-                              style: const TextStyle(
-                                fontSize: 22, // Tùy chỉnh kích thước văn bản
-                                color: Colors.black54, // Màu văn bản
-                              ),
-                            ),
+            height: 50,
+            margin: const EdgeInsets.all(10.0),
+            color: Colors.white,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: List.generate(26, (index) {
+                final char = String.fromCharCode('A'.codeUnitAt(0) + index);
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                  child: SizedBox(
+                    height: 30,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          if (activeButton == char) {
+                            activeButton = '';
+                            selectedLetter = '';
+                          } else {
+                            activeButton = char;
+                            selectedLetter = char;
+                          }
+                          filterKeys();
+                        });
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: (activeButton == char &&
+                                !isTextNotEmpty)
+                            ? MaterialStatePropertyAll(Colors.orange.shade300)
+                            : MaterialStatePropertyAll(Colors.yellow.shade50),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(7.0),
+                            side: const BorderSide(
+                                color: Colors.grey, width: 0.5),
                           ),
                         ),
-                      ));
-                }),
-              )),
+                        elevation: MaterialStatePropertyAll(4.0),
+                      ),
+                      child: Container(
+                        child: Text(
+                          char,
+                          style: const TextStyle(
+                            fontSize: 22,
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              }),
+            ),
+          ),
           Expanded(
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount:
-                  isTextNotEmpty ? filteredKeys.length : _letterData.length,
+              itemCount: filteredKeys.length,
               itemBuilder: (context, index) {
-                String key = isTextNotEmpty
-                    ? filteredKeys[index]
-                    : String.fromCharCode('A'.codeUnitAt(0) + index);
-                Map<String, dynamic> data = _letterData[key] ?? {};
-                List<String> keys = data.keys.toList();
-
-                if (isTextNotEmpty) {
-                  // Display only the inner column with the correct filtered keys
-                  return Column(
-                    children: filteredKeys.map((String subKey) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            minimumSize:
-                                MaterialStateProperty.all<Size>(Size(400, 50)),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                            ),
-                            elevation: MaterialStatePropertyAll(4.0),
-                            backgroundColor:
-                                MaterialStatePropertyAll(Colors.orange),
-                          ),
-                          onPressed: () {
-                            // Your button logic here
-                          },
-                          child: Text(subKey.toUpperCase(),
-                              style: TextStyle(fontSize: 18)),
+                return Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      minimumSize:
+                          MaterialStateProperty.all<Size>(Size(400, 50)),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
                         ),
+                      ),
+                      elevation: MaterialStatePropertyAll(4.0),
+                      backgroundColor: MaterialStatePropertyAll(Colors.orange),
+                    ),
+                    onPressed: () {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                              height: 400,
+                              // width: double.infinity,
+                              alignment: Alignment.center,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(filteredKeys[index].toUpperCase(),
+                                      style: TextStyle(fontSize: 35)),
+                                  Container(
+                                    margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+                                    // width: double.infinity,
+                                    // height: double.infinity,
+                                    child: VideoYoutube(filteredKeys[index]),
+                                  )
+                                ],
+                              ));
+                        },
                       );
-                    }).toList(),
-                  );
-                } else {
-                  // Display the entire structure
-                  return Column(
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(right: 380),
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          '$key',
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Column(
-                        children: keys.map((String subKey) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                minimumSize: MaterialStateProperty.all<Size>(
-                                    Size(400, 50)),
-                                shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30.0),
-                                  ),
-                                ),
-                                elevation: MaterialStatePropertyAll(4.0),
-                                backgroundColor:
-                                    MaterialStatePropertyAll(Colors.orange),
-                              ),
-                              onPressed: () {
-                                // Your button logic here
-                              },
-                              child: Text(subKey.toUpperCase(),
-                                  style: TextStyle(fontSize: 18)),
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ],
-                  );
-                }
+                    },
+                    child: Text(filteredKeys[index].toUpperCase(),
+                        style: TextStyle(fontSize: 18)),
+                  ),
+                );
               },
             ),
           )

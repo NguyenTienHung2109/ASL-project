@@ -12,12 +12,11 @@ import 'package:signlingo/src/resources/learning/learning_body/quiz/quiz_img.dar
 class Learning extends StatefulWidget {
   bool isHiding = true;
   bool isSlow = false;
-  int complete = 0;
+  int complete = -1;
   late int unit;
   late int chapter;
   late String name;
   int total = 0;
-
   Learning(
       {super.key,
       required this.chapter,
@@ -32,6 +31,7 @@ class Learning extends StatefulWidget {
 
 class _LearningState extends State<Learning> {
   Widget _currentWidget = SizedBox.shrink();
+  bool _isExit = false;
   bool isLoading = true;
   List<dynamic> scenario = [];
   Future<void> init() async {
@@ -45,14 +45,18 @@ class _LearningState extends State<Learning> {
     updateWidget();
   }
 
-  void updateWidget() {
+  void updateWidget() async {
+    await increment();
+    if (widget.complete == scenario.length) {
+      return;
+    }
     Map<String, dynamic> temp = scenario[widget.complete];
     String type = temp["type"];
     if (type == "study") {
       _currentWidget = StudyPage(
           name: temp["name"],
           nextLesson: () {
-            increment();
+            // increment();
             updateWidget();
           });
     }
@@ -62,7 +66,7 @@ class _LearningState extends State<Learning> {
           name: temp["video"],
           answers: LearningBloc.dynamicToStringList(temp["word"]),
           nextLesson: () {
-            increment();
+            // increment();
             updateWidget();
           });
     }
@@ -72,7 +76,7 @@ class _LearningState extends State<Learning> {
           name: temp["word"],
           answers: LearningBloc.dynamicToStringList(temp["video"]),
           nextLesson: () {
-            increment();
+            // increment();
             updateWidget();
           });
     }
@@ -91,12 +95,14 @@ class _LearningState extends State<Learning> {
     // );
   }
 
-  void increment() {
+  Future<void> increment() async {
     setState(() {
       widget.complete++;
-      print(widget.complete);
-      if (widget.complete == widget.total) {
-        widget.complete = widget.total;
+      // print(widget.complete);
+      if (widget.complete == scenario.length) {
+        setState(() {
+          _isExit = true;
+        });
       }
     });
   }
@@ -159,9 +165,19 @@ class _LearningState extends State<Learning> {
 
   @override
   Widget build(BuildContext context) {
+    if (_isExit) {
+      Future.delayed(Duration.zero, () {
+      Navigator.of(context).pop();
+    });
+    }
     // TODO: implement build
     return isLoading
-        ? Container()
+        ? Container(
+            color: Colors.white,
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          )
         : Container(
             decoration: BoxDecoration(
               color: Colors.white,

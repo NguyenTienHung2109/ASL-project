@@ -22,16 +22,12 @@ class StudyPage extends StatefulWidget {
 }
 
 class _StudyPageState extends State<StudyPage> {
-  bool _isLoading = true;
-  Map<String, dynamic> _video = {};
+  bool _isLoading = false;
   Widget videoWidget = SizedBox.shrink();
   Future<void> loadingVideo() async {
-    _video = await LearningData.getVideo(widget.name);
     setState(() {
-      if (_video.isNotEmpty) _isLoading = false;
       if (!_isLoading) {
-        videoWidget = VideoYoutube(
-            id: _video["id"], title: _video["title"], videoUrl: _video["link"]);
+        videoWidget = VideoYoutube(widget.name);
       }
     });
   }

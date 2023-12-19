@@ -43,7 +43,7 @@ class IncorrectFooter extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  width: 100,
+                  width: 150,
                   height: 20,
                   margin: EdgeInsets.symmetric(vertical: 12),
                   child: Row(
