@@ -47,7 +47,8 @@ class _LearningState extends State<Learning> {
 
   void updateWidget() async {
     await increment();
-    if (widget.complete == scenario.length) {
+    if (_isExit) {
+      _currentWidget = Container();
       return;
     }
     Map<String, dynamic> temp = scenario[widget.complete];
@@ -75,6 +76,17 @@ class _LearningState extends State<Learning> {
       _currentWidget = QuizChooseVideo(
           name: temp["word"],
           answers: LearningBloc.dynamicToStringList(temp["video"]),
+          nextLesson: () {
+            // increment();
+            updateWidget();
+          });
+    }
+    
+    if (type == "quiz_img") {
+      _currentWidget = QuizImg(
+          name: temp["name"],
+          answers: LearningBloc.dynamicToStringList(temp["image"]),
+          correctIndex: temp["correctAns"],
           nextLesson: () {
             // increment();
             updateWidget();

@@ -31,6 +31,10 @@ class LearningBloc {
     return toUpper(answer.trim()) == toUpper(correct.trim());
   }
 
+  Future<bool> checkIndex(int selected, int correct) async {
+    return selected >= 0 && correct == selected;
+  }
+
   static String toUpper(String temp) {
     return temp.toUpperCase();
   }
