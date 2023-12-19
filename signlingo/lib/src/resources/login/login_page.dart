@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:signlingo/src/bloc/login_bloc.dart';
+import 'package:signlingo/src/resources/start/start_page.dart';
 
 import 'forgot_page.dart';
 
@@ -20,11 +21,48 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  String getError(String error) {
+      switch (error) {
+        case "channel-error": return "Please enter email and password";
+        case "invalid-credential": return "You've entered an incorrect email or password";
+        case "invalid-email": return "Please enter a valid email address";
+    }
+    return error;
+  }
+
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim()
-    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim()
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(
+           "Login successful",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+            backgroundColor: Colors.green,
+          )
+      );
+    } on FirebaseAuthException catch (e) {
+      String error = getError(e.code);
+      print(e.code);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(
+          error,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+        ),
+          backgroundColor: Colors.redAccent,
+          )
+        );
+    }
+
   }
 
   @override
@@ -118,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                                 context,
                               MaterialPageRoute(
                                   builder: (context) {
-                                    return ForgotPasswordPage();
+                                    return StartPage();
                                   }
                               )
                             );
@@ -166,6 +204,12 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Text(
+                      "Not a member? ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     GestureDetector(
                       onTap: widget.showRegisterPage,
                       child: Text(
