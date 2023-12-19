@@ -8,6 +8,7 @@ import 'package:signlingo/src/resources/learning/learning_body/learning_footer/i
 class QuestionPage extends StatefulWidget {
   late List<Map<String, bool>> answers;
   late Function nextLesson;
+  late Function resetLesson;
   QuestionPage({Key? key, required this.answers, required this.nextLesson})
       : super(key: key);
   @override
@@ -19,50 +20,33 @@ class QuestionPageState extends State<QuestionPage> {
   QuizBloc bloc = new QuizBloc();
   bool check = false;
   bool _checked = false;
+  bool checkClick = false; //kiểm tra đã chọn đáp án chưa
   String? selectedAnswer;
   bool isCorrect = false; //check đáp án
   @override
   Widget build(BuildContext context) {
     setState(() {
-      if (!_checked) {
-        _footer = CheckFooter(checkLesson: () async {
-          await checkQuiz();
-        });
-      } else {
-        _footer = CorrectFooter(nextLesson: () {
-          widget.nextLesson();
-        });
-        // if (isCorrect) {
-        //   _footer = CorrectFooter(nextLesson: () {
-        //     widget.nextLesson();
-        //   });
-        // } else {
-        //   _footer = IncorrectFooter(
-        //     nextLesson: () {
-        //       widget.nextLesson();
-        //     },
-        //     resetLesson: widget.nextLesson(),
-        //     type: false,
-        //   );
-        // }
-        // if (isCorrect) {
-        //   _footer = LoadingFooter();
-        // } else {
-        //   if (_result) {
-        //     _footer = CorrectFooter(nextLesson: () {
-        //       widget.nextLesson();
-        //     });
-        //   } else {
-        //     _footer = IncorrectFooter(
-        //         nextLesson: () {
-        //           widget.nextLesson();
-        //         },
-        //         resetLesson: () {
-        //           widget.resetLesson();
-        //         },
-        //         type: false);
-        //   }
-        // }
+      if (checkClick) {
+        if (!_checked) {
+          _footer = CheckFooter(checkLesson: () async {
+            await checkQuiz();
+          });
+        } else {
+          if (isCorrect) {
+            _footer = CorrectFooter(nextLesson: () {
+              widget.nextLesson();
+            });
+          } else {
+            _footer = IncorrectFooter(
+                nextLesson: () {
+                  widget.nextLesson();
+                },
+                resetLesson: () {
+                  widget.resetLesson();
+                },
+                type: true);
+          }
+        }
       }
     });
     return Scaffold(
@@ -97,31 +81,6 @@ class QuestionPageState extends State<QuestionPage> {
                             height: 20,
                             width: 200,
                           ),
-                          // CheckFooter(checkLesson: () async {
-                          //   await checkQuiz();
-                          // })
-                          // ElevatedButton(
-                          //   style: ElevatedButton.styleFrom(
-                          //       minimumSize: const Size(20, 40)),
-                          //   onPressed: () {
-                          //     onClickButton();
-                          //   },
-                          //   child: Text('Check Answer'),
-                          // ),
-                          // SizedBox(height: 20),
-                          // check
-                          //     ? Text(
-                          //         'Đáp án đúng: ${isCorrect?.toString() ?? ""}',
-                          //         style: TextStyle(
-                          //           color: isCorrect == true
-                          //               ? Colors.green
-                          //               : isCorrect == false
-                          //                   ? Colors.red
-                          //                   : null,
-                          //           fontSize: 18,
-                          //         ),
-                          //       )
-                          //     : Text(""),
                         ],
                       )),
             ),
@@ -139,6 +98,7 @@ class QuestionPageState extends State<QuestionPage> {
       child: OutlinedButton(
         onPressed: () {
           setState(() {
+            checkClick = true;
             selectedAnswer = answer;
           });
         },
@@ -191,17 +151,6 @@ class QuestionPageState extends State<QuestionPage> {
         isCorrect = true;
       else
         isCorrect = false;
-      // widget.nextLesson;
     });
-    // if (_doneRecorded && !_checked) {
-    //   setState(() {
-    //     _checked = true;
-    //     _isChecking = true;
-    //   });
-    //   _result = await _bloc.isCorrectVideo(file, widget.name);
-    //   setState(() {
-    //     _isChecking = false;
-    //   });
-    // }
   }
 }
