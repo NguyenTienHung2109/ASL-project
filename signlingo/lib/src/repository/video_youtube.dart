@@ -91,57 +91,32 @@ class _VideoYoutubeState extends State<VideoYoutube> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return Container(
-      width: 350,
-      height: 150,
-      margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 0.0),
-      child: _isLoading
-          ? Container(
-              color: Colors.white,
-              child: const Center(
-                child: CircularProgressIndicator(),
-              ),
-            )
-          : Container(
-              width: 350,
-              height: 150,
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  YoutubePlayer(
-                    controller: _controller,
-                    showVideoProgressIndicator: false,
-                    bottomActions: [
-                      CurrentPosition(),
-                      ProgressBar(isExpanded: true),
-                    ],
-                  ),
-                  Positioned.fill(
-                    child: Container(
-                      color: Colors.black.withOpacity(_isLoading
-                          ? 0.8
-                          : 0), // Set opacity based on isLoading
-                    ),
-                  ),
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    child: Container(
-                      padding: EdgeInsets.all(8.0),
-                      color: Colors.white.withOpacity(1),
-                      child: Text(
-                        "hello",
-                        style: TextStyle(
-                          color: Colors.white, // Adjust the text color
-                          fontSize: 18.0,
-                        ),
-                      ),
-                    ),
-                  ),
+        width: 350,
+        height: 250,
+        margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 0.0),
+        child: _isLoading
+            ? Container(
+                color: Colors.white,
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              )
+            : YoutubePlayer(
+                controller: _controller,
+                showVideoProgressIndicator: false,
+                bottomActions: [
+                  CurrentPosition(),
+                  ProgressBar(isExpanded: true),
+                  // TotalDuration(),
                 ],
-              ),
-            ),
-    );
+                // topActions: [Text(
+                //   "hahah",
+                //   style: TextStyle(
+                //     color: Colors.white
+                //   ),
+                // )],
+              ));
   }
 }
