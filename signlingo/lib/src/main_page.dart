@@ -19,9 +19,9 @@ class MainPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             print("dang nhap duoc");
-            return HomePage();
+            return Home();
           } else {
-            return HomePage();
+            return AuthPage();
           }
         },
       ),
