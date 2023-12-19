@@ -36,16 +36,16 @@ class _LoginPageState extends State<LoginPage> {
           email: _emailController.text.trim(),
           password: _passwordController.text.trim()
       );
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(
-           "Login successful",
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-            backgroundColor: Colors.green,
-          )
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //     SnackBar(content: Text(
+      //      "Login successful",
+      //       style: TextStyle(
+      //         color: Colors.white,
+      //       ),
+      //     ),
+      //       backgroundColor: Colors.green,
+      //     )
+      // );
     } on FirebaseAuthException catch (e) {
       String error = getError(e.code);
       print(e.code);
