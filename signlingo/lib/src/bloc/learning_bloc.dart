@@ -3,6 +3,13 @@ import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:signlingo/src/validators/validations.dart';
 
+import 'package:http/http.dart' as http;
+
+fetchdata(String url) async {
+  http.Response response = await http.get(Uri.parse(url));
+  return response.body;
+}
+
 class LearningBloc {
   StreamController _checkController = new StreamController();
   Stream get checkStream => _checkController.stream;
@@ -42,4 +49,9 @@ class LearningBloc {
   static String toLower(String temp) {
     return temp.toLowerCase();
   }
+
+//   static Future<void> moveFile(String src, String des) {
+//     String videoPath = src;
+//     String 
+//   }
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:camera/camera.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,21 +25,25 @@ class Validations {
     return key && answer != null;
   }
 
-  static Future<bool> isCorrectVideo(XFile path, String name) async {
-    return true;
-    // var apiUrl = Uri.parse('https://your-server.com/upload-video');
-    // var request = http.MultipartRequest('POST', apiUrl);
+  static Future<bool> isCorrectVideo(XFile file, String name) async {
+    // String pathVideo = file.path;
+    // String result = await getWord(pathVideo);
+    // return (result == name);
+    // return true;
+    var apiUrl = Uri.parse('http://10.0.2.2:5000/');
+    var request = http.MultipartRequest('POST', apiUrl);
 
-    // var videoStream = http.ByteStream(path.openRead());
-    // var videoLength = await path.length();
-    // request.files.add(http.MultipartFile('video', videoStream, videoLength,
-    //     filename: '$name.mp4'));
-    // var response = await http.Response.fromStream(await request.send());
-    // if (response.statusCode == 200) {
-    //   print('Video uploaded successfully');
-    //   return true;
-    // }
-    // print('Failed to upload video. Status code: ${response.statusCode}');
-    // return false;
+    var videoStream = http.ByteStream(file.openRead());
+    var videoLength = await file.length();
+    request.files.add(http.MultipartFile('video', videoStream, videoLength,
+        filename: 'video.mp4'));
+    var response = await http.Response.fromStream(await request.send());
+    if (response.statusCode == 200) {
+      Map<String, dynamic> result = jsonDecode(response.body);
+      print(result['message']);
+      return true;
+    }
+    print('Failed to upload video. Status code: ${response.statusCode}');
+    return false;
   }
 }
