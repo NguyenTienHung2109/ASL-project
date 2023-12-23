@@ -24,6 +24,9 @@ class Validations {
   static bool isValidQuiz(bool key, String? answer) {
     return key && answer != null;
   }
+  static Future<bool> checkString(String answer, String correct) async {
+    return toUpper(answer.trim()) == toUpper(correct.trim());
+  }
 
   static Future<bool> isCorrectVideo(XFile file, String name) async {
     // String pathVideo = file.path;
@@ -41,9 +44,13 @@ class Validations {
     if (response.statusCode == 200) {
       Map<String, dynamic> result = jsonDecode(response.body);
       print(result['message']);
-      return true;
+      return await checkString(result['message'], name);
     }
     print('Failed to upload video. Status code: ${response.statusCode}');
     return false;
+  }
+
+  static String toUpper(String temp) {
+    return temp.toUpperCase();
   }
 }

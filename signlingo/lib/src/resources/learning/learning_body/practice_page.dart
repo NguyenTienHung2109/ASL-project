@@ -2,6 +2,7 @@ import 'dart:async' show Future, Timer;
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:signlingo/src/bloc/Learning_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:signlingo/src/resources/learning/learning_body/learning_footer/check_footer.dart';
@@ -129,9 +130,10 @@ class _PracticePageState extends State<PracticePage> {
           (camera) => camera.lensDirection == CameraLensDirection.front);
       print(front);
       print(cameras);
-      _cameraController = CameraController(front, ResolutionPreset.max);
+      _cameraController = CameraController(front, ResolutionPreset.max, enableAudio: false);
       print(_cameraController);
       await _cameraController.initialize();
+      await _cameraController.lockCaptureOrientation(DeviceOrientation.landscapeRight);
       print(_cameraController);
       setState(() => _isLoading = false);
     } on CameraException catch (e) {
