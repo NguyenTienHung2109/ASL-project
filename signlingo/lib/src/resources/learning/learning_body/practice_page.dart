@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:signlingo/src/bloc/Learning_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:signlingo/src/repository/video_youtube.dart';
 import 'package:signlingo/src/resources/learning/learning_body/learning_footer/check_footer.dart';
 import 'package:signlingo/src/resources/learning/learning_body/learning_footer/correct_footer.dart';
 import 'package:signlingo/src/resources/learning/learning_body/learning_footer/incorrect_footer.dart';
@@ -175,7 +176,7 @@ class _PracticePageState extends State<PracticePage> {
                   resetLesson: () {
                     widget.resetLesson();
                   },
-                  type: false);
+                  type: true);
             }
           }
         }
@@ -274,11 +275,12 @@ class _PracticePageState extends State<PracticePage> {
                               width: double.infinity,
                               height: double.infinity,
                               decoration: BoxDecoration(
-                                color: Colors.blue,
+                                // color: Colors.blue,
                                 border:
                                     Border.all(width: 0.1, color: Colors.white),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
+                              child: VideoYoutube(widget.name),
                             ),
                             // Word
                             Opacity(
