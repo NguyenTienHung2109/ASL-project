@@ -134,7 +134,7 @@ class _SettingScreenState extends State<SettingPage> {
                                 const SizedBox(width: 20.0),
                                 Container(
                                   child: const Text(
-                                    'Edit Personal Data',
+                                    'Profile',
                                     style: TextStyle(
                                       fontSize: 20.0,
                                     ),

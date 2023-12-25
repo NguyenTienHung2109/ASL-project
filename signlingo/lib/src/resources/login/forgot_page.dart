@@ -57,62 +57,69 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[300],
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-            child: Text(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+              child: Text(
                 'Enter Your Email and we will send you a password reset link',
-              style: TextStyle(
-                fontSize: 20,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: TextField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(12),
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.deepOrangeAccent
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.deepPurple),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                fillColor: Colors.grey[200],
-                hintText: 'Email',
-                filled: true,
+                textAlign: TextAlign.center,
               ),
             ),
-          ),
-          SizedBox(height: 15),
-          MaterialButton(
-            onPressed: passwordReset,
-            child: Container(
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                color: Colors.deepPurple,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Center(
-                child: Text(
-                  'Send Email',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: TextField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(30),
                   ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Color.fromRGBO(240, 128, 128, 1)),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  fillColor: Colors.white,
+                  hintText: 'Email',
+                  prefixIcon: Icon(Icons.email, color: Colors.deepOrangeAccent),
+                  filled: true,
                 ),
               ),
             ),
-          ),
-        ],
-      )
+            SizedBox(height: 15),
+            Container(
+              width: MediaQuery.of(context).size.width*0.5,
+              height: MediaQuery.of(context).size.height*0.06,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  image: DecorationImage(
+                      image: AssetImage(
+                          "images/loginbtn.png"
+                      ),
+                      fit: BoxFit.cover
+                  )
+              ),
+              child: InkWell(
+                  onTap: passwordReset,
+                  child: Center(
+                    child: Text(
+                      "Send link",
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  )
+              ),
+            ),
+          ],
+        )
 
 
     );
