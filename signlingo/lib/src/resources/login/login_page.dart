@@ -36,16 +36,6 @@ class _LoginPageState extends State<LoginPage> {
           email: _emailController.text.trim(),
           password: _passwordController.text.trim()
       );
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //     SnackBar(content: Text(
-      //      "Login successful",
-      //       style: TextStyle(
-      //         color: Colors.white,
-      //       ),
-      //     ),
-      //       backgroundColor: Colors.green,
-      //     )
-      // );
     } on FirebaseAuthException catch (e) {
       String error = getError(e.code);
       print(e.code);
@@ -74,140 +64,156 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.white,
       body: SafeArea(
-        child: Center(
           child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.android,
-                  size: 100,
-                ),
-                const SizedBox(height: 25),
-                Text(
-                    'Hello Again',
-                    style: GoogleFonts.bebasNeue(
-                      fontSize: 52,
-                    )
-                ),
-                const SizedBox(height: 10),
-                const Text(
-                  'Welcome back, you\'ve been missed!',
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                const SizedBox(height: 50),
-
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: TextField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.deepPurple),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      fillColor: Colors.grey[200],
-                      hintText: 'Email',
-                      filled: true,
-                    ),
-                  ),
-                ),
-
-
-                const SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: TextField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.deepPurple),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      fillColor: Colors.grey[200],
-                      hintText: 'Password',
-                      filled: true,
-                    ),
-                    obscureText: true,
-                  ),
-                ),
-
-                Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                              MaterialPageRoute(
-                                  builder: (context) {
-                                    return ForgotPasswordPage();
-                                  }
-                              )
-                            );
-                          },
-                          child: Text(
-                            "Forgot Password?",
-                            style: TextStyle(
-                              color: Colors.blue,
-                              fontWeight: FontWeight.bold,
-                            ),
+                Container(
+                  width: w,
+                  height: h*0.6,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(
+                              "images/loginimg.png"
                           ),
-                        )
-                      ],
-                    ),
-
+                          fit: BoxFit.cover
+                      )
+                  ),
                 ),
-
-
-                Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: GestureDetector(
+                Container(
+                  width: w,
+                  margin: EdgeInsets.only(left: 20, right: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Hello",
+                        style: TextStyle(
+                            fontSize: 50,
+                            color: Colors.deepOrangeAccent,
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      Text(
+                        "Sign into your account",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Color.fromRGBO(240, 128, 128, 1),
+                        ),
+                      ),
+                      SizedBox(height:20),
+                      Container(
+                        child: TextField(
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Color.fromRGBO(240, 128, 128, 1)),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            fillColor: Colors.white,
+                            hintText: 'Email',
+                            prefixIcon: Icon(Icons.email, color: Colors.deepOrangeAccent),
+                            filled: true,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height:20),
+                      Container(
+                        child: TextField(
+                          controller: _passwordController,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Color.fromRGBO(240, 128, 128, 1)),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            fillColor: Colors.white,
+                            hintText: 'Password',
+                            prefixIcon: Icon(Icons.password_outlined, color: Colors.deepOrangeAccent),
+                            filled: true,
+                          ),
+                          obscureText: true,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) {
+                                          return ForgotPasswordPage();
+                                        }
+                                    )
+                                );
+                              },
+                              child: Text(
+                                "Forgot Password?",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 25),
+                Container(
+                  width: w*0.6,
+                  height: h*0.15,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      image: DecorationImage(
+                          image: AssetImage(
+                              "images/loginbtn.png"
+                          ),
+                          fit: BoxFit.cover
+                      )
+                  ),
+                  child: InkWell(
                       onTap: signIn,
-                      child: Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Colors.deepPurple,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Sign In',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
+                      child: Center(
+                        child: Text(
+                          "Sign in",
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
-                      ),
-                    )
-
+                      )
+                  ),
                 ),
-                const SizedBox(height: 25),
-
+                SizedBox(height: h*0.25),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Not a member? ",
+                      "Don't have an account? ",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                        fontSize: 16,
                       ),
                     ),
                     GestureDetector(
@@ -217,6 +223,7 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
+                          fontSize: 16,
                         ),
                       ),
                     )
@@ -225,38 +232,163 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
-        ),
-      ),
+
+      )
+
+
+
+
+      // body: SafeArea(
+      //   child: Center(
+      //     child: SingleChildScrollView(
+      //       child: Column(
+      //         mainAxisAlignment: MainAxisAlignment.center,
+      //         children: [
+      //           const Icon(
+      //             Icons.android,
+      //             size: 100,
+      //           ),
+      //           const SizedBox(height: 25),
+      //           Text(
+      //               'Hello Again',
+      //               style: GoogleFonts.bebasNeue(
+      //                 fontSize: 52,
+      //               )
+      //           ),
+      //           const SizedBox(height: 10),
+      //           const Text(
+      //             'Welcome back, you\'ve been missed!',
+      //             style: TextStyle(
+      //               fontSize: 20,
+      //             ),
+      //           ),
+      //           const SizedBox(height: 50),
+      //
+      //           Padding(
+      //             padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      //             child: TextField(
+      //               controller: _emailController,
+      //               decoration: InputDecoration(
+      //                 enabledBorder: OutlineInputBorder(
+      //                   borderSide: const BorderSide(color: Colors.white),
+      //                   borderRadius: BorderRadius.circular(12),
+      //                 ),
+      //                 focusedBorder: OutlineInputBorder(
+      //                   borderSide: const BorderSide(color: Colors.deepPurple),
+      //                   borderRadius: BorderRadius.circular(12),
+      //                 ),
+      //                 fillColor: Colors.grey[200],
+      //                 hintText: 'Email',
+      //                 filled: true,
+      //               ),
+      //             ),
+      //           ),
+      //
+      //
+      //           const SizedBox(height: 10),
+      //           Padding(
+      //             padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      //             child: TextField(
+      //               controller: _passwordController,
+      //               decoration: InputDecoration(
+      //                 enabledBorder: OutlineInputBorder(
+      //                   borderSide: const BorderSide(color: Colors.white),
+      //                   borderRadius: BorderRadius.circular(12),
+      //                 ),
+      //                 focusedBorder: OutlineInputBorder(
+      //                   borderSide: const BorderSide(color: Colors.deepPurple),
+      //                   borderRadius: BorderRadius.circular(12),
+      //                 ),
+      //                 fillColor: Colors.grey[200],
+      //                 hintText: 'Password',
+      //                 filled: true,
+      //               ),
+      //               obscureText: true,
+      //             ),
+      //           ),
+      //
+      //           Padding(
+      //               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+      //               child: Row(
+      //                 mainAxisAlignment: MainAxisAlignment.end,
+      //                 children: [
+      //                   GestureDetector(
+      //                     onTap: () {
+      //                       Navigator.push(
+      //                           context,
+      //                         MaterialPageRoute(
+      //                             builder: (context) {
+      //                               return ForgotPasswordPage();
+      //                             }
+      //                         )
+      //                       );
+      //                     },
+      //                     child: Text(
+      //                       "Forgot Password?",
+      //                       style: TextStyle(
+      //                         color: Colors.blue,
+      //                         fontWeight: FontWeight.bold,
+      //                       ),
+      //                     ),
+      //                   )
+      //                 ],
+      //               ),
+      //
+      //           ),
+      //
+      //
+      //           Padding(
+      //               padding: const EdgeInsets.symmetric(horizontal: 25),
+      //               child: GestureDetector(
+      //                 onTap: signIn,
+      //                 child: Container(
+      //                   padding: const EdgeInsets.all(20),
+      //                   decoration: BoxDecoration(
+      //                     color: Colors.deepPurple,
+      //                     borderRadius: BorderRadius.circular(12),
+      //                   ),
+      //                   child: const Center(
+      //                     child: Text(
+      //                       'Sign In',
+      //                       style: TextStyle(
+      //                         color: Colors.white,
+      //                         fontWeight: FontWeight.bold,
+      //                         fontSize: 18,
+      //                       ),
+      //                     ),
+      //                   ),
+      //                 ),
+      //               )
+      //
+      //           ),
+      //           const SizedBox(height: 25),
+      //
+      //           Row(
+      //             mainAxisAlignment: MainAxisAlignment.center,
+      //             children: [
+      //               Text(
+      //                 "Not a member? ",
+      //                 style: TextStyle(
+      //                   fontWeight: FontWeight.bold,
+      //                 ),
+      //               ),
+      //               GestureDetector(
+      //                 onTap: widget.showRegisterPage,
+      //                 child: Text(
+      //                   "Register Now!",
+      //                   style: TextStyle(
+      //                     color: Colors.blue,
+      //                     fontWeight: FontWeight.bold,
+      //                   ),
+      //                 ),
+      //               )
+      //             ],
+      //           ),
+      //         ],
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
-
-  // void ShowPass() {
-  //   setState(() {
-  //     showPass = !showPass;
-  //   });
-  // }
-  //
-  // void onClickButton() {
-  //   setState(() {
-  //     if (bloc.isValidInfo(EmailData.text, PassData.text)) {
-  //       Navigator.push(
-  //           context, MaterialPageRoute(builder: (context) => Home()));
-  //     }
-  //   });
-  // }
-  //
-  // void onClickNewAcc() {
-  //   setState(() {
-  //     Navigator.push(
-  //         context, MaterialPageRoute(builder: (context) => RegisterPage()));
-  //   });
-  // }
-  //
-  // Widget NewAccPage(BuildContext context) {
-  //   return RegisterPage();
-  // }
-  //
-  // Widget GotoHome(BuildContext context) {
-  //   return Home();
-  // }
 }

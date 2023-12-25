@@ -8,8 +8,7 @@ class LogoutAlert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: const EdgeInsets.all(
-          3.0), // Để loại bỏ khoảng trắng xung quanh nội dung
+      contentPadding: const EdgeInsets.all(3.0), // Để loại bỏ khoảng trắng xung quanh nội dung
 
       // Thay đổi shape để bo tròn viền của AlertDialog
       shape: RoundedRectangleBorder(
@@ -18,8 +17,9 @@ class LogoutAlert extends StatelessWidget {
 
       content: Container(
         padding: const EdgeInsets.all(30.0),
-        decoration:
-            const BoxDecoration(color: Color.fromRGBO(240, 248, 255, 1)),
+        decoration: const BoxDecoration(
+          color: Color.fromRGBO(240, 248, 255, 1)
+         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -27,7 +27,10 @@ class LogoutAlert extends StatelessWidget {
             const Center(
               child: Text(
                 'Are you sure?',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0
+                ),
               ),
             ),
             const SizedBox(height: 40), // Khoảng trắng giữa title và content
@@ -46,7 +49,8 @@ class LogoutAlert extends StatelessWidget {
                     Navigator.of(context).pop();
                   },
                   style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    shape: MaterialStateProperty.all<
+                        RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                         // side: BorderSide(
@@ -56,14 +60,13 @@ class LogoutAlert extends StatelessWidget {
                     backgroundColor: MaterialStateProperty.all<Color>(
                       const Color.fromRGBO(255, 250, 240, 1), // Màu nền của nút
                     ),
-                    elevation:
-                        MaterialStateProperty.all<double>(1), // Độ nổi lên
+                    elevation: MaterialStateProperty.all<double>(
+                        1), // Độ nổi lên
                     shadowColor: MaterialStateProperty.all<Color>(
                         Colors.grey), // Màu đổ bóng
                   ),
                   child: Container(
-                    padding: const EdgeInsets.only(
-                        left: 10.0, top: 15.0, right: 10.0, bottom: 15.0),
+                    padding: const EdgeInsets.only(left: 10.0, top: 15.0, right: 10.0, bottom: 15.0),
                     child: const Text(
                       'Cancel',
                       style: TextStyle(
@@ -73,7 +76,7 @@ class LogoutAlert extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: 10.0),
+                const SizedBox(width: 10),
                 ElevatedButton(
                   onPressed: () {
                     // Xử lý khi nút được nhấn
@@ -81,22 +84,23 @@ class LogoutAlert extends StatelessWidget {
                     Navigator.of(context).pop();
                   },
                   style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    shape: MaterialStateProperty.all<
+                        RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
+
                       ),
                     ),
                     backgroundColor: MaterialStateProperty.all<Color>(
                       const Color.fromRGBO(58, 223, 206, 1), // Màu nền của nút
                     ),
-                    elevation:
-                        MaterialStateProperty.all<double>(1), // Độ nổi lên
+                    elevation: MaterialStateProperty.all<double>(
+                        1), // Độ nổi lên
                     shadowColor: MaterialStateProperty.all<Color>(
                         Colors.grey), // Màu đổ bóng
                   ),
                   child: Container(
-                    padding: const EdgeInsets.only(
-                        left: 10.0, top: 15.0, right: 10.0, bottom: 15.0),
+                    padding: const EdgeInsets.only(left: 10.0, top: 15.0, right: 10.0, bottom: 15.0),
                     child: const Text(
                       'Log out',
                       style: TextStyle(
