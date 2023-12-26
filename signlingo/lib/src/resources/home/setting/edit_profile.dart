@@ -25,7 +25,7 @@ class _EditProfilePage extends State<EditProfilePage>{
             onPressed: () {Navigator.pop(context);},
             icon: const Icon(Icons.arrow_back_ios, color: Colors.black,)),
             title: const Text(
-                'Edit Profile',
+                'Profile',
               style: TextStyle(
                 color: Colors.black,
               ),
@@ -88,6 +88,7 @@ class _EditProfilePage extends State<EditProfilePage>{
                             ),
                             const SizedBox(height: 30),
                             TextFormField(
+                              readOnly: true,
                               decoration: InputDecoration(
                                 label: Text(userData['email']), prefixIcon: const Icon(Icons.mail),
                                 border: OutlineInputBorder(
@@ -110,36 +111,22 @@ class _EditProfilePage extends State<EditProfilePage>{
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 30),
-                            TextFormField(
-                              decoration: InputDecoration(
-                                label: Text(userData['password']), prefixIcon: const Icon(Icons.vpn_key),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                focusedBorder: const OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.zero)
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 40),
+                            const SizedBox(height: 70),
                             SizedBox(
                               height: 50.0,
                               width: double.infinity,
                               child: ElevatedButton(
-                                onPressed: () {
-                                  // xử lý cập nhật thông tin
-                                },
+                                onPressed: () {Navigator.pop(context);},
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.blue,
                                     side: BorderSide.none,
                                     shape: const StadiumBorder()
                                 ),
                                 child: const Text(
-                                  'Edit Profile',
+                                  'Close',
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 16.0
+                                      fontSize: 18.0
                                   ),
                                 ),
                               ),

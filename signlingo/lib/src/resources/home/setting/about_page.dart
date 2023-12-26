@@ -27,17 +27,123 @@ class AboutPage extends StatelessWidget {
                 'Members',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 20.0
+                    fontSize: 28.0
                 ),
               ),
             ),
-            const SizedBox(height: 40), // Khoảng trắng giữa title và content
+            const SizedBox(height: 20), // Khoảng trắng giữa title và content
 
             // Widget content ở giữa
-            // Center(
-            //   child: Text('Đây là nội dung của cửa sổ nổi.'),
-            // ),
-            // Widget actions
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    children: [
+                      ClipOval(
+                        child: Image.network(
+                          'https://static.wikia.nocookie.net/bach-khoa-the-gioi-toan-thu/images/e/eb/Drm-nobi-nobita.jpg/revision/latest?cb=20200916115732',
+                          width: 70.0,
+                          height: 70.0,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Text(
+                        "Tiến Hùng",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(width: 20),
+                  Column(
+                    children: [
+                      ClipOval(
+                        child: Image.network(
+                          'https://i.pinimg.com/564x/e3/f3/4d/e3f34de992ae4267f272550a5935447f.jpg',
+                          width: 70.0,
+                          height: 70.0,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Text(
+                          "Huy Hoàng",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(width: 20),
+                  Column(
+                    children: [
+                      ClipOval(
+                        child: Image.network(
+                          'https://i.pinimg.com/564x/c2/a0/09/c2a0099bbddf9be08f3672f0cf197d5f.jpg',
+                          width: 70.0,
+                          height: 70.0,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Text(
+                          "Phạm Hoàng",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    children: [
+                      ClipOval(
+                        child: Image.network(
+                          'https://i.pinimg.com/564x/60/8a/4f/608a4f498d9f1ffcef0d2d40306a4941.jpg',
+                          width: 70.0,
+                          height: 70.0,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Text(
+                          "Bảo Khanh",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(width: 20),
+                  Column(
+                    children: [
+                      ClipOval(
+                        child: Image.network(
+                          'https://i.pinimg.com/564x/e1/f0/47/e1f0478d30eb7768372556bf8b4c7573.jpg',
+                          width: 70.0,
+                          height: 70.0,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Text(
+                          "Mai Hải",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(width: 20),
+                ],
+              ),
+            ),
+            const SizedBox(height: 50),
             Center(
                 child: ElevatedButton(
                   onPressed: () {
