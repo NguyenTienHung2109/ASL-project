@@ -8,6 +8,8 @@ import 'package:signlingo/src/resources/learning/learning_menu.dart';
 import 'package:signlingo/src/resources/learning/learning_body/quiz/quiz_video.dart';
 import 'package:signlingo/src/resources/learning/learning_body/quiz/quiz_img.dart';
 
+import '../home/unit.dart';
+
 // ignore: must_be_immutable
 class Learning extends StatefulWidget {
   bool isHiding = true;
@@ -34,6 +36,7 @@ class _LearningState extends State<Learning> {
   bool _isExit = false;
   bool isLoading = true;
   List<dynamic> scenario = [];
+  int _score = 0;
   Future<void> init() async {
     scenario =
         await LearningData.getPart(widget.unit, widget.chapter, widget.name);
@@ -110,13 +113,6 @@ class _LearningState extends State<Learning> {
   void initState() {
     super.initState();
     init();
-    // _currentWidget = StudyPage(
-    //   name: "drInK",
-    //   nextLesson: () {
-    //     increment();
-    //     updateWidget();
-    //   },
-    // );
   }
 
   Future<void> increment() async {
@@ -131,67 +127,12 @@ class _LearningState extends State<Learning> {
     });
   }
 
-  // void updateWidget() {
-  //   setState(() {
-  //     if (widget.complete == 1) {
-  //       _currentWidget = StudyPage(
-  //         name: "HOTEL",
-  //         nextLesson: () {
-  //           increment();
-  //           updateWidget();
-  //         },
-  //       );
-  //     }
-  //     if (widget.complete == 2) {
-  //       _currentWidget = PracticePage(
-  //         name: "Dance",
-  //         nextLesson: () {
-  //           increment();
-  //           updateWidget();
-  //         },
-  //       );
-  //     }
-  //     if (widget.complete == 3) {
-  //       _currentWidget = QuizVideo(
-  //         // name: "DEAF",
-  //         nextLesson: () {
-  //           increment();
-  //           updateWidget();
-  //         },
-  //       );
-  //     }
-  //     if (widget.complete == 4) {
-  //       _currentWidget = QuizImg(
-  //         // name: "DEAF",
-  //         nextLesson: () {
-  //           increment();
-  //           updateWidget();
-  //         },
-  //       );
-  //     }
-  //   });
-  // }
-
-  // List<String> sceriano = [
-  //   StudyPage(
-  //     name: "DEAF",
-  //     nextLesson: () {
-  //       increment();
-  //     },
-  //   ),
-  //   PracticePage(
-  //     name: "DEAF",
-  //     nextLesson: () {
-  //       increment();
-  //     },
-  //   ),
-  // ];
 
   @override
   Widget build(BuildContext context) {
     if (_isExit) {
       Future.delayed(Duration.zero, () {
-      Navigator.of(context).pop();
+      Navigator.pop(context, TwoValues(widget.complete == scenario.length, _score));
     });
     }
     // TODO: implement build

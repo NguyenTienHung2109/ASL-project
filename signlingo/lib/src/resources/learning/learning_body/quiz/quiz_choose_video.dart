@@ -194,7 +194,7 @@ class QuizChooseVideoState extends State<QuizChooseVideo> {
                   ]),
             ),
             bottomNavigationBar: AnimatedSwitcher(
-              duration: Duration(microseconds: 600),
+              duration: const Duration(microseconds: 2000),
               child: _footer,
             ),
           );

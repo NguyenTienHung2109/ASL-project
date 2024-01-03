@@ -8,6 +8,10 @@ class Unit extends StatefulWidget {
   String description = "";
 
   Unit({super.key, required this.unit});
+  // _UnitState state = ;
+  // void refresh() {
+  //   state.refresh();
+  // }
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -18,11 +22,18 @@ class Unit extends StatefulWidget {
 class _UnitState extends State<Unit> {
   List<Widget> result = [];
   Map<String, dynamic> _data = {};
+  Map<String, dynamic> _unit = {};
   Future<void> getData() async {
     _data = await HomeData.getAllChapter("${widget.unit}");
+    _unit = await HomeData.getStatusChapter(widget.unit);
   }
-
+  void refresh() {
+    init();
+  }
   Future<void> init() async {
+    setState(() {
+        _isLoading = true;
+    });
     await getData();
     // print(_data);
     if (_data.isEmpty) {
@@ -40,12 +51,15 @@ class _UnitState extends State<Unit> {
           chapter: i + 1,
           name: chapterData["name"],
           description: chapterData["description"],
-          progress: 0,
+          progress: HomeBloc.caculateProgress(_unit, i + 1) / 3 * 100,
           isLooking: false,
           items: HomeBloc.dynamicToStringList(
             chapterData["items"],
           ),
           unit: widget.unit,
+          refresh: () {
+            refresh();
+          },
         ));
       } else {
         print("Error: Can not find chapter ${i + 1}");
@@ -210,4 +224,11 @@ class _UnitState extends State<Unit> {
             ),
           );
   }
+}
+
+class TwoValues {
+  final bool value1;
+  final int value2;
+
+  TwoValues(this.value1, this.value2);
 }

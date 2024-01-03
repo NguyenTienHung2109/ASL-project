@@ -18,4 +18,13 @@ class HomeBloc {
     _isRequiring = false;
     return (0 < newUnit && newUnit <= total);
   }
+
+  static int caculateProgress(Map<String, dynamic> unit, int chapter) {
+    if (unit.containsKey('$chapter')) {
+      Map<String, dynamic> thisChapter = unit['$chapter'];
+      return thisChapter.length;
+    }
+    return 0;
+  }
+
 }

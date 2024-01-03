@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomeData {
 
@@ -42,4 +43,42 @@ class HomeData {
     }
     return 0;
   }
+
+  static Future<Map<String, dynamic>> getStatusPart(int unit, int chapter) async {
+    final user = FirebaseAuth.instance.currentUser!;
+    FirebaseFirestore database = FirebaseFirestore.instance;
+    final docRef = database.collection('user').doc(user.email);
+    try {
+      DocumentSnapshot doc = await docRef.get();
+      if (doc.exists) {
+        Map<String, dynamic> result = doc.data() as Map<String, dynamic>;
+        if (result.containsKey('$unit')) {
+          Map<String, dynamic> thisUnit = result['$unit'];
+          return thisUnit['$chapter'];
+        }
+      }
+    }
+    catch (e) {
+      //
+    }
+    return {};
+  }
+
+  static Future<Map<String, dynamic>> getStatusChapter(int unit) async {
+    final user = FirebaseAuth.instance.currentUser!;
+    FirebaseFirestore database = FirebaseFirestore.instance;
+    final docRef = database.collection('user').doc(user.email);
+    try {
+      DocumentSnapshot doc = await docRef.get();
+      if (doc.exists) {
+        Map<String, dynamic> result = doc.data() as Map<String, dynamic>;
+        return result['$unit'];
+      }
+    }
+    catch (e) {
+      //
+    }
+    return {};
+  }
+
 }

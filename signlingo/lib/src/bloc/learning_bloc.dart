@@ -50,6 +50,8 @@ class LearningBloc {
     return temp.toLowerCase();
   }
 
+  static updateProgress() {}
+
 //   static Future<void> moveFile(String src, String des) {
 //     String videoPath = src;
 //     String 

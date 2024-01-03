@@ -118,7 +118,7 @@ class _StudyPageState extends State<StudyPage> {
                       )),
                     ])),
             bottomNavigationBar: AnimatedSwitcher(
-              duration: Duration(milliseconds: 600),
+              duration: const Duration(milliseconds: 600),
               child: NextFooter(nextLesson: () {
                 widget.nextLesson();
               }),

@@ -15,6 +15,7 @@ class PracticePage extends StatefulWidget {
   late String name;
   late Function nextLesson;
   late Function resetLesson;
+  int score = 0;
 
   PracticePage({super.key, required this.name, required this.nextLesson});
 
@@ -90,18 +91,18 @@ class _PracticePageState extends State<PracticePage> {
 
   Future<void> _recordVideo() async {
     if (!_isRecording) {
-      print("Haha");
+      // print("Haha");
 
       _startCountdown();
       await Future.delayed(Duration(seconds: _countdown));
-      print("Start recording");
+      // print("Start recording");
       setState(() => _isRecording = true);
       await _cameraController.prepareForVideoRecording();
       await _cameraController.startVideoRecording();
       Timer(Duration(seconds: _recordDuration), () async {
         if (_isRecording) {
           file = await _cameraController.stopVideoRecording();
-          print('Dừng ghi video.');
+          // print('Dừng ghi video.');
           print(file.path);
           setState(() {
             _isRecording = false;
@@ -129,17 +130,17 @@ class _PracticePageState extends State<PracticePage> {
       final cameras = await availableCameras();
       final front = cameras.firstWhere(
           (camera) => camera.lensDirection == CameraLensDirection.front);
-      print(front);
-      print(cameras);
+      // print(front);
+      // print(cameras);
       _cameraController = CameraController(front, ResolutionPreset.max, enableAudio: false);
-      print(_cameraController);
+      // print(_cameraController);
       await _cameraController.initialize();
       await _cameraController.lockCaptureOrientation(DeviceOrientation.landscapeRight);
-      print(_cameraController);
+      // print(_cameraController);
       setState(() => _isLoading = false);
     } on CameraException catch (e) {
-      print(e.code);
-      print(e);
+      // print(e.code);
+      // print(e);
       // _logError(e.code, e.description);
     }
   }
@@ -165,6 +166,7 @@ class _PracticePageState extends State<PracticePage> {
             if (_result) {
               _footer = CorrectFooter(nextLesson: () {
                 _cameraController.dispose();
+                widget.score = 1;
                 widget.nextLesson();
               });
             } else {
@@ -309,7 +311,7 @@ class _PracticePageState extends State<PracticePage> {
                       )
                     ])),
         bottomNavigationBar: AnimatedSwitcher(
-          duration: Duration(milliseconds: 600),
+          duration: const Duration(milliseconds: 600),
           child: _footer,
         ));
     // TODO: implement build

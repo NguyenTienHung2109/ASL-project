@@ -183,7 +183,7 @@ class QuizImgState extends State<QuizImg> {
             ]),
       ),
       bottomNavigationBar: AnimatedSwitcher(
-        duration: Duration(microseconds: 600),
+        duration: const Duration(microseconds: 600),
         child: _footer,
       ),
     );

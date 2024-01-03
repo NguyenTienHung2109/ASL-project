@@ -4,24 +4,35 @@ class ChapterHeader extends StatefulWidget {
   final int chapter;
   final String name;
   final String description;
-  final double progress;
+  late double progress;
   bool isLooking = true;
 
   ChapterHeader(
-      {required this.chapter,
+      {super.key, required this.chapter,
       required this.name,
       required this.description,
       required this.progress,
       required this.isLooking});
 
+  ChapterHeaderState state = ChapterHeaderState();
+  void onChange(double newProgress) {
+    state.changeProgress(newProgress);
+  }
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _ChapterHeaderState();
+    return state;
   }
 }
 
-class _ChapterHeaderState extends State<ChapterHeader> {
+class ChapterHeaderState extends State<ChapterHeader> {
+
+  void changeProgress(double newProgress) {
+    setState(() {
+      widget.progress = newProgress;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
